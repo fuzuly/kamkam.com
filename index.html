@@ -101,6 +101,28 @@
       white-space: nowrap;
     }
     .nav-btn:hover { background: var(--primary-d); transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: transform .22s, opacity .22s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ────────────────────────────────
        HERO
@@ -695,32 +717,100 @@
        RESPONSIVE
     ──────────────────────────────── */
     @media (max-width: 960px) {
+      /* Nav */
       .nav { padding: 0 20px; }
-      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-btn { display: none; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(255,255,255,.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        padding: 12px 20px 20px;
+        flex-direction: column;
+        gap: 2px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.09);
+        z-index: 199;
+        margin: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 14px; font-size: 16px; border-radius: 10px; }
+
+      /* Hero */
+      .hero { padding-top: 96px; }
       .hero-h1 { font-size: 44px; letter-spacing: -2px; }
       .hero-phones { height: 380px; }
       .hphone-c .phone-frame { width: 180px; height: 370px; }
       .hphone-l .phone-frame,
-      .hphone-r .phone-frame { width: 162px; height: 330px; border-radius: 36px; }
+      .hphone-r .phone-frame { width: 155px; height: 315px; border-radius: 34px; }
       .hphone-l .phone-frame .pf-screen,
-      .hphone-r .phone-frame .pf-screen { border-radius: 28px; }
-      .hphone-l { margin-left: -210px; }
+      .hphone-r .phone-frame .pf-screen { border-radius: 26px; }
+      .hphone-l { margin-left: -200px; }
       .hphone-r { margin-left: 42px; }
+
+      /* Sections */
       .section-inner,
-      .section-inner.flip { flex-direction: column !important; gap: 48px; }
+      .section-inner.flip { flex-direction: column !important; gap: 40px; }
       .section-h2 { font-size: 32px; }
-      .section { padding: 58px 24px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .section { padding: 60px 24px; }
+      .features-section { padding: 60px 24px; }
+      .download-band { padding: 60px 24px; }
+
+      /* Bento */
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .bc-wide { grid-column: span 2; }
+      .bc-full { grid-column: span 2; }
+      .bc-full-inner { flex-direction: column; gap: 24px; }
+      .bc-full-right { flex-direction: row; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+
+      /* Footer */
+      footer { padding: 48px 24px 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
+
     @media (max-width: 560px) {
+      /* Hero */
+      .hero { padding-top: 84px; }
       .hero-h1 { font-size: 36px; letter-spacing: -1.5px; }
       .hero-sub { font-size: 16px; }
-      .hero-cta-row { flex-direction: column; align-items: center; }
-      .btn-dl { width: 240px; justify-content: center; }
-      .features-grid { grid-template-columns: 1fr; }
+      .hero-cta-row { flex-direction: row; justify-content: center; margin-bottom: 48px; gap: 10px; }
+      .btn-dl { flex: 1; max-width: 160px; justify-content: center; padding: 11px 14px; }
+      .btn-dl-big { font-size: 13px; }
+      .btn-dl-small { font-size: 9px; }
+
+      /* Phones — sadece orta telefon */
+      .hero-phones { height: 340px; }
+      .hphone-l, .hphone-r { display: none; }
+      .hphone-c { left: 50%; transform: translateX(-50%); }
+      .hphone-c .phone-frame { width: 200px; height: 410px; }
+
+      /* Section visuals */
+      .sec-phone, [style*="width:210px"] { width: 180px !important; height: 365px !important; }
+
+      /* Bento */
+      .bento { grid-template-columns: 1fr; }
+      .bc-wide, .bc-full { grid-column: span 1; }
+      .bc-big { font-size: 52px; }
+      .bc-full-inner { flex-direction: column; }
+      .bc-full-right { flex-direction: row; flex-wrap: wrap; }
+      .bc-title[style] { font-size: 22px !important; }
+
+      /* Waitlist */
+      .wl-form { flex-direction: column; }
+      .wl-btn { width: 100%; }
+
+      /* Footer */
+      .footer-col { display: none; } /* sadece brand göster */
+      .download-band h2 { font-size: 30px; }
+    }
+
+    @media (max-width: 390px) {
+      .hero-h1 { font-size: 30px; letter-spacing: -1px; }
+      .btn-dl { width: 100%; max-width: 300px; }
+      .nav-btn { padding: 8px 14px; font-size: 13px; }
     }
   </style>
 </head>
@@ -731,14 +821,18 @@
     <a href="#" class="nav-logo">
       <span class="nav-logo-text">KamKam</span>
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
       <li><a href="#isletmeler">İşletmeler</a></li>
       <li><a href="#ozellikler">Özellikler</a></li>
       <li><a href="#indir">İndir</a></li>
+      <li style="margin-top:8px"><a href="#indir" style="background:var(--primary);color:#fff;font-weight:700;text-align:center;justify-content:center">Uygulamayı İndir</a></li>
     </ul>
     <div class="nav-actions">
       <a href="#indir" class="nav-btn">Uygulamayı İndir</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -1245,6 +1339,24 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
     document.querySelectorAll('.fi').forEach(el => fiObs.observe(el));
 
+
+    // ── Hamburger menu
+    (function () {
+      const btn   = document.getElementById('nav-hamburger');
+      const links = document.getElementById('nav-links');
+      if (!btn || !links) return;
+      btn.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        btn.classList.toggle('open', open);
+      });
+      // close on link click
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+        });
+      });
+    })();
 
     // ── Waitlist form
     function wlSubmit(e) {
