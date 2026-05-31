@@ -171,7 +171,7 @@
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 72px;
+      margin-bottom: 20px;
     }
     .btn-dl {
       display: inline-flex; align-items: center; gap: 9px;
@@ -278,6 +278,124 @@
     }
     .pf-card-sub { font-size: 10px; color: #6b7280; margin-top: 1px; }
     .pf-big { font-size: 22px; font-weight: 900; color: #0d0d0d; letter-spacing: -1px; line-height: 1; }
+
+    /* ── Aurora background blobs */
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .aurora-1 {
+      width: 560px; height: 480px;
+      background: var(--primary);
+      opacity: .07;
+      top: -80px; left: -120px;
+      animation: auroraA 14s ease-in-out infinite alternate;
+    }
+    .aurora-2 {
+      width: 480px; height: 420px;
+      background: var(--primary);
+      opacity: .055;
+      top: -40px; right: -100px;
+      animation: auroraB 17s ease-in-out infinite alternate;
+    }
+    .aurora-3 {
+      width: 360px; height: 340px;
+      background: #ff6b7a;
+      opacity: .045;
+      bottom: 100px; left: 38%;
+      animation: auroraC 21s ease-in-out infinite alternate;
+    }
+    @keyframes auroraA {
+      from { transform: translate(0,0)    scale(1); }
+      to   { transform: translate(70px,50px)  scale(1.12); }
+    }
+    @keyframes auroraB {
+      from { transform: translate(0,0)    scale(1); }
+      to   { transform: translate(-50px,70px) scale(.88); }
+    }
+    @keyframes auroraC {
+      from { transform: translate(0,0)    scale(1); }
+      to   { transform: translate(35px,-55px) scale(1.16); }
+    }
+
+    /* ── Marquee strip */
+    .hero-marquee {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 44px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    }
+    .mq-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      will-change: transform;
+      animation: mqScroll 28s linear infinite;
+    }
+    .hero-marquee:hover .mq-track { animation-play-state: paused; }
+    .mq-item {
+      display: flex; align-items: center; gap: 7px;
+      padding: 0 20px;
+      font-size: 13px; font-weight: 500;
+      color: var(--muted);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .mq-sep {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: #d1d5db;
+      flex-shrink: 0;
+    }
+    @keyframes mqScroll {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* ── Ödül SVG underline */
+    .odol-underline {
+      display: flex;
+      justify-content: center;
+      margin-top: -8px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .odol-svg { width: 210px; overflow: visible; }
+    .odol-path {
+      stroke: var(--primary);
+      stroke-width: 3.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 230;
+      stroke-dashoffset: 230;
+      opacity: .8;
+    }
+    .odol-path.draw {
+      transition: stroke-dashoffset .6s cubic-bezier(.22,1,.36,1);
+      stroke-dashoffset: 0;
+    }
+
+    /* ── Phone entrance animation */
+    .hphone .phone-frame {
+      animation: phoneEnter 1.05s cubic-bezier(.34,1.42,.64,1) both;
+    }
+    .hphone-l .phone-frame { animation-delay: .12s; }
+    .hphone-c .phone-frame { animation-delay: .32s; }
+    .hphone-r .phone-frame { animation-delay: .12s; }
+    @keyframes phoneEnter {
+      from { opacity: 0; transform: translateY(72px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Center phone screen fade transition */
+    .pf-screen { transition: opacity .4s ease; }
 
     /* ────────────────────────────────
        SECTIONS (alternating)
@@ -741,6 +859,11 @@
       /* Hero */
       .hero { padding-top: 96px; }
       .hero-h1 { font-size: 44px; letter-spacing: -2px; }
+      .odol-svg { width: 160px; }
+      .hero-marquee { margin-bottom: 28px; }
+      .aurora-1 { width: 340px; height: 300px; opacity: .06; }
+      .aurora-2 { width: 300px; height: 260px; opacity: .05; }
+      .aurora-3 { width: 240px; height: 220px; opacity: .04; }
       .hero-phones { height: 380px; }
       .hphone-c .phone-frame { width: 180px; height: 370px; }
       .hphone-l .phone-frame,
@@ -775,6 +898,14 @@
       /* Hero */
       .hero { padding-top: 84px; }
       .hero-h1 { font-size: 36px; letter-spacing: -1.5px; }
+      .odol-svg { width: 120px; }
+      .odol-path { stroke-dasharray: 140; stroke-dashoffset: 140; }
+      .odol-path.draw { stroke-dashoffset: 0; }
+      .hero-marquee { margin-bottom: 14px; }
+      .mq-item { font-size: 12px; padding: 0 12px; }
+      .aurora-1 { width: 260px; height: 220px; }
+      .aurora-2 { width: 220px; height: 190px; }
+      .aurora-3 { display: none; }
       .hero-sub { font-size: 16px; }
       .hero-cta-row { flex-direction: row; justify-content: center; margin-bottom: 48px; gap: 10px; }
       .btn-dl { flex: 1; max-width: 160px; justify-content: center; padding: 11px 14px; }
@@ -782,10 +913,10 @@
       .btn-dl-small { font-size: 9px; }
 
       /* Phones — sadece orta telefon */
-      .hero-phones { height: 340px; }
+      .hero-phones { height: 380px; }
       .hphone-l, .hphone-r { display: none; }
       .hphone-c { left: 50%; transform: translateX(-50%); }
-      .hphone-c .phone-frame { width: 200px; height: 410px; }
+      .hphone-c .phone-frame { width: 186px; height: 375px; border-radius: 38px; }
 
       /* Section visuals */
       .sec-phone, [style*="width:210px"] { width: 180px !important; height: 365px !important; }
@@ -809,6 +940,9 @@
 
     @media (max-width: 390px) {
       .hero-h1 { font-size: 30px; letter-spacing: -1px; }
+      .odol-svg { width: 100px; }
+      .odol-path { stroke-dasharray: 120; stroke-dashoffset: 120; }
+      .odol-path.draw { stroke-dashoffset: 0; }
       .btn-dl { width: 100%; max-width: 300px; }
       .nav-btn { padding: 8px 14px; font-size: 13px; }
     }
@@ -839,8 +973,16 @@
   <!-- ── HERO ── -->
   <section class="hero" id="hero">
     <canvas id="hero-canvas"></canvas>
+    <div class="aurora-blob aurora-1"></div>
+    <div class="aurora-blob aurora-2"></div>
+    <div class="aurora-blob aurora-3"></div>
     <div class="hero-text">
       <h1 class="hero-h1">Her Gittiğin Yerde<br><em>Ödül</em> Kazan</h1>
+      <div class="odol-underline">
+        <svg class="odol-svg" viewBox="0 0 210 14" xmlns="http://www.w3.org/2000/svg">
+          <path class="odol-path" d="M4 10 C38 4, 80 13, 120 7 C145 3, 172 11, 206 8"/>
+        </svg>
+      </div>
       <p class="hero-sub">Berberden kafeye, marketten restorana,<br>tek uygulama, sonsuz avantaj.</p>
       <div class="hero-cta-row" id="indir">
         <a href="#" class="btn-dl">
@@ -857,6 +999,33 @@
             <span class="btn-dl-big">Google Play</span>
           </div>
         </a>
+      </div>
+    </div>
+
+    <!-- Marquee partner strip -->
+    <div class="hero-marquee">
+      <div class="mq-track">
+        <span class="mq-item">☕ Kafe</span><span class="mq-sep"></span>
+        <span class="mq-item">✂️ Berber</span><span class="mq-sep"></span>
+        <span class="mq-item">🛒 Market</span><span class="mq-sep"></span>
+        <span class="mq-item">🍕 Restoran</span><span class="mq-sep"></span>
+        <span class="mq-item">💇 Güzellik</span><span class="mq-sep"></span>
+        <span class="mq-item">💊 Eczane</span><span class="mq-sep"></span>
+        <span class="mq-item">🏋️ Spor Salonu</span><span class="mq-sep"></span>
+        <span class="mq-item">🍦 Pastane</span><span class="mq-sep"></span>
+        <span class="mq-item">🎬 Sinema</span><span class="mq-sep"></span>
+        <span class="mq-item">🧴 Kozmetik</span><span class="mq-sep"></span>
+        <!-- repeat for seamless loop -->
+        <span class="mq-item">☕ Kafe</span><span class="mq-sep"></span>
+        <span class="mq-item">✂️ Berber</span><span class="mq-sep"></span>
+        <span class="mq-item">🛒 Market</span><span class="mq-sep"></span>
+        <span class="mq-item">🍕 Restoran</span><span class="mq-sep"></span>
+        <span class="mq-item">💇 Güzellik</span><span class="mq-sep"></span>
+        <span class="mq-item">💊 Eczane</span><span class="mq-sep"></span>
+        <span class="mq-item">🏋️ Spor Salonu</span><span class="mq-sep"></span>
+        <span class="mq-item">🍦 Pastane</span><span class="mq-sep"></span>
+        <span class="mq-item">🎬 Sinema</span><span class="mq-sep"></span>
+        <span class="mq-item">🧴 Kozmetik</span><span class="mq-sep"></span>
       </div>
     </div>
 
@@ -897,7 +1066,7 @@
       <div class="hphone hphone-c">
         <div class="phone-frame">
           <div class="pf-notch"></div>
-          <div class="pf-screen">
+          <div class="pf-screen" id="center-phone-screen">
             <div class="pf-title">Ödüllerim</div>
             <div class="pf-card">
               <span class="pf-card-icon">🎁</span>
@@ -1340,6 +1509,49 @@
     document.querySelectorAll('.fi').forEach(el => fiObs.observe(el));
 
 
+    // ── Center phone screen rotation
+    (function () {
+      const screen = document.getElementById('center-phone-screen');
+      if (!screen) return;
+
+      const slides = [
+        {
+          theme: '',
+          html: '<div class="pf-title">Ödüllerim</div>' +
+            '<div class="pf-card"><span class="pf-card-icon">🎁</span><div class="pf-card-info"><div class="pf-big">2.450</div><div class="pf-card-sub">toplam puan</div></div></div>' +
+            '<div class="pf-card"><span class="pf-card-icon">🏆</span><div class="pf-card-info"><div class="pf-card-title">Bu ay 3 ödül</div><div class="pf-card-sub">Altın üye</div></div></div>' +
+            '<div class="pf-card"><span class="pf-card-icon">🔥</span><div class="pf-card-info"><div class="pf-card-title">14 gün seri</div><div class="pf-card-sub">Devam et!</div></div></div>'
+        },
+        {
+          theme: 'dark',
+          html: '<div class="pf-title">QR Tara</div>' +
+            '<div class="pf-card"><span class="pf-card-icon">📱</span><div class="pf-card-info"><div class="pf-card-title">Kodu Tarat</div><div class="pf-card-sub">Kasada 2 saniye</div></div></div>' +
+            '<div class="pf-card"><span class="pf-card-icon">✅</span><div class="pf-card-info"><div class="pf-card-title">+50 Puan!</div><div class="pf-card-sub">Café Nero\'dan kazandın</div></div></div>' +
+            '<div class="pf-card"><span class="pf-card-icon">🎁</span><div class="pf-card-info"><div class="pf-card-title">Toplam 2.500</div><div class="pf-card-sub">puan birikti</div></div></div>'
+        },
+        {
+          theme: 'warm',
+          html: '<div class="pf-title">Kampanyalar</div>' +
+            '<div class="pf-card"><span class="pf-card-icon">🔔</span><div class="pf-card-info"><div class="pf-card-title">%20 İndirim!</div><div class="pf-card-sub">Café Nero · Bugün</div></div></div>' +
+            '<div class="pf-card"><span class="pf-card-icon">⚡</span><div class="pf-card-info"><div class="pf-card-title">2× Puan Fırsatı</div><div class="pf-card-sub">Berber · 3 gün kaldı</div></div></div>' +
+            '<div class="pf-card"><span class="pf-card-icon">🎯</span><div class="pf-card-info"><div class="pf-card-title">Ücretsiz Kahve</div><div class="pf-card-sub">500 puana ulaştın</div></div></div>'
+        }
+      ];
+
+      let idx = 0;
+
+      setInterval(() => {
+        idx = (idx + 1) % slides.length;
+        const s = slides[idx];
+        screen.style.opacity = '0';
+        setTimeout(() => {
+          screen.className = 'pf-screen' + (s.theme ? ' ' + s.theme : '');
+          screen.innerHTML  = s.html;
+          screen.style.opacity = '1';
+        }, 420);
+      }, 3600);
+    })();
+
     // ── Hamburger menu
     (function () {
       const btn   = document.getElementById('nav-hamburger');
@@ -1423,6 +1635,11 @@
       const lastDelay = (counter.i - 1) * 0.085 + 0.75; // last word end
       setTimeout(() => sub && sub.classList.add('show'), (lastDelay - 0.18) * 1000);
       setTimeout(() => cta && cta.classList.add('show'), (lastDelay)         * 1000);
+      // Ödül underline
+      setTimeout(() => {
+        const path = document.querySelector('.odol-path');
+        if (path) path.classList.add('draw');
+      }, lastDelay * 1000 + 180);
     })();
 
     // ── Bento number / pill reveal
