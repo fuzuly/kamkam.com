@@ -123,6 +123,7 @@
     .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
 
     /* ────────────────────────────────
        HERO
@@ -839,6 +840,7 @@
       .nav { padding: 0 20px; }
       .nav-hamburger { display: flex; }
       .nav-btn { display: none; }
+      .nav-mobile-cta { display: block; }
       .nav-links {
         display: none;
         position: fixed;
@@ -957,10 +959,10 @@
     </a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
-      <li><a href="#isletmeler">İşletmeler</a></li>
+      <li><a href="isletmeler.html">İşletmeler</a></li>
       <li><a href="#ozellikler">Özellikler</a></li>
       <li><a href="#indir">İndir</a></li>
-      <li style="margin-top:8px"><a href="#indir" style="background:var(--primary);color:#fff;font-weight:700;text-align:center;justify-content:center">Uygulamayı İndir</a></li>
+      <li class="nav-mobile-cta" style="margin-top:8px"><a href="#indir" style="background:var(--primary);color:#fff;font-weight:700;text-align:center;justify-content:center">Uygulamayı İndir</a></li>
     </ul>
     <div class="nav-actions">
       <a href="#indir" class="nav-btn">Uygulamayı İndir</a>
