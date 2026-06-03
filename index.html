@@ -3,1720 +3,1135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KamKam — Her Gittiğin Yerde Ödül Kazan</title>
-  <meta name="description" content="Berberden kafeye, marketten restorana, tek uygulama, sonsuz avantaj.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8192C'/><text x='16' y='23' font-family='system-ui,sans-serif' font-size='20' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
+  <title>KamKam — Şehri Telefonunla Keşfet</title>
+  <meta name="description" content="Özenle seçilmiş yüzlerce işletme, şehrin en kaliteli rehberi, ayrıcalıklar, indirimler, kampanyalar.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C8432A'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: auto; }
-
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #0d0d0d;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #111;
       background: #fff;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-
     :root {
-      --primary:   #E8192C;
-      --primary-d: #C41020;
-      --dark:      #0d0d0d;
-      --bg:        #f7f7f7;
-      --muted:     #6b7280;
-      --border:    #e5e7eb;
+      --p:  #C8432A;
+      --pd: #A83520;
+      --dark: #0D0D0D;
+      --card: #161616;
+      --hero-bg: #F0EBE4;
+      --muted: #666;
+      --border: #E5E5E5;
     }
 
-    /* ────────────────────────────────
-       NAVBAR
-    ──────────────────────────────── */
+    /* ── NAVBAR ── */
     .nav {
       position: fixed;
       inset: 0 0 auto 0;
-      z-index: 200;
-      height: 64px;
-      display: flex;
+      z-index: 300;
+      height: 68px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      padding: 0 40px;
+      padding: 0 20px;
       transition: background .25s, box-shadow .25s;
     }
     .nav.solid {
-      background: rgba(255,255,255,.92);
+      background: rgba(240,235,228,.95);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 1px 0 var(--border);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
     }
     .nav-logo {
+      justify-self: start;
+      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      flex-shrink: 0;
     }
-    .nav-logo-icon {
-      width: 32px; height: 32px;
-      background: var(--primary);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 900; color: #fff;
-      letter-spacing: -1px;
+    .nav-logo img {
+      height: 52px;
+      width: auto;
+      mix-blend-mode: multiply;
     }
-    .nav-logo-text {
-      font-size: 18px; font-weight: 800;
-      color: var(--dark);
-      letter-spacing: -0.5px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 4px;
-      list-style: none;
-      margin: 0 auto;
-    }
-    .nav-links a {
-      display: flex; align-items: center; gap: 4px;
-      text-decoration: none;
-      color: #374151;
-      font-weight: 500;
-      font-size: 14px;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: background .15s, color .15s;
-    }
-    .nav-links a:hover { background: #f3f4f6; color: var(--dark); }
-    .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .nav-btn {
-      background: var(--primary);
+    .nav-cta {
+      justify-self: center;
+      background: var(--p);
       color: #fff;
-      border: none; cursor: pointer;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 14px; font-weight: 600;
-      font-family: inherit;
       text-decoration: none;
-      transition: background .15s, transform .15s;
+      padding: 11px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
       white-space: nowrap;
+      transition: background .15s;
     }
-    .nav-btn:hover { background: var(--primary-d); transform: translateY(-1px); }
+    .nav-cta:hover { background: var(--pd); }
     .nav-hamburger {
-      display: none;
+      justify-self: end;
+      display: flex;
       flex-direction: column;
-      justify-content: center;
       gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
       padding: 6px;
-      margin-left: 12px;
-      flex-shrink: 0;
     }
     .nav-hamburger span {
       display: block;
-      width: 22px; height: 2px;
-      background: var(--dark);
+      width: 24px; height: 2px;
+      background: #111;
       border-radius: 2px;
       transition: transform .22s, opacity .22s;
     }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .nav-mobile-cta { display: none; }
 
-    /* ────────────────────────────────
-       HERO
-    ──────────────────────────────── */
+    /* Mobile dropdown menu */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(240,235,228,.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 10px 16px 20px;
+      flex-direction: column;
+      gap: 2px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      z-index: 299;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      text-decoration: none;
+      color: #111;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 14px;
+      border-radius: 10px;
+      transition: background .15s;
+    }
+    .nav-mobile a:hover { background: rgba(0,0,0,.05); }
+    .nav-mobile a.cta {
+      background: var(--p);
+      color: #fff;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* Desktop-only nav links */
+    .nav-links-desk {
+      display: none;
+      list-style: none;
+      gap: 4px;
+      justify-content: center;
+    }
+    .nav-links-desk a {
+      text-decoration: none;
+      color: #444;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: background .15s;
+      display: block;
+    }
+    .nav-links-desk a:hover { background: rgba(0,0,0,.06); }
+
+    @media (min-width: 768px) {
+      .nav {
+        padding: 0 40px;
+        grid-template-columns: auto 1fr auto;
+      }
+      .nav-logo    { justify-self: start; }
+      .nav-cta     { justify-self: end; }
+      .nav-hamburger { display: none; }
+      .nav-links-desk { display: flex; }
+    }
+
+    /* ── HERO ── */
     .hero {
-      background: radial-gradient(ellipse 90% 55% at 50% 0%, #ebebeb 0%, #fff 68%);
+      position: relative;
       min-height: 100vh;
+      background: var(--hero-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-map {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 130px;
-      overflow: hidden;
-      position: relative;
+      max-width: 580px;
     }
-    #hero-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+    .hero-mark { margin-bottom: 32px; }
+    .hero-mark img {
+      height: 230px;
+      width: auto;
+      mix-blend-mode: multiply;
+      display: block;
     }
-    .hero-text {
-      text-align: center;
-      max-width: 700px;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
+    @media (min-width: 600px) {
+      .hero-mark img { height: 306px; }
     }
+
     .hero-h1 {
-      font-size: 64px;
+      font-size: 38px;
       font-weight: 900;
-      line-height: 1.06;
-      letter-spacing: -3px;
-      color: var(--dark);
-      margin-bottom: 20px;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      color: #111;
+      margin-bottom: 18px;
     }
-    .hero-h1 em { font-style: italic; color: var(--primary); }
     .hero-sub {
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--muted);
-      line-height: 1.65;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
       margin-bottom: 36px;
+      max-width: 400px;
     }
-    .hero-cta-row {
+    .hero-btns {
       display: flex;
+      flex-direction: column;
       gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
+      width: 100%;
+      max-width: 360px;
     }
-    .btn-dl {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: var(--dark);
+    .btn-fill {
+      display: block;
+      background: var(--p);
       color: #fff;
       text-decoration: none;
-      padding: 13px 22px;
-      border-radius: 14px;
-      font-size: 14px; font-weight: 600;
-      transition: opacity .15s, transform .15s;
+      padding: 17px 28px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      text-align: center;
+      transition: background .15s, transform .15s;
+      border: none;
+      cursor: pointer;
     }
-    .btn-dl:hover { opacity: .85; transform: translateY(-1px); }
-    .btn-dl-inner { display: flex; flex-direction: column; line-height: 1.2; }
-    .btn-dl-small { font-size: 10px; font-weight: 400; opacity: .6; }
-    .btn-dl-big   { font-size: 15px; font-weight: 700; }
+    .btn-fill:hover { background: var(--pd); transform: translateY(-1px); }
+    .btn-outline {
+      display: block;
+      background: transparent;
+      color: var(--p);
+      text-decoration: none;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      text-align: center;
+      border: 2px solid var(--p);
+      transition: background .15s, transform .15s;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: rgba(200,67,42,.06); transform: translateY(-1px); }
 
-    /* Phones */
-    .hero-phones {
-      width: 100%;
-      max-width: 960px;
-      height: 500px;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .hphone {
-      position: absolute;
-      bottom: 0;
-    }
-    .hphone-c {
-      left: 50%; transform: translateX(-50%);
-      z-index: 3;
-    }
-    .hphone-l {
-      left: 50%; margin-left: -265px;
-      transform: rotate(-8deg) translateY(30px);
-      transform-origin: bottom center;
-      z-index: 2;
-    }
-    .hphone-r {
-      left: 50%; margin-left: 60px;
-      transform: rotate(8deg) translateY(30px);
-      transform-origin: bottom center;
-      z-index: 2;
+    @media (min-width: 600px) {
+      .hero-h1 { font-size: 56px; letter-spacing: -3px; }
+      .hero-sub { font-size: 17px; }
+      .hero-btns { flex-direction: row; max-width: 460px; }
+      .btn-fill, .btn-outline { flex: 1; }
     }
 
-    /* Phone frame */
-    .phone-frame {
-      position: relative;
-      background: #161616;
-      border-radius: 44px;
-      padding: 10px;
+    /* ── DARK DEMO ── */
+    .dark-demo {
+      background: var(--dark);
+      padding: 80px 24px;
     }
-    .hphone-c .phone-frame { width: 224px; height: 456px; box-shadow: 0 50px 100px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.06); }
-    .hphone-l .phone-frame,
-    .hphone-r .phone-frame { width: 200px; height: 410px; box-shadow: 0 32px 72px rgba(0,0,0,.20), 0 0 0 1px rgba(255,255,255,.04); }
-    .pf-notch {
-      position: absolute;
-      top: 10px; left: 50%; transform: translateX(-50%);
-      width: 64px; height: 20px;
-      background: #161616;
-      border-radius: 0 0 12px 12px;
-      z-index: 4;
-    }
-    .pf-home {
-      position: absolute;
-      bottom: 13px; left: 50%; transform: translateX(-50%);
-      width: 52px; height: 4px;
-      background: rgba(255,255,255,.25);
-      border-radius: 2px;
-      z-index: 4;
-    }
-    .pf-screen {
-      width: 100%; height: 100%;
-      border-radius: 36px;
-      overflow: hidden;
-      background: linear-gradient(160deg, var(--primary) 0%, #ff3a4a 100%);
-      display: flex; flex-direction: column;
-      padding: 32px 12px 18px;
-      gap: 8px;
-    }
-    .pf-screen.dark { background: linear-gradient(160deg, #1a1a2e 0%, #2a2a44 100%); }
-    .pf-screen.warm { background: linear-gradient(160deg, #ff3a4a 0%, #ff6b7a 100%); }
-    .pf-title {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: rgba(255,255,255,.55);
-      padding: 0 4px;
-      margin-bottom: 2px;
-    }
-    .pf-card {
-      background: rgba(255,255,255,.93);
-      border-radius: 13px;
-      padding: 10px 12px;
-      display: flex; align-items: center; gap: 9px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.12);
-      backdrop-filter: blur(6px);
-    }
-    .pf-card-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
-    .pf-card-info { min-width: 0; }
-    .pf-card-title {
-      font-size: 12px; font-weight: 700;
-      color: #0d0d0d; line-height: 1.2;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .pf-card-sub { font-size: 10px; color: #6b7280; margin-top: 1px; }
-    .pf-big { font-size: 22px; font-weight: 900; color: #0d0d0d; letter-spacing: -1px; line-height: 1; }
-
-    /* ── Aurora background blobs */
-    .aurora-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .aurora-1 {
-      width: 560px; height: 480px;
-      background: var(--primary);
-      opacity: .07;
-      top: -80px; left: -120px;
-      animation: auroraA 14s ease-in-out infinite alternate;
-    }
-    .aurora-2 {
-      width: 480px; height: 420px;
-      background: var(--primary);
-      opacity: .055;
-      top: -40px; right: -100px;
-      animation: auroraB 17s ease-in-out infinite alternate;
-    }
-    .aurora-3 {
-      width: 360px; height: 340px;
-      background: #ff6b7a;
-      opacity: .045;
-      bottom: 100px; left: 38%;
-      animation: auroraC 21s ease-in-out infinite alternate;
-    }
-    @keyframes auroraA {
-      from { transform: translate(0,0)    scale(1); }
-      to   { transform: translate(70px,50px)  scale(1.12); }
-    }
-    @keyframes auroraB {
-      from { transform: translate(0,0)    scale(1); }
-      to   { transform: translate(-50px,70px) scale(.88); }
-    }
-    @keyframes auroraC {
-      from { transform: translate(0,0)    scale(1); }
-      to   { transform: translate(35px,-55px) scale(1.16); }
-    }
-
-    /* ── Marquee strip */
-    .hero-marquee {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 44px;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
-    }
-    .mq-track {
-      display: flex;
-      align-items: center;
-      width: max-content;
-      will-change: transform;
-      animation: mqScroll 28s linear infinite;
-    }
-    .hero-marquee:hover .mq-track { animation-play-state: paused; }
-    .mq-item {
-      display: flex; align-items: center; gap: 7px;
-      padding: 0 20px;
-      font-size: 13px; font-weight: 500;
-      color: var(--muted);
-      white-space: nowrap;
-      user-select: none;
-    }
-    .mq-sep {
-      width: 3px; height: 3px;
-      border-radius: 50%;
-      background: #d1d5db;
-      flex-shrink: 0;
-    }
-    @keyframes mqScroll {
-      0%   { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-50%, 0, 0); }
-    }
-
-    /* ── Ödül SVG underline */
-    .odol-underline {
-      display: flex;
-      justify-content: center;
-      margin-top: -8px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-    }
-    .odol-svg { width: 210px; overflow: visible; }
-    .odol-path {
-      stroke: var(--primary);
-      stroke-width: 3.5;
-      fill: none;
-      stroke-linecap: round;
-      stroke-dasharray: 230;
-      stroke-dashoffset: 230;
-      opacity: .8;
-    }
-    .odol-path.draw {
-      transition: stroke-dashoffset .6s cubic-bezier(.22,1,.36,1);
-      stroke-dashoffset: 0;
-    }
-
-    /* ── Phone entrance animation */
-    .hphone .phone-frame {
-      animation: phoneEnter 1.05s cubic-bezier(.34,1.42,.64,1) both;
-    }
-    .hphone-l .phone-frame { animation-delay: .12s; }
-    .hphone-c .phone-frame { animation-delay: .32s; }
-    .hphone-r .phone-frame { animation-delay: .12s; }
-    @keyframes phoneEnter {
-      from { opacity: 0; transform: translateY(72px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Center phone screen fade transition */
-    .pf-screen { transition: opacity .4s ease; }
-
-    /* ────────────────────────────────
-       SECTIONS (alternating)
-    ──────────────────────────────── */
-    .section { padding: 80px 40px; }
-    .section-white { background: #fff; }
-    .section-gray  { background: var(--bg); }
-
-    .section-inner {
+    .dark-demo-inner {
       max-width: 1100px;
       margin: 0 auto;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 80px;
-    }
-    .section-inner.flip { flex-direction: row-reverse; }
-
-    .section-text { flex: 1; min-width: 0; }
-    .section-visual { flex: 1; display: flex; justify-content: center; }
-
-    .tag {
-      display: inline-block;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 14px;
-    }
-    .section-h2 {
-      font-size: 42px; font-weight: 800;
-      line-height: 1.1; letter-spacing: -1.5px;
-      color: var(--dark);
-      margin-bottom: 18px;
-    }
-    .section-p {
-      font-size: 17px; color: var(--muted);
-      line-height: 1.75; margin-bottom: 36px;
-      max-width: 440px;
-    }
-
-    /* Steps list */
-    .steps { display: flex; flex-direction: column; gap: 20px; }
-    .step  { display: flex; align-items: flex-start; gap: 14px; }
-    .step-dot {
-      width: 34px; height: 34px; flex-shrink: 0;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 800; color: #fff;
-      margin-top: 1px;
-    }
-    .step h4 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
-    .step p  { font-size: 14px; color: var(--muted); }
-
-    /* CTA button */
-    .btn-cta {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--primary); color: #fff;
-      text-decoration: none;
-      padding: 13px 24px; border-radius: 12px;
-      font-size: 15px; font-weight: 700;
-      transition: background .15s, transform .15s, box-shadow .15s;
-    }
-    .btn-cta:hover {
-      background: var(--primary-d);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,25,44,.35);
-    }
-
-    /* Section phone visual */
-    .sec-phone {
-      width: 220px; height: 440px;
-      border-radius: 38px;
-      overflow: hidden;
-      box-shadow: 0 32px 72px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.05);
-    }
-
-    /* ────────────────────────────────
-       FEATURES
-    ──────────────────────────────── */
-    .features-section {
-      background: var(--bg);
-      padding: 80px 40px;
-    }
-    .features-inner { max-width: 1100px; margin: 0 auto; }
-    .features-head {
+      gap: 56px;
       text-align: center;
-      margin-bottom: 60px;
     }
-    .features-head .tag { display: block; margin-bottom: 12px; }
-    .features-head h2 {
-      font-size: 42px; font-weight: 800;
-      letter-spacing: -1.5px; color: var(--dark);
-    }
-    /* ── Bento grid ── */
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto auto;
-      gap: 16px;
-    }
-    .bc {
-      background: #fff;
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      padding: 32px 28px;
-      overflow: hidden;
-      position: relative;
-      transition: transform .28s cubic-bezier(.34,1.1,.64,1), box-shadow .28s;
-    }
-    .bc:hover { transform: translateY(-5px); box-shadow: 0 24px 52px rgba(0,0,0,.09); }
-    .bc-wide { grid-column: span 2; }
-    .bc-full { grid-column: span 3; }
-    .bc-dark    { background: var(--dark);    border-color: transparent; }
-    .bc-primary { background: var(--primary); border-color: transparent; }
-    .bc-subtle  { background: #fafafa; }
-
-    .bc-icon { font-size: 38px; display: block; margin-bottom: 18px; }
-    .bc-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 1.4px; text-transform: uppercase;
-      color: var(--primary); margin-bottom: 8px; display: block;
-    }
-    .bc-dark .bc-label    { color: rgba(255,255,255,.4); }
-    .bc-primary .bc-label { color: rgba(255,255,255,.65); }
-    .bc-title {
-      font-size: 20px; font-weight: 800;
-      letter-spacing: -.5px; color: var(--dark);
-      margin-bottom: 8px; line-height: 1.2;
-    }
-    .bc-dark .bc-title    { color: #fff; }
-    .bc-primary .bc-title { color: #fff; }
-    .bc-desc {
-      font-size: 14px; color: var(--muted); line-height: 1.7;
-    }
-    .bc-dark .bc-desc    { color: rgba(255,255,255,.5); }
-    .bc-primary .bc-desc { color: rgba(255,255,255,.75); }
-
-    /* big stat number inside card */
-    .bc-big {
-      font-size: 68px; font-weight: 900;
-      letter-spacing: -4px; line-height: .9;
-      display: block; margin-bottom: 12px;
-      color: var(--primary);
-    }
-    .bc-dark .bc-big    { color: #fff; }
-    .bc-primary .bc-big { color: rgba(255,255,255,.95); }
-
-    /* sector chips */
-    .bc-chips {
-      display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px;
-    }
-    .bc-chip {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 12px; font-weight: 600; color: var(--dark);
-    }
-
-    /* decorative large bg text */
-    .bc-deco {
-      position: absolute;
-      right: -10px; bottom: -20px;
-      font-size: 120px; line-height: 1;
-      opacity: .06; pointer-events: none;
-      user-select: none;
-    }
-    .bc-primary .bc-deco { opacity: .15; }
-
-    /* full-width card inner layout */
-    .bc-full-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 40px; flex-wrap: wrap;
-    }
-    .bc-full-left  { flex: 1; min-width: 0; }
-    .bc-full-right {
-      display: flex; gap: 12px; flex-shrink: 0;
-    }
-    .bc-pill {
-      background: rgba(255,255,255,.15);
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-size: 13px; font-weight: 700; color: #fff;
-      white-space: nowrap;
-    }
-
-    /* waitlist form inside bento */
-    .wl-form {
-      display: flex;
-      gap: 8px;
-      margin-top: 24px;
-      flex-wrap: wrap;
-    }
-    .wl-input {
-      flex: 1;
-      min-width: 200px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 12px;
-      padding: 13px 18px;
-      font-size: 15px;
-      font-family: inherit;
-      color: #fff;
-      outline: none;
-      transition: border-color .2s, background .2s;
-    }
-    .wl-input::placeholder { color: rgba(255,255,255,.35); }
-    .wl-input:focus {
-      border-color: rgba(255,255,255,.45);
-      background: rgba(255,255,255,.14);
-    }
-    .wl-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none; cursor: pointer;
-      padding: 13px 24px;
-      border-radius: 12px;
-      font-size: 15px; font-weight: 700;
-      font-family: inherit;
-      white-space: nowrap;
-      transition: background .15s, transform .15s;
-    }
-    .wl-btn:hover { background: var(--primary-d); transform: translateY(-1px); }
-    .wl-success {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      color: rgba(255,255,255,.8);
-      margin-top: 14px;
-    }
-    .wl-success.show { display: flex; }
-    .wl-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 999px;
-      padding: 5px 14px;
-      font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6);
-    }
-
-    @media (max-width: 960px) {
-      .bento { grid-template-columns: repeat(2, 1fr); }
-      .bc-wide { grid-column: span 2; }
-      .bc-full { grid-column: span 2; }
-      .bc-full-right { flex-wrap: wrap; }
-    }
-    @media (max-width: 560px) {
-      .bento { grid-template-columns: 1fr; }
-      .bc-wide, .bc-full { grid-column: span 1; }
-    }
-
-    /* ────────────────────────────────
-       DOWNLOAD BAND
-    ──────────────────────────────── */
-    .download-band {
-      background: #fff;
-      padding: 80px 40px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-    .download-band h2 {
-      font-size: 42px; font-weight: 800;
-      letter-spacing: -1.5px; color: var(--dark);
-      margin-bottom: 14px;
-    }
-    .download-band p {
-      font-size: 17px; color: var(--muted);
-      margin-bottom: 40px;
-    }
-    .download-btns {
-      display: flex; gap: 14px;
-      justify-content: center; flex-wrap: wrap;
-    }
-
-    /* ────────────────────────────────
-       FOOTER
-    ──────────────────────────────── */
-    footer {
-      background: #0d0d0d;
-      padding: 64px 40px 40px;
-      color: rgba(255,255,255,.55);
-    }
-    .footer-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr;
-      gap: 60px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .footer-brand {}
-    .footer-logo-row {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 14px;
-    }
-    .footer-logo-icon {
-      width: 30px; height: 30px;
-      background: var(--primary); border-radius: 7px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 900; color: #fff;
-    }
-    .footer-logo-text {
-      font-size: 17px; font-weight: 800;
-      color: #fff; letter-spacing: -.3px;
-    }
-    .footer-tagline { font-size: 14px; line-height: 1.6; max-width: 220px; }
-    .footer-col h4 {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: rgba(255,255,255,.3);
+    .dark-demo-text { color: #fff; }
+    .dark-h2 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.1;
       margin-bottom: 16px;
     }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col a {
-      text-decoration: none; color: rgba(255,255,255,.6);
-      font-size: 14px; transition: color .15s;
-    }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom {
-      max-width: 1100px; margin: 24px auto 0;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 13px; color: rgba(255,255,255,.25);
+    .dark-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,.5);
+      line-height: 1.7;
+      max-width: 380px;
+      margin: 0 auto;
     }
 
-    /* ────────────────────────────────
-       TEXT SPLIT — hero heading
-    ──────────────────────────────── */
-    .hero-h1 { opacity: 1; } /* override until JS runs */
-    .sw  { display: inline-block; vertical-align: bottom; }
-    .swi {
-      display: inline-block;
-      vertical-align: bottom;
-      transform: translateY(28px);
-      opacity: 0;
-      animation: wordUp .7s cubic-bezier(.22,1,.36,1) var(--d,0s) forwards;
-    }
-    @keyframes wordUp {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    /* subtitle + cta fade-up */
-    .hero-sub, .hero-cta-row {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
-    }
-    .hero-sub.show, .hero-cta-row.show {
-      opacity: 1; transform: none;
-    }
-
-    /* ────────────────────────────────
-       SLOT MACHINE
-    ──────────────────────────────── */
-    /* bento numbers / pills — whole-element reveal */
-    .slot-num,
-    .slot-pill {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .65s cubic-bezier(.22,1,.36,1),
-                  transform .65s cubic-bezier(.22,1,.36,1);
-    }
-    .slot-num.slotted,
-    .slot-pill.slotted {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ────────────────────────────────
-       LIVE NOTIFICATIONS
-    ──────────────────────────────── */
-    .notif-wrap {
-      position: fixed;
-      bottom: 28px;
-      left: 28px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      pointer-events: none;
-    }
-    .notif {
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(0,0,0,0.07);
-      border-radius: 16px;
-      padding: 11px 14px;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      max-width: 285px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.11), 0 2px 6px rgba(0,0,0,.06);
-      animation: notifIn .42s cubic-bezier(.34,1.56,.64,1) forwards;
-    }
-    .notif.out {
-      animation: notifOut .3s ease forwards;
-    }
-    .notif-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary) 0%, #ff3a4a 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px;
+    /* Phone frame */
+    .pf {
+      background: #1C1C1E;
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow: 0 60px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07);
       flex-shrink: 0;
     }
-    .notif-body { min-width: 0; }
-    .notif-name   { font-size: 13px; font-weight: 700; color: #0d0d0d; line-height: 1.2; }
-    .notif-action { font-size: 12px; color: #6b7280; margin-top: 2px; line-height: 1.3; }
-    .notif-time   { font-size: 10px; color: #d1d5db; margin-top: 3px; }
-    @keyframes notifIn {
-      from { opacity: 0; transform: translateX(-18px) scale(.94); }
-      to   { opacity: 1; transform: translateX(0)     scale(1);   }
-    }
-    @keyframes notifOut {
-      from { opacity: 1; transform: translateX(0)     scale(1);   }
-      to   { opacity: 0; transform: translateX(-14px) scale(.94); }
-    }
-    @media (max-width: 560px) {
-      .notif-wrap { left: 12px; bottom: 16px; }
-      .notif { max-width: calc(100vw - 24px); }
+    .ps {
+      border-radius: 34px;
+      overflow: hidden;
+      background: #fff;
+      width: 100%; height: 100%;
     }
 
-    /* ────────────────────────────────
-       FADE-IN
-    ──────────────────────────────── */
+    /* Login screen content */
+    .login-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 18px 20px;
+      height: 100%;
+      background: #fff;
+    }
+    .ls-logo { margin-bottom: 14px; }
+    .ls-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #333;
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    .ls-btn-main {
+      width: 100%;
+      background: var(--p);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: inherit;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    .ls-or {
+      font-size: 9px;
+      color: #aaa;
+      margin: 2px 0 6px;
+    }
+    .ls-social {
+      width: 100%;
+      background: #fff;
+      border: 1px solid #E5E5E5;
+      border-radius: 9px;
+      padding: 8px;
+      font-size: 9px;
+      font-weight: 500;
+      font-family: inherit;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      color: #333;
+    }
+    .ls-link {
+      font-size: 9px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    @media (min-width: 768px) {
+      .dark-demo-inner { flex-direction: row; text-align: left; gap: 80px; }
+      .dark-demo-text { flex: 1; }
+      .dark-sub { margin: 0; }
+      .dark-h2 { font-size: 48px; }
+    }
+
+    /* ── THREE PHONES ── */
+    .three-sec {
+      background: #fff;
+      padding: 80px 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .three-head { margin-bottom: 48px; }
+    .three-h2 {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: #111;
+      margin-bottom: 12px;
+    }
+    .three-h2 .ac { color: var(--p); }
+    .three-sub { font-size: 15px; color: #555; line-height: 1.6; }
+
+    .phones-cluster {
+      position: relative;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 0 auto 48px;
+    }
+    .pc-item { position: absolute; bottom: 0; }
+    .pc-item.c { z-index: 3; left: 50%; transform: translateX(-50%); }
+    .pc-item.l {
+      z-index: 2;
+      left: 50%;
+      transform: translateX(-50%) translateX(-125px) rotate(-10deg);
+      transform-origin: bottom center;
+    }
+    .pc-item.r {
+      z-index: 2;
+      left: 50%;
+      transform: translateX(-50%) translateX(125px) rotate(10deg);
+      transform-origin: bottom center;
+    }
+
+    /* App screen inside phone */
+    .app-screen {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: #F5F5F5;
+    }
+    .app-hdr {
+      background: #fff;
+      padding: 10px 10px 7px;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .app-cat {
+      font-size: 12px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 7px;
+    }
+    .app-tabs { display: flex; gap: 6px; }
+    .app-tab {
+      font-size: 8px;
+      font-weight: 600;
+      color: #999;
+      padding: 3px 7px;
+      border-radius: 5px;
+    }
+    .app-tab.on { background: #111; color: #fff; }
+    .app-body { padding: 8px; flex: 1; overflow: hidden; }
+    .app-sec-title { font-size: 8px; font-weight: 700; color: #111; margin-bottom: 6px; }
+    .app-feat-row { display: flex; gap: 6px; margin-bottom: 10px; overflow: hidden; }
+    .app-feat-card {
+      flex: 1; min-width: 0;
+      background: #fff;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+    .app-feat-img { height: 44px; }
+    .app-feat-name { font-size: 7px; font-weight: 600; color: #111; padding: 3px 4px 2px; }
+    .app-list-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(0,0,0,.04);
+    }
+    .app-list-img { width: 26px; height: 26px; border-radius: 5px; flex-shrink: 0; }
+    .app-list-info { flex: 1; min-width: 0; }
+    .app-list-name { font-size: 7px; font-weight: 700; color: #111; }
+    .app-list-sub { font-size: 6px; color: #999; margin-top: 1px; }
+
+    @media (min-width: 500px) {
+      .pc-item.l { transform: translateX(-50%) translateX(-155px) rotate(-10deg); }
+      .pc-item.r { transform: translateX(-50%) translateX(155px) rotate(10deg); }
+    }
+    @media (min-width: 600px) {
+      .three-h2 { font-size: 40px; letter-spacing: -2px; }
+    }
+
+    /* ── BUSINESS SECTION ── */
+    .biz-sec {
+      background: #FAFAFA;
+      padding: 0 0 80px;
+    }
+
+    /* Logo marquee */
+    .lm-wrap {
+      overflow: hidden;
+      border-top: 1px solid #EBEBEB;
+      border-bottom: 1px solid #EBEBEB;
+      padding: 18px 0;
+      margin-bottom: 72px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    }
+    .lm-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: lmScroll 20s linear infinite;
+    }
+    .lm-item {
+      padding: 0 36px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #C8C8C8;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .lm-dot { width: 4px; height: 4px; border-radius: 50%; background: #E0E0E0; flex-shrink: 0; }
+    @keyframes lmScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .biz-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+      text-align: center;
+    }
+    .biz-text { max-width: 540px; }
+    .biz-h2 {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: #111;
+      margin-bottom: 18px;
+    }
+    .biz-h2 .ac { color: var(--p); }
+    .biz-sub { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 32px; }
+
+    @media (min-width: 768px) {
+      .biz-inner { flex-direction: row; text-align: left; gap: 80px; }
+      .biz-text { flex: 1; }
+      .biz-h2 { font-size: 40px; }
+    }
+
+    /* ── BENTO SECTION (DARK) ── */
+    .bento-sec {
+      background: var(--dark);
+      padding: 80px 24px;
+    }
+    .bento-inner { max-width: 1100px; margin: 0 auto; }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .bc {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bc-lbl {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .bc-num {
+      font-size: 72px;
+      font-weight: 900;
+      letter-spacing: -4px;
+      line-height: .88;
+      color: var(--p);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .bc-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.5px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .bc-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,.38);
+      line-height: 1.5;
+    }
+    .bc-stars { font-size: 16px; letter-spacing: 2px; margin-bottom: 10px; color: #F59E0B; }
+
+    /* Accent center card */
+    .bc.accent {
+      background: linear-gradient(160deg, var(--p) 0%, #D4572D 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 280px;
+    }
+    .bc.accent .bc-lbl   { color: rgba(255,255,255,.6); }
+    .bc.accent .bc-num   { color: #fff; font-size: 88px; }
+    .bc.accent .bc-title { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.8); }
+
+    @media (min-width: 600px) {
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 900px) {
+      .bento-grid {
+        grid-template-columns: 1fr 1.3fr 1fr;
+        grid-template-rows: 230px 230px;
+      }
+      .bc:nth-child(1) { grid-column: 1; grid-row: 1; }
+      .bc.accent       { grid-column: 2; grid-row: 1 / span 2; }
+      .bc:nth-child(3) { grid-column: 3; grid-row: 1; }
+      .bc:nth-child(4) { grid-column: 1; grid-row: 2; }
+      .bc:nth-child(5) { grid-column: 3; grid-row: 2; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 48px 24px 32px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .footer-logo img {
+      display: block;
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      line-height: 1.5;
+      max-width: 220px;
+      margin-top: 8px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,.45);
+      font-size: 13px;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,.85); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,.2);
+    }
+    @media (min-width: 768px) {
+      footer { padding: 60px 40px 36px; }
+      .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+
+    /* ── FADE-IN ── */
     .fi {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(24px);
       transition: opacity .6s ease, transform .6s ease;
     }
     .fi.vis { opacity: 1; transform: none; }
-
-    /* ────────────────────────────────
-       RESPONSIVE
-    ──────────────────────────────── */
-    @media (max-width: 960px) {
-      /* Nav */
-      .nav { padding: 0 20px; }
-      .nav-hamburger { display: flex; }
-      .nav-btn { display: none; }
-      .nav-mobile-cta { display: block; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 64px; left: 0; right: 0;
-        background: rgba(255,255,255,.97);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        padding: 12px 20px 20px;
-        flex-direction: column;
-        gap: 2px;
-        box-shadow: 0 8px 24px rgba(0,0,0,.09);
-        z-index: 199;
-        margin: 0;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 14px; font-size: 16px; border-radius: 10px; }
-
-      /* Hero */
-      .hero { padding-top: 96px; }
-      .hero-h1 { font-size: 44px; letter-spacing: -2px; }
-      .odol-svg { width: 160px; }
-      .hero-marquee { margin-bottom: 28px; }
-      .aurora-1 { width: 340px; height: 300px; opacity: .06; }
-      .aurora-2 { width: 300px; height: 260px; opacity: .05; }
-      .aurora-3 { width: 240px; height: 220px; opacity: .04; }
-      .hero-phones { height: 380px; }
-      .hphone-c .phone-frame { width: 180px; height: 370px; }
-      .hphone-l .phone-frame,
-      .hphone-r .phone-frame { width: 155px; height: 315px; border-radius: 34px; }
-      .hphone-l .phone-frame .pf-screen,
-      .hphone-r .phone-frame .pf-screen { border-radius: 26px; }
-      .hphone-l { margin-left: -200px; }
-      .hphone-r { margin-left: 42px; }
-
-      /* Sections */
-      .section-inner,
-      .section-inner.flip { flex-direction: column !important; gap: 40px; }
-      .section-h2 { font-size: 32px; }
-      .section { padding: 60px 24px; }
-      .features-section { padding: 60px 24px; }
-      .download-band { padding: 60px 24px; }
-
-      /* Bento */
-      .bento { grid-template-columns: repeat(2, 1fr); }
-      .bc-wide { grid-column: span 2; }
-      .bc-full { grid-column: span 2; }
-      .bc-full-inner { flex-direction: column; gap: 24px; }
-      .bc-full-right { flex-direction: row; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
-
-      /* Footer */
-      footer { padding: 48px 24px 32px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-    }
-
-    @media (max-width: 560px) {
-      /* Hero */
-      .hero { padding-top: 84px; }
-      .hero-h1 { font-size: 36px; letter-spacing: -1.5px; }
-      .odol-svg { width: 120px; }
-      .odol-path { stroke-dasharray: 140; stroke-dashoffset: 140; }
-      .odol-path.draw { stroke-dashoffset: 0; }
-      .hero-marquee { margin-bottom: 14px; }
-      .mq-item { font-size: 12px; padding: 0 12px; }
-      .aurora-1 { width: 260px; height: 220px; }
-      .aurora-2 { width: 220px; height: 190px; }
-      .aurora-3 { display: none; }
-      .hero-sub { font-size: 16px; }
-      .hero-cta-row { flex-direction: row; justify-content: center; margin-bottom: 48px; gap: 10px; }
-      .btn-dl { flex: 1; max-width: 160px; justify-content: center; padding: 11px 14px; }
-      .btn-dl-big { font-size: 13px; }
-      .btn-dl-small { font-size: 9px; }
-
-      /* Phones — sadece orta telefon */
-      .hero-phones { height: 380px; }
-      .hphone-l, .hphone-r { display: none; }
-      .hphone-c { left: 50%; transform: translateX(-50%); }
-      .hphone-c .phone-frame { width: 186px; height: 375px; border-radius: 38px; }
-
-      /* Section visuals */
-      .sec-phone, [style*="width:210px"] { width: 180px !important; height: 365px !important; }
-
-      /* Bento */
-      .bento { grid-template-columns: 1fr; }
-      .bc-wide, .bc-full { grid-column: span 1; }
-      .bc-big { font-size: 52px; }
-      .bc-full-inner { flex-direction: column; }
-      .bc-full-right { flex-direction: row; flex-wrap: wrap; }
-      .bc-title[style] { font-size: 22px !important; }
-
-      /* Waitlist */
-      .wl-form { flex-direction: column; }
-      .wl-btn { width: 100%; }
-
-      /* Footer */
-      .footer-col { display: none; } /* sadece brand göster */
-      .download-band h2 { font-size: 30px; }
-    }
-
-    @media (max-width: 390px) {
-      .hero-h1 { font-size: 30px; letter-spacing: -1px; }
-      .odol-svg { width: 100px; }
-      .odol-path { stroke-dasharray: 120; stroke-dashoffset: 120; }
-      .odol-path.draw { stroke-dashoffset: 0; }
-      .btn-dl { width: 100%; max-width: 300px; }
-      .nav-btn { padding: 8px 14px; font-size: 13px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ── NAVBAR ── -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">
-      <span class="nav-logo-text">KamKam</span>
-    </a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
-      <li><a href="isletmeler.html">İşletmeler</a></li>
-      <li><a href="#ozellikler">Özellikler</a></li>
-      <li><a href="#indir">İndir</a></li>
-      <li class="nav-mobile-cta" style="margin-top:8px"><a href="#indir" style="background:var(--primary);color:#fff;font-weight:700;text-align:center;justify-content:center">Uygulamayı İndir</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a href="#indir" class="nav-btn">Uygulamayı İndir</a>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menü">
-        <span></span><span></span><span></span>
-      </button>
+<!-- ── NAVBAR ── -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="image.png" alt="KamKam">
+  </a>
+
+  <ul class="nav-links-desk">
+    <li><a href="#app">Nasıl Çalışır</a></li>
+    <li><a href="#isletme">İşletmeler</a></li>
+    <li><a href="#stats">Özellikler</a></li>
+  </ul>
+
+  <a href="#app" class="nav-cta">Uygulamayı İndir</a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="mobile-menu">
+  <a href="#app">Nasıl Çalışır</a>
+  <a href="#isletme">İşletmeler</a>
+  <a href="#stats">Özellikler</a>
+  <a href="#isletme" class="cta">İşletme Olarak Katıl</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <!-- City map SVG background -->
+  <svg class="hero-map" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Main roads -->
+    <line x1="0" y1="175" x2="1000" y2="175" stroke="#888" stroke-width="1.8"/>
+    <line x1="0" y1="360" x2="1000" y2="360" stroke="#888" stroke-width="2.2"/>
+    <line x1="0" y1="520" x2="1000" y2="520" stroke="#888" stroke-width="1.8"/>
+    <line x1="155" y1="0" x2="155" y2="700" stroke="#888" stroke-width="1.8"/>
+    <line x1="420" y1="0" x2="420" y2="700" stroke="#888" stroke-width="2.2"/>
+    <line x1="690" y1="0" x2="690" y2="700" stroke="#888" stroke-width="1.8"/>
+    <line x1="880" y1="0" x2="880" y2="700" stroke="#888" stroke-width="1.2"/>
+    <!-- Secondary roads -->
+    <line x1="0" y1="60" x2="1000" y2="60" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="0" y1="270" x2="1000" y2="270" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="0" y1="440" x2="1000" y2="440" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="0" y1="620" x2="1000" y2="620" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="60" y1="0" x2="60" y2="700" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="265" y1="0" x2="265" y2="700" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="560" y1="0" x2="560" y2="700" stroke="#AAA" stroke-width="0.9"/>
+    <line x1="800" y1="0" x2="800" y2="700" stroke="#AAA" stroke-width="0.9"/>
+    <!-- Smaller streets -->
+    <line x1="0" y1="112" x2="420" y2="112" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="420" y1="112" x2="1000" y2="112" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="0" y1="315" x2="690" y2="315" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="0" y1="480" x2="1000" y2="480" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="0" y1="580" x2="880" y2="580" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="0" y1="655" x2="1000" y2="655" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="108" y1="0" x2="108" y2="520" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="340" y1="0" x2="340" y2="700" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="500" y1="0" x2="500" y2="700" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="625" y1="175" x2="625" y2="700" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="760" y1="0" x2="760" y2="520" stroke="#BBB" stroke-width="0.6"/>
+    <line x1="940" y1="0" x2="940" y2="700" stroke="#BBB" stroke-width="0.6"/>
+    <!-- Diagonal roads -->
+    <line x1="0" y1="360" x2="420" y2="0" stroke="#AAA" stroke-width="1"/>
+    <line x1="420" y1="700" x2="1000" y2="220" stroke="#AAA" stroke-width="1"/>
+    <line x1="690" y1="0" x2="1000" y2="360" stroke="#BBB" stroke-width="0.8"/>
+    <line x1="0" y1="520" x2="155" y2="700" stroke="#BBB" stroke-width="0.7"/>
+    <!-- Roundabouts -->
+    <circle cx="420" cy="360" r="24" fill="none" stroke="#888" stroke-width="1.8"/>
+    <circle cx="155" cy="175" r="14" fill="none" stroke="#AAA" stroke-width="1"/>
+    <circle cx="690" cy="520" r="18" fill="none" stroke="#AAA" stroke-width="1.2"/>
+    <circle cx="265" cy="60" r="8" fill="none" stroke="#BBB" stroke-width="0.7"/>
+  </svg>
+
+  <div class="hero-content fi">
+    <!-- KAM wave logo mark -->
+    <div class="hero-mark">
+      <img src="image.png" alt="KamKam">
     </div>
-  </nav>
 
-  <!-- ── HERO ── -->
-  <section class="hero" id="hero">
-    <canvas id="hero-canvas"></canvas>
-    <div class="aurora-blob aurora-1"></div>
-    <div class="aurora-blob aurora-2"></div>
-    <div class="aurora-blob aurora-3"></div>
-    <div class="hero-text">
-      <h1 class="hero-h1">Her Gittiğin Yerde<br><em>Ödül</em> Kazan</h1>
-      <div class="odol-underline">
-        <svg class="odol-svg" viewBox="0 0 210 14" xmlns="http://www.w3.org/2000/svg">
-          <path class="odol-path" d="M4 10 C38 4, 80 13, 120 7 C145 3, 172 11, 206 8"/>
-        </svg>
-      </div>
-      <p class="hero-sub">Berberden kafeye, marketten restorana,<br>tek uygulama, sonsuz avantaj.</p>
-      <div class="hero-cta-row" id="indir">
-        <a href="#" class="btn-dl">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <div class="btn-dl-inner">
-            <span class="btn-dl-small">İndir</span>
-            <span class="btn-dl-big">App Store</span>
-          </div>
-        </a>
-        <a href="#" class="btn-dl">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M3.18 23.76c.3.18.67.2 1.01.02l12.18-6.81-2.61-2.63-10.58 9.42zM20.8 10.58L17.4 8.67l-2.93 2.93 2.93 2.93 3.42-1.92c.97-.55.97-1.48-.02-2.03zM2.04 1.28C1.99 1.47 1.97 1.67 1.97 1.89v20.22c0 .22.02.42.07.6l.11.1 11.33-11.33-.11-.1L2.04 1.28zM4.19.24L16.37 7.05l-2.61 2.61L3.18.24C3.52.06 3.89.07 4.19.24z"/></svg>
-          <div class="btn-dl-inner">
-            <span class="btn-dl-small">İndir</span>
-            <span class="btn-dl-big">Google Play</span>
-          </div>
-        </a>
-      </div>
+    <h1 class="hero-h1">Şehri Telefonunla Keşfet</h1>
+    <p class="hero-sub">Özenle seçilmiş yüzlerce işletme, şehrin en kaliteli rehberi, ayrıcalıklar, indirimler, kampanyalar ve çok daha fazlası...</p>
+
+    <div class="hero-btns">
+      <a href="#app" class="btn-fill">Ayrıcalıkları Keşfet</a>
+      <a href="isletmeler.html" class="btn-outline">İşletme Olarak Katıl</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── DARK APP DEMO ── -->
+<section class="dark-demo" id="app">
+  <div class="dark-demo-inner fi">
+    <div class="dark-demo-text">
+      <h2 class="dark-h2">Şehri Telefonunla<br>Keşfet</h2>
+      <p class="dark-sub">Sizin için özenle seçilmiş işletmelerde, ayrıcalıklı bir deneyim. Sadece telefonunu okut ve anında kazanmaya başla.</p>
     </div>
 
-    <!-- Marquee partner strip -->
-    <div class="hero-marquee">
-      <div class="mq-track">
-        <span class="mq-item">☕ Kafe</span><span class="mq-sep"></span>
-        <span class="mq-item">✂️ Berber</span><span class="mq-sep"></span>
-        <span class="mq-item">🛒 Market</span><span class="mq-sep"></span>
-        <span class="mq-item">🍕 Restoran</span><span class="mq-sep"></span>
-        <span class="mq-item">💇 Güzellik</span><span class="mq-sep"></span>
-        <span class="mq-item">💊 Eczane</span><span class="mq-sep"></span>
-        <span class="mq-item">🏋️ Spor Salonu</span><span class="mq-sep"></span>
-        <span class="mq-item">🍦 Pastane</span><span class="mq-sep"></span>
-        <span class="mq-item">🎬 Sinema</span><span class="mq-sep"></span>
-        <span class="mq-item">🧴 Kozmetik</span><span class="mq-sep"></span>
-        <!-- repeat for seamless loop -->
-        <span class="mq-item">☕ Kafe</span><span class="mq-sep"></span>
-        <span class="mq-item">✂️ Berber</span><span class="mq-sep"></span>
-        <span class="mq-item">🛒 Market</span><span class="mq-sep"></span>
-        <span class="mq-item">🍕 Restoran</span><span class="mq-sep"></span>
-        <span class="mq-item">💇 Güzellik</span><span class="mq-sep"></span>
-        <span class="mq-item">💊 Eczane</span><span class="mq-sep"></span>
-        <span class="mq-item">🏋️ Spor Salonu</span><span class="mq-sep"></span>
-        <span class="mq-item">🍦 Pastane</span><span class="mq-sep"></span>
-        <span class="mq-item">🎬 Sinema</span><span class="mq-sep"></span>
-        <span class="mq-item">🧴 Kozmetik</span><span class="mq-sep"></span>
-      </div>
-    </div>
-
-    <div class="hero-phones" id="hero-phones">
-      <!-- Left phone: Keşfet -->
-      <div class="hphone hphone-l">
-        <div class="phone-frame">
-          <div class="pf-notch"></div>
-          <div class="pf-screen dark">
-            <div class="pf-title">Keşfet</div>
-            <div class="pf-card">
-              <span class="pf-card-icon">☕</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">Café Nero</div>
-                <div class="pf-card-sub">150 m · 2× puan</div>
-              </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">✂️</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">Berber Ali</div>
-                <div class="pf-card-sub">400 m · %10 indirim</div>
-              </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🛒</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">BİM Market</div>
-                <div class="pf-card-sub">600 m · 50 puan</div>
-              </div>
-            </div>
+    <!-- Phone: app login screen -->
+    <div class="pf" style="width:230px;height:470px;">
+      <div class="ps">
+        <div class="login-screen">
+          <div class="ls-logo">
+            <img src="image.png" style="height:44px;width:auto;" alt="KamKam">
           </div>
-          <div class="pf-home"></div>
-        </div>
-      </div>
-
-      <!-- Center phone: Ödüllerim -->
-      <div class="hphone hphone-c">
-        <div class="phone-frame">
-          <div class="pf-notch"></div>
-          <div class="pf-screen" id="center-phone-screen">
-            <div class="pf-title">Ödüllerim</div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🎁</span>
-              <div class="pf-card-info">
-                <div class="pf-big">2.450</div>
-                <div class="pf-card-sub">toplam puan</div>
-              </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🏆</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">Bu ay 3 ödül</div>
-                <div class="pf-card-sub">Altın üye</div>
-              </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🔥</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">14 gün seri</div>
-                <div class="pf-card-sub">Devam et!</div>
-              </div>
-            </div>
-          </div>
-          <div class="pf-home"></div>
-        </div>
-      </div>
-
-      <!-- Right phone: Kampanyalar -->
-      <div class="hphone hphone-r">
-        <div class="phone-frame">
-          <div class="pf-notch"></div>
-          <div class="pf-screen warm">
-            <div class="pf-title">Kampanyalar</div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🔔</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">%20 İndirim!</div>
-                <div class="pf-card-sub">Café Nero · Bugün</div>
-              </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">⚡</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">2× Puan Fırsatı</div>
-                <div class="pf-card-sub">Berber · 3 gün kaldı</div>
-              </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🎯</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">Ücretsiz Kahve</div>
-                <div class="pf-card-sub">500 puana ulaştın</div>
-              </div>
-            </div>
-          </div>
-          <div class="pf-home"></div>
+          <div class="ls-title">Yüzlerce anlaşmalı<br>işletme ile hizmetinizde</div>
+          <button class="ls-btn-main">Ücretsiz Kayıt Ol</button>
+          <div class="ls-or">Ya da</div>
+          <button class="ls-social">
+            <svg width="10" height="10" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Google ile Devam Et
+          </button>
+          <button class="ls-social">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook ile Devam Et
+          </button>
+          <button class="ls-social">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#111"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Apple ile Devam Et
+          </button>
+          <div class="ls-link">Giriş Yap</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── SECTION 1: Nasıl Çalışır (metin sol, görsel sağ) ── -->
-  <section class="section section-white" id="nasil-calisir">
-    <div class="section-inner fi">
-      <div class="section-text">
-        <span class="tag">Nasıl Çalışır</span>
-        <h2 class="section-h2">Dakikalar İçinde<br>İlk Ödülünü Al</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-dot">1</div>
-            <div>
-              <h4>Üye Ol</h4>
-              <p>Dakikalar içinde hesabını oluştur, hemen kullanmaya başla.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">2</div>
-            <div>
-              <h4>QR'ı Tara</h4>
-              <p>Anlaşmalı işletmelerde kasada QR kodu tarat, puan kazan.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">3</div>
-            <div>
-              <h4>Ödülünü Al</h4>
-              <p>Biriken puanlarını dilediğin işletmede ödüle dönüştür.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section-visual">
-        <div class="phone-frame" style="width:210px;height:430px;box-shadow:0 32px 72px rgba(0,0,0,.14)">
-          <div class="pf-notch"></div>
-          <div class="pf-screen">
-            <div class="pf-title">QR Tara</div>
-            <div class="pf-card">
-              <span class="pf-card-icon">📱</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">Kodu Tarat</div>
-                <div class="pf-card-sub">Kasada 2 saniye</div>
+<!-- ── THREE PHONES ── -->
+<section class="three-sec" id="uclu">
+  <div class="three-head fi">
+    <h2 class="three-h2">Tek Uygulama, <span class="ac">Sınırsız</span><br>Ayrıcalık.</h2>
+    <p class="three-sub">Kasada QR okut, saniyeler içinde puanını al ve çık.</p>
+  </div>
+
+  <div class="phones-cluster fi">
+    <!-- Left: Pet Dostları -->
+    <div class="pc-item l">
+      <div class="pf" style="width:170px;height:355px;">
+        <div class="ps">
+          <div class="app-screen">
+            <div class="app-hdr">
+              <div class="app-cat">Pet Dostları</div>
+              <div class="app-tabs">
+                <span class="app-tab on">Yeniler</span>
+                <span class="app-tab">İçindekiler</span>
+                <span class="app-tab">Teklifler</span>
               </div>
             </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">✅</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">+50 Puan!</div>
-                <div class="pf-card-sub">Café Nero'dan kazandın</div>
+            <div class="app-body">
+              <div class="app-sec-title">One Çıkanlar</div>
+              <div class="app-feat-row">
+                <div class="app-feat-card">
+                  <div class="app-feat-img" style="background:linear-gradient(135deg,#f0e6d3,#e0d0b0)"></div>
+                  <div class="app-feat-name">Hamdi Restaurant</div>
+                </div>
+                <div class="app-feat-card">
+                  <div class="app-feat-img" style="background:linear-gradient(135deg,#d4e8d3,#b8ddb6)"></div>
+                  <div class="app-feat-name">Hamdi Restaurant</div>
+                </div>
               </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🎁</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">Toplam 2.500</div>
-                <div class="pf-card-sub">puan birikti</div>
+              <div class="app-sec-title">Tüm İşletmeler</div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#f0e6d3,#ddc898)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">Hamdi Restaurant</div>
+                  <div class="app-list-sub">★★★★☆ · 2.5km</div>
+                </div>
+              </div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#d3e4f0,#a8c8e8)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">İyi Sporcular Gym</div>
+                  <div class="app-list-sub">★★★★★ · 1.2km</div>
+                </div>
+              </div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#f0d4d3,#e0a8a8)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">İyi Sporcular Gym</div>
+                  <div class="app-list-sub">★★★★☆ · 2.1km</div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="pf-home"></div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ── SECTION 2: İşletmeler (görsel sol, metin sağ) ── -->
-  <section class="section section-gray" id="isletmeler">
-    <div class="section-inner flip fi">
-      <div class="section-visual">
-        <div class="phone-frame" style="width:210px;height:430px;box-shadow:0 32px 72px rgba(0,0,0,.14)">
-          <div class="pf-notch"></div>
-          <div class="pf-screen dark">
-            <div class="pf-title">Dashboard</div>
-            <div class="pf-card">
-              <span class="pf-card-icon">👥</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">248 Müşteri</div>
-                <div class="pf-card-sub">Bu ay +32 yeni</div>
+    <!-- Center: Lezzet Dünyası -->
+    <div class="pc-item c">
+      <div class="pf" style="width:195px;height:400px;">
+        <div class="ps">
+          <div class="app-screen">
+            <div class="app-hdr">
+              <div class="app-cat">Lezzet Dünyası</div>
+              <div class="app-tabs">
+                <span class="app-tab on">Yeniler</span>
+                <span class="app-tab">İçindekiler</span>
+                <span class="app-tab">Teklifler</span>
               </div>
             </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">📈</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">%18 Artış</div>
-                <div class="pf-card-sub">Tekrar ziyaret oranı</div>
+            <div class="app-body">
+              <div class="app-sec-title">One Çıkanlar</div>
+              <div class="app-feat-row">
+                <div class="app-feat-card">
+                  <div class="app-feat-img" style="background:linear-gradient(135deg,#f5e6d0,#ebd0a0)"></div>
+                  <div class="app-feat-name">Hamdi Restaurant</div>
+                </div>
+                <div class="app-feat-card">
+                  <div class="app-feat-img" style="background:linear-gradient(135deg,#f5d0d0,#ebb0b0)"></div>
+                  <div class="app-feat-name">Hamdi Restaurant</div>
+                </div>
               </div>
-            </div>
-            <div class="pf-card">
-              <span class="pf-card-icon">🎯</span>
-              <div class="pf-card-info">
-                <div class="pf-card-title">3 Kampanya</div>
-                <div class="pf-card-sub">Aktif · 1.2k görüntüleme</div>
+              <div class="app-sec-title">Tüm İşletmeler</div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#f5e6d0,#e8cc98)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">Hamdi Restaurant</div>
+                  <div class="app-list-sub">★★★★☆ · 2.5km</div>
+                </div>
+              </div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#d0e6f5,#a0c8ea)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">İyi Sporcular Gym</div>
+                  <div class="app-list-sub">★★★★★ · 1.2km</div>
+                </div>
+              </div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#f5d0d0,#eba0a0)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">İyi Sporcular Gym</div>
+                  <div class="app-list-sub">★★★★☆ · 2.1km</div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="pf-home"></div>
         </div>
-      </div>
-      <div class="section-text">
-        <span class="tag">İşletmeler İçin</span>
-        <h2 class="section-h2">Müşterilerini<br>Geri Getir</h2>
-        <p class="section-p">Sadakat programını dakikalar içinde kur, kampanyaları yönet, analizleri takip et. KamKam ile müşteri bağlılığını artır, tekrar eden ziyaretleri ödüllendir.</p>
-        <a href="#" class="btn-cta">
-          İşletme Hesabı Aç
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
       </div>
     </div>
-  </section>
 
-  <!-- ── FEATURES ── -->
-  <section class="features-section" id="ozellikler">
-    <div class="features-inner">
-      <div class="features-head fi">
-        <span class="tag">Özellikler</span>
-        <h2>Neden KamKam?</h2>
-      </div>
-      <div class="bento">
-
-        <!-- Card 1: wide, white — Her Sektörde -->
-        <div class="bc bc-wide fi">
-          <span class="bc-icon">🎁</span>
-          <span class="bc-label">Kapsam</span>
-          <h3 class="bc-title">Her Sektörde Geçerli</h3>
-          <p class="bc-desc">Tek bir uygulama, binlerce işletme. Sabah kahvenden akşam lokantasına kadar her yerde puan kazan.</p>
-          <div class="bc-chips">
-            <span class="bc-chip">☕ Kafe</span>
-            <span class="bc-chip">✂️ Berber</span>
-            <span class="bc-chip">🛒 Market</span>
-            <span class="bc-chip">🍕 Restoran</span>
-            <span class="bc-chip">💇 Güzellik</span>
-            <span class="bc-chip">+ daha fazlası</span>
-          </div>
-          <span class="bc-deco">🎁</span>
-        </div>
-
-        <!-- Card 2: small, dark — Ücretsiz -->
-        <div class="bc bc-dark fi">
-          <span class="bc-label">Maliyet</span>
-          <span class="bc-big slot-num">₺0</span>
-          <h3 class="bc-title">Tamamen Ücretsiz</h3>
-          <p class="bc-desc">Üyelik, kullanım, kart. Hiçbirinde ücret yok.</p>
-        </div>
-
-        <!-- Card 3: small, primary — QR hızı -->
-        <div class="bc bc-primary fi">
-          <span class="bc-label">Hız</span>
-          <span class="bc-big slot-num">2sn</span>
-          <h3 class="bc-title">QR ile Saniyeler İçinde</h3>
-          <p class="bc-desc">Kart taşımak yok, kasa beklemek yok.</p>
-          <span class="bc-deco">📱</span>
-        </div>
-
-        <!-- Card 4: wide, subtle — Kampanyalar -->
-        <div class="bc bc-subtle bc-wide fi">
-          <span class="bc-icon">🔔</span>
-          <span class="bc-label">Bildirimler</span>
-          <h3 class="bc-title">Kampanyaları Hiç Kaçırma</h3>
-          <p class="bc-desc">Gittiğin yerlerin fırsatları anında bildirimle gelir. Özel kampanyalar, 2× puan günleri, ücretsiz ödüller, hepsi cebinde.</p>
-          <span class="bc-deco">🔔</span>
-        </div>
-
-        <!-- Card 5: full-width, dark — waitlist -->
-        <div class="bc bc-dark bc-full fi">
-          <div class="bc-full-inner">
-            <div class="bc-full-left" style="max-width:580px;">
-              <span class="bc-label">Erken Erişim</span>
-              <h3 class="bc-title" style="font-size:28px;letter-spacing:-1px;">İlk kullananlardan ol,<br>kurucu avantajını kap</h3>
-              <p class="bc-desc" style="margin-top:10px;">KamKam henüz büyüyor. Listeye kaydol, uygulama şehrine geldiğinde ilk sen haber al, özel kurucu rozetini kazan.</p>
-              <form class="wl-form" id="wl-form" onsubmit="return wlSubmit(event)">
-                <input class="wl-input" type="email" placeholder="e-posta adresin" required autocomplete="email">
-                <button class="wl-btn" type="submit">Listeye Katıl →</button>
-              </form>
-              <div class="wl-success" id="wl-success">
-                <span>🎉</span> Kaydoldun! Şehrine gelince seni haberdar edeceğiz.
+    <!-- Right: Güzellik & Bakım -->
+    <div class="pc-item r">
+      <div class="pf" style="width:170px;height:355px;">
+        <div class="ps">
+          <div class="app-screen">
+            <div class="app-hdr">
+              <div class="app-cat">Güzellik &amp; Bakım</div>
+              <div class="app-tabs">
+                <span class="app-tab on">Yeniler</span>
+                <span class="app-tab">İçindekiler</span>
+                <span class="app-tab">Teklifler</span>
               </div>
             </div>
-            <div class="bc-full-right" style="flex-direction:column;align-items:flex-end;gap:10px;">
-              <span class="wl-badge">🚀 Yakında</span>
-              <span class="wl-badge">🔒 Spam yok</span>
-              <span class="wl-badge">🎁 Kurucu rozeti</span>
+            <div class="app-body">
+              <div class="app-sec-title">One Çıkanlar</div>
+              <div class="app-feat-row">
+                <div class="app-feat-card">
+                  <div class="app-feat-img" style="background:linear-gradient(135deg,#f0e0f5,#e0c4f0)"></div>
+                  <div class="app-feat-name">Hamdi Restaurant</div>
+                </div>
+                <div class="app-feat-card">
+                  <div class="app-feat-img" style="background:linear-gradient(135deg,#f5f0d8,#f0e4b0)"></div>
+                  <div class="app-feat-name">Hamdi Restaurant</div>
+                </div>
+              </div>
+              <div class="app-sec-title">Tüm İşletmeler</div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#f0e0f5,#e0b8f0)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">Hamdi Restaurant</div>
+                  <div class="app-list-sub">★★★★☆ · 2.5km</div>
+                </div>
+              </div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#d8eef5,#b0d8f0)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">İyi Sporcular Gym</div>
+                  <div class="app-list-sub">★★★★★ · 1.2km</div>
+                </div>
+              </div>
+              <div class="app-list-item">
+                <div class="app-list-img" style="background:linear-gradient(135deg,#f5ead8,#f0d4b0)"></div>
+                <div class="app-list-info">
+                  <div class="app-list-name">İyi Sporcular Gym</div>
+                  <div class="app-list-sub">★★★★☆ · 2.1km</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ── DOWNLOAD BAND ── -->
-  <section class="download-band">
-    <h2>Hemen İndir, Ödül Kazan</h2>
-    <p>50.000+ kullanıcıya katıl. Ücretsiz.</p>
-    <div class="download-btns">
-      <a href="#" class="btn-dl">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <div class="btn-dl-inner">
-          <span class="btn-dl-small">İndir</span>
-          <span class="btn-dl-big">App Store</span>
+  <a href="#app" class="btn-fill fi" style="display:inline-block;max-width:380px;width:90%;">
+    Fırsatları Yakala, Şehri Keşfet
+  </a>
+</section>
+
+<!-- ── BUSINESS SECTION ── -->
+<section class="biz-sec" id="isletme">
+  <!-- Logo marquee -->
+  <div class="lm-wrap">
+    <div class="lm-track">
+      <span class="lm-item">Microsoft</span>
+      <span class="lm-item">MetalLB</span>
+      <span class="lm-item">LinkedIn</span>
+      <span class="lm-item">Instagram</span>
+      <span class="lm-item">Stripe</span>
+      <span class="lm-item">Figma</span>
+      <span class="lm-item">Notion</span>
+      <span class="lm-item">Vercel</span>
+      <span class="lm-item">Microsoft</span>
+      <span class="lm-item">MetalLB</span>
+      <span class="lm-item">LinkedIn</span>
+      <span class="lm-item">Instagram</span>
+      <span class="lm-item">Stripe</span>
+      <span class="lm-item">Figma</span>
+      <span class="lm-item">Notion</span>
+      <span class="lm-item">Vercel</span>
+    </div>
+  </div>
+
+  <div class="biz-inner fi">
+    <div class="biz-text">
+      <h2 class="biz-h2">Sıfır Donanım, Sıfır Karmaşa. Sadece <span class="ac">Gerçek</span> Müşteriler.</h2>
+      <p class="biz-sub">Komisyon yok, kurulum ücreti yok. Şehrin harcama yapmaya hazır kitlesi doğrudan kapınızdan içeri girsin.</p>
+      <a href="isletmeler.html" class="btn-fill" style="display:inline-block;">İşletmen ile Ağımıza Katıl</a>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="pf" style="width:230px;height:470px;">
+      <div class="ps">
+        <div class="login-screen">
+          <div class="ls-logo">
+            <img src="image.png" style="height:44px;width:auto;" alt="KamKam">
+          </div>
+          <div class="ls-title">Yüzlerce anlaşmalı<br>işletme ile hizmetinizde</div>
+          <button class="ls-btn-main">Ücretsiz Kayıt Ol</button>
+          <div class="ls-or">Ya da</div>
+          <button class="ls-social">
+            <svg width="10" height="10" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Google ile Devam Et
+          </button>
+          <button class="ls-social">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook ile Devam Et
+          </button>
+          <button class="ls-social">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#111"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Apple ile Devam Et
+          </button>
+          <div class="ls-link">Giriş Yap</div>
         </div>
-      </a>
-      <a href="#" class="btn-dl">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M3.18 23.76c.3.18.67.2 1.01.02l12.18-6.81-2.61-2.63-10.58 9.42zM20.8 10.58L17.4 8.67l-2.93 2.93 2.93 2.93 3.42-1.92c.97-.55.97-1.48-.02-2.03zM2.04 1.28C1.99 1.47 1.97 1.67 1.97 1.89v20.22c0 .22.02.42.07.6l.11.1 11.33-11.33-.11-.1L2.04 1.28zM4.19.24L16.37 7.05l-2.61 2.61L3.18.24C3.52.06 3.89.07 4.19.24z"/></svg>
-        <div class="btn-dl-inner">
-          <span class="btn-dl-small">İndir</span>
-          <span class="btn-dl-big">Google Play</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo-row">
-          <span class="footer-logo-text">KamKam</span>
-        </div>
-        <p class="footer-tagline">Her gittiğin yerde ödül kazan. Tek uygulama, sonsuz avantaj.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Uygulama</h4>
-        <ul>
-          <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
-          <li><a href="#isletmeler">İşletmeler İçin</a></li>
-          <li><a href="#ozellikler">Özellikler</a></li>
-          <li><a href="#indir">İndir</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Yasal</h4>
-        <ul>
-          <li><a href="#">Gizlilik Politikası</a></li>
-          <li><a href="#">Kullanım Şartları</a></li>
-          <li><a href="#">KVKK</a></li>
-          <li><a href="#">İletişim</a></li>
-        </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 KamKam. Tüm hakları saklıdır.</span>
-      <span>Türkiye'nin Sadakat Uygulaması</span>
+  </div>
+</section>
+
+<!-- ── BENTO STATS DARK ── -->
+<section class="bento-sec" id="stats">
+  <div class="bento-inner">
+    <div class="bento-grid">
+
+      <div class="bc fi">
+        <span class="bc-lbl">4 Farklı Kategori</span>
+        <h3 class="bc-title">Sadece Şehrin İyileri.</h3>
+        <p class="bc-desc">Bir tık daha yakında</p>
+      </div>
+
+      <div class="bc accent fi">
+        <span class="bc-lbl">Size en yakın</span>
+        <span class="bc-num">500+</span>
+        <h3 class="bc-title">Özenle Seçilmiş İşletme</h3>
+      </div>
+
+      <div class="bc fi">
+        <span class="bc-lbl">Yeni müşteriler</span>
+        <span class="bc-num">0</span>
+        <h3 class="bc-title">Komisyon</h3>
+      </div>
+
+      <div class="bc fi">
+        <div class="bc-stars">★★★★★</div>
+        <h3 class="bc-title">Gerçek<br>Yorumlarla</h3>
+        <p class="bc-desc">Fikirlerin Değerli</p>
+      </div>
+
+      <div class="bc fi">
+        <span class="bc-lbl">Kasada sadece</span>
+        <h3 class="bc-title">Okut ve Çık.</h3>
+        <p class="bc-desc">Telefonunu okut, ayrıcalığını anında hesabına yansıt.</p>
+      </div>
+
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script>
-    // ── Canvas floating coins
-    (function () {
-      const canvas = document.getElementById('hero-canvas');
-      const ctx = canvas.getContext('2d');
-      const hero = document.querySelector('.hero');
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <img src="image.png" alt="KamKam" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:0.7;">
+      </div>
+      <p class="footer-tagline">Şehri telefonunla keşfet. Özenle seçilmiş işletmeler, sınırsız ayrıcalık.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#app">Nasıl Çalışır</a>
+      <a href="#isletme">İşletmeler</a>
+      <a href="#">Gizlilik Politikası</a>
+      <a href="#">Kullanım Şartları</a>
+      <a href="#">İletişim</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 KamKam. Tüm hakları saklıdır.</span>
+    <span>Türkiye'nin Şehir Rehberi</span>
+  </div>
+</footer>
 
-      function resize() {
-        canvas.width  = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-
-      const COLS = [
-        [232,  25,  44],  // primary red
-        [255,  58,  74],  // light red
-        [200,  10,  30],  // deep red
-        [255, 100, 110],  // soft red
-      ];
-
-      class Coin {
-        constructor(init) {
-          this.init = init;
-          this.reset(init);
-        }
-        reset(fromRandom) {
-          this.x  = Math.random() * canvas.width;
-          this.y  = fromRandom ? Math.random() * canvas.height : canvas.height + 16;
-          this.r  = 3 + Math.random() * 5.5;
-          this.vy = -(0.25 + Math.random() * 0.55);
-          this.vx = (Math.random() - 0.5) * 0.25;
-          this.alpha  = 0.12 + Math.random() * 0.28;
-          this.wobble = Math.random() * Math.PI * 2;
-          this.wSpeed = 0.012 + Math.random() * 0.018;
-          const c = COLS[Math.floor(Math.random() * COLS.length)];
-          this.rgb = c;
-        }
-        update() {
-          this.wobble += this.wSpeed;
-          this.x += this.vx + Math.sin(this.wobble) * 0.5;
-          this.y += this.vy;
-          if (this.y < -20) this.reset(false);
-        }
-        draw() {
-          const [r, g, b] = this.rgb;
-          // coin body
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r},${g},${b},${this.alpha})`;
-          ctx.fill();
-          // inner shine
-          ctx.beginPath();
-          ctx.arc(this.x - this.r * 0.28, this.y - this.r * 0.28, this.r * 0.38, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${this.alpha * 0.55})`;
-          ctx.fill();
-        }
-      }
-
-      const coins = Array.from({ length: 55 }, () => new Coin(true));
-
-      function drawCanvas() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        coins.forEach(c => { c.update(); c.draw(); });
-        requestAnimationFrame(drawCanvas);
-      }
-      drawCanvas();
-    })();
-
-    // ── Mouse parallax on hero phones
-    (function () {
-      const heroEl   = document.querySelector('.hero');
-      const phonesEl = document.getElementById('hero-phones');
-      if (!phonesEl) return;
-
-      let tx = 0, ty = 0, cx = 0, cy = 0;
-
-      heroEl.addEventListener('mousemove', e => {
-        const rect = heroEl.getBoundingClientRect();
-        tx = (e.clientX - (rect.left + rect.width  * 0.5)) / (rect.width  * 0.5);
-        ty = (e.clientY - (rect.top  + rect.height * 0.5)) / (rect.height * 0.5);
-      });
-      heroEl.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
-
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      function tick() {
-        cx = lerp(cx, tx, 0.055);
-        cy = lerp(cy, ty, 0.055);
-        const ry =  cx * 9;   // max ±9deg yaw
-        const rx = -cy * 5;   // max ±5deg pitch
-        phonesEl.style.transform = `perspective(1400px) rotateY(${ry}deg) rotateX(${rx}deg)`;
-        requestAnimationFrame(tick);
-      }
-      tick();
-    })();
-
-    // ── Lenis smooth scroll
-    const lenis = new Lenis({
-      duration: 1.3,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
     });
+  });
 
-    // RAF loop
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
+  // Lenis smooth scroll
+  const lenis = new Lenis({ duration: 1.3, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+  (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
 
-    // Anchor links — Lenis handles href="#..." natively
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href');
-        if (id === '#') return;
-        const target = document.querySelector(id);
-        if (!target) return;
-        e.preventDefault();
-        lenis.scrollTo(target, { offset: -72, duration: 1.4 });
-      });
+  // Navbar solid on scroll (via Lenis)
+  const nav = document.getElementById('nav');
+  lenis.on('scroll', ({ scroll }) => nav.classList.toggle('solid', scroll > 10));
+
+  // Fade-in observer
+  const fiObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('vis'); fiObs.unobserve(e.target); }
     });
+  }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
+  document.querySelectorAll('.fi').forEach(el => fiObs.observe(el));
 
-    // ── Navbar solid on scroll (via Lenis)
-    const nav = document.getElementById('nav');
-    lenis.on('scroll', ({ scroll }) => {
-      nav.classList.toggle('solid', scroll > 10);
-    });
-
-    // ── Fade-in observer
-    const fiObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('vis'); fiObs.unobserve(e.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
-    document.querySelectorAll('.fi').forEach(el => fiObs.observe(el));
-
-
-    // ── Center phone screen rotation
-    (function () {
-      const screen = document.getElementById('center-phone-screen');
-      if (!screen) return;
-
-      const slides = [
-        {
-          theme: '',
-          html: '<div class="pf-title">Ödüllerim</div>' +
-            '<div class="pf-card"><span class="pf-card-icon">🎁</span><div class="pf-card-info"><div class="pf-big">2.450</div><div class="pf-card-sub">toplam puan</div></div></div>' +
-            '<div class="pf-card"><span class="pf-card-icon">🏆</span><div class="pf-card-info"><div class="pf-card-title">Bu ay 3 ödül</div><div class="pf-card-sub">Altın üye</div></div></div>' +
-            '<div class="pf-card"><span class="pf-card-icon">🔥</span><div class="pf-card-info"><div class="pf-card-title">14 gün seri</div><div class="pf-card-sub">Devam et!</div></div></div>'
-        },
-        {
-          theme: 'dark',
-          html: '<div class="pf-title">QR Tara</div>' +
-            '<div class="pf-card"><span class="pf-card-icon">📱</span><div class="pf-card-info"><div class="pf-card-title">Kodu Tarat</div><div class="pf-card-sub">Kasada 2 saniye</div></div></div>' +
-            '<div class="pf-card"><span class="pf-card-icon">✅</span><div class="pf-card-info"><div class="pf-card-title">+50 Puan!</div><div class="pf-card-sub">Café Nero\'dan kazandın</div></div></div>' +
-            '<div class="pf-card"><span class="pf-card-icon">🎁</span><div class="pf-card-info"><div class="pf-card-title">Toplam 2.500</div><div class="pf-card-sub">puan birikti</div></div></div>'
-        },
-        {
-          theme: 'warm',
-          html: '<div class="pf-title">Kampanyalar</div>' +
-            '<div class="pf-card"><span class="pf-card-icon">🔔</span><div class="pf-card-info"><div class="pf-card-title">%20 İndirim!</div><div class="pf-card-sub">Café Nero · Bugün</div></div></div>' +
-            '<div class="pf-card"><span class="pf-card-icon">⚡</span><div class="pf-card-info"><div class="pf-card-title">2× Puan Fırsatı</div><div class="pf-card-sub">Berber · 3 gün kaldı</div></div></div>' +
-            '<div class="pf-card"><span class="pf-card-icon">🎯</span><div class="pf-card-info"><div class="pf-card-title">Ücretsiz Kahve</div><div class="pf-card-sub">500 puana ulaştın</div></div></div>'
-        }
-      ];
-
-      let idx = 0;
-
-      setInterval(() => {
-        idx = (idx + 1) % slides.length;
-        const s = slides[idx];
-        screen.style.opacity = '0';
-        setTimeout(() => {
-          screen.className = 'pf-screen' + (s.theme ? ' ' + s.theme : '');
-          screen.innerHTML  = s.html;
-          screen.style.opacity = '1';
-        }, 420);
-      }, 3600);
-    })();
-
-    // ── Hamburger menu
-    (function () {
-      const btn   = document.getElementById('nav-hamburger');
-      const links = document.getElementById('nav-links');
-      if (!btn || !links) return;
-      btn.addEventListener('click', () => {
-        const open = links.classList.toggle('open');
-        btn.classList.toggle('open', open);
-      });
-      // close on link click
-      links.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          links.classList.remove('open');
-          btn.classList.remove('open');
-        });
-      });
-    })();
-
-    // ── Waitlist form
-    function wlSubmit(e) {
+  // Anchor scroll via Lenis
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
       e.preventDefault();
-      document.getElementById('wl-form').style.display = 'none';
-      document.getElementById('wl-success').classList.add('show');
-      return false;
-    }
-
-    // ── Text split — hero h1
-    (function () {
-      const h1  = document.querySelector('.hero-h1');
-      const sub = document.querySelector('.hero-sub');
-      const cta = document.querySelector('.hero-cta-row');
-      if (!h1) return;
-
-      // Walk child nodes and wrap each word
-      function wrapWords(node, container, counter) {
-        [...node.childNodes].forEach(child => {
-          if (child.nodeType === Node.TEXT_NODE) {
-            child.textContent.split(/(\s+)/).forEach(part => {
-              if (!part.trim()) {
-                container.appendChild(document.createTextNode(part));
-              } else {
-                const wrap  = document.createElement('span');
-                wrap.className = 'sw';
-                const inner = document.createElement('span');
-                inner.className = 'swi';
-                inner.style.setProperty('--d', (counter.i++ * 0.085) + 's');
-                inner.textContent = part;
-                wrap.appendChild(inner);
-                container.appendChild(wrap);
-              }
-            });
-          } else if (child.nodeName === 'BR') {
-            container.appendChild(document.createElement('br'));
-          } else if (child.nodeName === 'EM') {
-            // keep <em> but split words inside
-            child.textContent.split(/(\s+)/).forEach(part => {
-              if (!part.trim()) {
-                container.appendChild(document.createTextNode(part));
-              } else {
-                const wrap  = document.createElement('span');
-                wrap.className = 'sw';
-                const em    = document.createElement('em');
-                em.className = 'swi';
-                em.style.setProperty('--d', (counter.i++ * 0.085) + 's');
-                em.textContent = part;
-                wrap.appendChild(em);
-                container.appendChild(wrap);
-              }
-            });
-          }
-        });
-      }
-
-      const frag = document.createDocumentFragment();
-      const counter = { i: 0 };
-      wrapWords(h1, frag, counter);
-      h1.innerHTML = '';
-      h1.appendChild(frag);
-
-      // Subtitle + CTA fade-up after last word lands
-      const lastDelay = (counter.i - 1) * 0.085 + 0.75; // last word end
-      setTimeout(() => sub && sub.classList.add('show'), (lastDelay - 0.18) * 1000);
-      setTimeout(() => cta && cta.classList.add('show'), (lastDelay)         * 1000);
-      // Ödül underline
-      setTimeout(() => {
-        const path = document.querySelector('.odol-path');
-        if (path) path.classList.add('draw');
-      }, lastDelay * 1000 + 180);
-    })();
-
-    // ── Bento number / pill reveal
-    (function () {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach((e, i) => {
-          if (!e.isIntersecting) return;
-          const el = e.target;
-          const delay = el.dataset.slotDelay || 0;
-          setTimeout(() => el.classList.add('slotted'), delay);
-          obs.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-
-      document.querySelectorAll('.slot-num, .slot-pill').forEach((el, i) => {
-        el.dataset.slotDelay = i * 80;
-        obs.observe(el);
-      });
-    })();
-
-    // ── Live notification popups
-    (function () {
-      const pool = [
-        { emoji: '☕', name: 'Ahmet K.',  action: 'Café Nero\'dan 150 puan kazandı'     },
-        { emoji: '✂️', name: 'Zeynep A.', action: 'Berber\'den %10 indirim kullandı'    },
-        { emoji: '🏆', name: 'Mehmet S.', action: '500 puana ulaştı, ödül açıldı!'      },
-        { emoji: '🛒', name: 'Elif B.',   action: 'Market alışverişinden 75 puan'       },
-        { emoji: '🔥', name: 'Can T.',    action: '14 günlük seri tamamlandı'           },
-        { emoji: '⚡', name: 'Ayşe K.',  action: '2× puan fırsatından yararlandı'      },
-        { emoji: '🎁', name: 'Burak Y.', action: 'Ücretsiz kahve ödülü kazandı'        },
-        { emoji: '💰', name: 'Selin D.', action: 'Bu ay 1.200 puan biriktirdi'         },
-        { emoji: '🎯', name: 'Emre C.',  action: 'Altın üye rozetini açtı'             },
-        { emoji: '🌟', name: 'Deniz A.', action: 'İlk ödülünü kullandı'                },
-        { emoji: '🍕', name: 'Berk M.',  action: 'Restoran kampanyasından 200 puan'    },
-        { emoji: '💇', name: 'Naz Y.',   action: 'Güzellik salonundan %15 indirim'     },
-      ];
-
-      const wrap = document.createElement('div');
-      wrap.className = 'notif-wrap';
-      document.body.appendChild(wrap);
-
-      let idx = Math.floor(Math.random() * pool.length);
-
-      function show() {
-        const d = pool[idx % pool.length]; idx++;
-        const el = document.createElement('div');
-        el.className = 'notif';
-        el.innerHTML =
-          `<div class="notif-avatar">${d.emoji}</div>` +
-          `<div class="notif-body">` +
-            `<div class="notif-name">${d.name}</div>` +
-            `<div class="notif-action">${d.action}</div>` +
-            `<div class="notif-time">az önce</div>` +
-          `</div>`;
-
-        wrap.prepend(el);
-
-        // auto-remove after 3.4s
-        setTimeout(() => {
-          el.classList.add('out');
-          setTimeout(() => el.remove(), 320);
-        }, 3400);
-
-        // keep max 3 visible
-        const visible = [...wrap.querySelectorAll('.notif:not(.out)')];
-        if (visible.length > 3) {
-          const old = visible[visible.length - 1];
-          old.classList.add('out');
-          setTimeout(() => old.remove(), 320);
-        }
-      }
-
-      // first pop at 1.8s, then every 3.8s
-      setTimeout(() => { show(); setInterval(show, 10000); }, 1800);
-    })();
-  </script>
+      lenis.scrollTo(target, { offset: -72, duration: 1.4 });
+    });
+  });
+</script>
 </body>
 </html>
