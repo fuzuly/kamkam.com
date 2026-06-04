@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gizlilik Politikası — KamKam</title>
+  <meta name="description" content="KamKam uygulaması KVKK uyumlu gizlilik politikası.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C8432A'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #111;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --p:  #C8432A;
+      --pd: #A83520;
+      --dark: #0D0D0D;
+    }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 300;
+      height: 68px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 20px;
+      background: rgba(240,235,228,.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+    }
+    .nav-logo {
+      justify-self: start;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 52px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+    .nav-cta {
+      justify-self: center;
+      background: var(--p);
+      color: #fff;
+      text-decoration: none;
+      padding: 11px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: background .15s;
+    }
+    .nav-cta:hover { background: var(--pd); }
+    .nav-hamburger {
+      justify-self: end;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #111;
+      border-radius: 2px;
+      transition: transform .22s, opacity .22s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(240,235,228,.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 10px 16px 20px;
+      flex-direction: column;
+      gap: 2px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      z-index: 299;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      text-decoration: none;
+      color: #111;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 14px;
+      border-radius: 10px;
+      transition: background .15s;
+    }
+    .nav-mobile a:hover { background: rgba(0,0,0,.05); }
+    .nav-mobile a.cta {
+      background: var(--p);
+      color: #fff;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .nav-links-desk {
+      display: none;
+      list-style: none;
+      gap: 4px;
+      justify-content: center;
+    }
+    .nav-links-desk a {
+      text-decoration: none;
+      color: #444;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: background .15s;
+      display: block;
+    }
+    .nav-links-desk a:hover { background: rgba(0,0,0,.06); }
+    @media (min-width: 768px) {
+      .nav { padding: 0 40px; grid-template-columns: auto 1fr auto; }
+      .nav-logo    { justify-self: start; }
+      .nav-cta     { justify-self: end; }
+      .nav-hamburger { display: none; }
+      .nav-links-desk { display: flex; }
+    }
+
+    /* ── CONTENT ── */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+    .page-title {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: #111;
+      margin-bottom: 8px;
+    }
+    .page-updated {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 48px;
+    }
+    .page-wrap h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111;
+      margin: 36px 0 12px;
+      letter-spacing: -.3px;
+    }
+    .page-wrap h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin: 24px 0 8px;
+    }
+    .page-wrap p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .page-wrap ul {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+    .page-wrap ul li {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 6px;
+    }
+    .page-wrap a { color: var(--p); text-decoration: none; }
+    .page-wrap a:hover { text-decoration: underline; }
+    .divider {
+      border: none;
+      border-top: 1px solid #E5E5E5;
+      margin: 40px 0;
+    }
+    .highlight-box {
+      background: #F5F0EB;
+      border-left: 3px solid var(--p);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 48px 24px 32px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .footer-logo img { display: block; }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      line-height: 1.5;
+      max-width: 220px;
+      margin-top: 8px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,.45);
+      font-size: 13px;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,.85); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,.2);
+    }
+    @media (min-width: 768px) {
+      footer { padding: 60px 40px 36px; }
+      .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="image.png" alt="KamKam">
+  </a>
+  <ul class="nav-links-desk">
+    <li><a href="index.html#app">Nasıl Çalışır</a></li>
+    <li><a href="index.html#isletme">İşletmeler</a></li>
+    <li><a href="index.html#stats">Özellikler</a></li>
+  </ul>
+  <a href="index.html#app" class="nav-cta">Uygulamayı İndir</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="mobile-menu">
+  <a href="index.html#app">Nasıl Çalışır</a>
+  <a href="index.html#isletme">İşletmeler</a>
+  <a href="index.html#stats">Özellikler</a>
+  <a href="index.html" class="cta">Ana Sayfa</a>
+</div>
+
+<!-- ── CONTENT ── -->
+<main class="page-wrap">
+  <h1 class="page-title">Gizlilik Politikası</h1>
+  <p class="page-updated">Son güncelleme: 1 Haziran 2026</p>
+
+  <div class="highlight-box">
+    Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında KamKam uygulaması kullanıcılarının kişisel verilerinin nasıl toplandığını, işlendiğini ve korunduğunu açıklamaktadır.
+  </div>
+
+  <h2>1. Veri Sorumlusu</h2>
+  <p>KamKam uygulaması kapsamında kişisel verilerinizin işlenmesinden sorumlu veri sorumlusu <strong>KamKam Teknoloji A.Ş.</strong>'dir (bundan böyle "KamKam", "biz" veya "şirket" olarak anılacaktır).</p>
+  <p>İletişim: <a href="mailto:info@kamkamapp.com">info@kamkamapp.com</a></p>
+
+  <hr class="divider">
+
+  <h2>2. Toplanan Kişisel Veriler</h2>
+  <p>KamKam, aşağıdaki kişisel verileri toplamakta ve işlemektedir:</p>
+
+  <h3>2.1 Hesap ve Kimlik Bilgileri</h3>
+  <ul>
+    <li>Ad, soyad</li>
+    <li>E-posta adresi</li>
+    <li>Telefon numarası</li>
+    <li>Profil fotoğrafı (isteğe bağlı)</li>
+    <li>Doğum tarihi (isteğe bağlı)</li>
+  </ul>
+
+  <h3>2.2 Konum Bilgileri</h3>
+  <ul>
+    <li>Yakınındaki işletmeleri göstermek amacıyla anlık konum verileri (izin vermeniz halinde)</li>
+    <li>Uygulama içi arama ve keşif geçmişi</li>
+  </ul>
+
+  <h3>2.3 İşlem ve Kullanım Verileri</h3>
+  <ul>
+    <li>QR kod okutma geçmişi</li>
+    <li>Kazanılan puan ve kullanılan ayrıcalıklar</li>
+    <li>Ziyaret edilen işletmeler</li>
+    <li>Uygulama içi tıklama ve gezinme davranışları</li>
+  </ul>
+
+  <h3>2.4 Cihaz ve Teknik Veriler</h3>
+  <ul>
+    <li>Cihaz türü, işletim sistemi ve sürümü</li>
+    <li>IP adresi</li>
+    <li>Çerez ve benzeri izleme teknolojilerine ait veriler</li>
+    <li>Uygulama çökme raporları</li>
+  </ul>
+
+  <h3>2.5 Üçüncü Taraf Girişi</h3>
+  <p>Google, Facebook veya Apple ile giriş yapmanız durumunda ilgili platformların paylaştığı profil bilgileri (ad, e-posta, profil fotoğrafı) işlenebilir.</p>
+
+  <hr class="divider">
+
+  <h2>3. Kişisel Verilerin İşlenme Amaçları</h2>
+  <p>Toplanan kişisel veriler aşağıdaki amaçlarla işlenmektedir:</p>
+  <ul>
+    <li>Hesap oluşturma, kimlik doğrulama ve güvenliğin sağlanması</li>
+    <li>Uygulamanın temel işlevlerinin (puan kazanma, ayrıcalık kullanma, keşif) sunulması</li>
+    <li>Konum bazlı işletme ve kampanya önerileri oluşturulması</li>
+    <li>Kullanıcı destek taleplerinin karşılanması</li>
+    <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+    <li>Hizmet kalitesinin iyileştirilmesi amacıyla istatistiksel analiz yapılması</li>
+    <li>Açık rızanız olması halinde pazarlama ve bildirim gönderilmesi</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>4. Hukuki İşleme Dayanakları</h2>
+  <p>Kişisel verileriniz KVKK Madde 5 kapsamında aşağıdaki hukuki dayanaklar çerçevesinde işlenmektedir:</p>
+  <ul>
+    <li><strong>Sözleşmenin kurulması ve ifası:</strong> Hesap oluşturma ve temel hizmetlerin sunulması</li>
+    <li><strong>Meşru menfaat:</strong> Güvenlik, hata tespiti ve hizmet iyileştirme</li>
+    <li><strong>Açık rıza:</strong> Pazarlama iletişimleri, konum verisi kullanımı</li>
+    <li><strong>Yasal yükümlülük:</strong> Vergi, muhasebe ve diğer mevzuat gereklilikleri</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>5. Verilerin Paylaşımı</h2>
+  <p>Kişisel verileriniz üçüncü taraflarla aşağıdaki durumlar dışında paylaşılmaz:</p>
+  <ul>
+    <li><strong>Anlaşmalı işletmeler:</strong> QR okutma işlemi gerçekleştiğinde yalnızca işlem onayı bilgisi paylaşılır; kimlik bilgileriniz paylaşılmaz.</li>
+    <li><strong>Altyapı ve hizmet sağlayıcıları:</strong> Bulut depolama, analitik ve bildirim gibi teknik hizmetler için (KVKK uyumlu veri işleme sözleşmesiyle)</li>
+    <li><strong>Yasal zorunluluk:</strong> Yetkili kamu kurumlarının yazılı talebi veya mahkeme kararı</li>
+    <li><strong>Şirket devri:</strong> Birleşme veya satın alma durumunda, kullanıcılar önceden bilgilendirilerek</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>6. Verilerin Saklanma Süresi</h2>
+  <p>Kişisel veriler, ilgili oldukları amaç için gerekli süre boyunca saklanır:</p>
+  <ul>
+    <li>Hesap verileri: Hesap silinene kadar + 3 yıl (yasal yükümlülük)</li>
+    <li>İşlem geçmişi: 5 yıl (ticaret ve vergi mevzuatı gereği)</li>
+    <li>Konum verileri: 90 gün</li>
+    <li>Çerezler: Çerez türüne göre değişmekte olup en fazla 2 yıl</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>7. Güvenlik Önlemleri</h2>
+  <p>Verilerinizin güvenliği için aşağıdaki teknik ve idari önlemler alınmaktadır:</p>
+  <ul>
+    <li>Aktarım ve depolama sırasında uçtan uca şifreleme (TLS 1.2+)</li>
+    <li>Rol bazlı erişim kontrolü ve düzenli erişim denetimleri</li>
+    <li>Güvenlik açığı tarama ve sızma testleri</li>
+    <li>Veri ihlali müdahale planı (72 saat içinde KVKK bildirimi)</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>8. KVKK Kapsamındaki Haklarınız</h2>
+  <p>6698 sayılı KVKK'nın 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+  <ul>
+    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+    <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+    <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+    <li>Yurt içinde veya yurt dışında verilerin aktarıldığı üçüncü kişileri öğrenme</li>
+    <li>Eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme</li>
+    <li>Verilerin silinmesini veya yok edilmesini isteme</li>
+    <li>Otomatik sistem aracılığıyla aleyhinize bir sonucun ortaya çıkması durumunda itiraz etme</li>
+    <li>Kanuna aykırı işleme nedeniyle uğradığınız zararın tazminini talep etme</li>
+  </ul>
+  <p>Bu haklarınızı kullanmak için <a href="mailto:kvkk@kamkamapp.com">kvkk@kamkamapp.com</a> adresine e-posta gönderebilir veya uygulama içi "Hesap Ayarları" bölümünden talepte bulunabilirsiniz. Talepler 30 gün içinde yanıtlanır.</p>
+
+  <hr class="divider">
+
+  <h2>9. Çocukların Gizliliği</h2>
+  <p>KamKam hizmetleri 13 yaşın altındaki bireylere yönelik değildir. 13 yaşın altında bir çocuğa ait kişisel verinin farkında olmadan toplandığını tespit etmemiz durumunda söz konusu veriler derhal silinecektir.</p>
+
+  <hr class="divider">
+
+  <h2>10. Uluslararası Veri Transferleri</h2>
+  <p>Verileriniz yurt dışına aktarılması gerektiğinde KVKK Madde 9 kapsamında gerekli güvenceler sağlanır. Aktarım yapılan ülkelerin KVKK ile uyumlu veri koruma mekanizmalarına sahip olması koşulu aranır.</p>
+
+  <hr class="divider">
+
+  <h2>11. Politika Değişiklikleri</h2>
+  <p>Bu politikada yapılacak önemli değişiklikler uygulama bildirimi veya e-posta yoluyla size duyurulacaktır. Güncelleme tarihinden itibaren uygulamayı kullanmaya devam etmeniz, değişikliği kabul ettiğiniz anlamına gelir.</p>
+
+  <hr class="divider">
+
+  <h2>12. İletişim</h2>
+  <p>Gizlilik politikamız veya kişisel verilerinizin işlenmesi hakkında sorularınız için:</p>
+  <ul>
+    <li>E-posta: <a href="mailto:kvkk@kamkamapp.com">kvkk@kamkamapp.com</a></li>
+    <li>Web: <a href="https://kamkamapp.com">kamkamapp.com</a></li>
+  </ul>
+  <p>Ayrıca Kişisel Verileri Koruma Kurumu'na (KVKK) şikâyette bulunma hakkınız saklıdır: <a href="https://www.kvkk.gov.tr" target="_blank" rel="noopener">kvkk.gov.tr</a></p>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <img src="image.png" alt="KamKam" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:0.7;">
+      </div>
+      <p class="footer-tagline">Şehri telefonunla keşfet. Özenle seçilmiş işletmeler, sınırsız ayrıcalık.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html#app">Nasıl Çalışır</a>
+      <a href="index.html#isletme">İşletmeler</a>
+      <a href="privacy-policy.html">Gizlilik Politikası</a>
+      <a href="terms.html">Kullanım Şartları</a>
+      <a href="mailto:info@kamkamapp.com">İletişim</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 KamKam. Tüm hakları saklıdır.</span>
+    <span>Türkiye'nin Şehir Rehberi</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
