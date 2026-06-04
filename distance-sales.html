@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesafeli Satış Sözleşmesi — KamKam</title>
+  <meta name="description" content="KamKam mesafeli satış sözleşmesi — 6502 sayılı Kanun kapsamında.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C8432A'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #111; background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    :root { --p: #C8432A; --pd: #A83520; --dark: #0D0D0D; }
+
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 300; height: 68px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 20px; background: rgba(240,235,228,.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+    .nav-logo { justify-self: start; text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 52px; width: auto; mix-blend-mode: multiply; }
+    .nav-cta { justify-self: center; background: var(--p); color: #fff; text-decoration: none; padding: 11px 24px; border-radius: 999px; font-size: 14px; font-weight: 700; font-family: inherit; white-space: nowrap; transition: background .15s; }
+    .nav-cta:hover { background: var(--pd); }
+    .nav-hamburger { justify-self: end; display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; transition: transform .22s, opacity .22s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(240,235,228,.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 10px 16px 20px; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 299; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { text-decoration: none; color: #111; font-size: 16px; font-weight: 600; padding: 12px 14px; border-radius: 10px; transition: background .15s; }
+    .nav-mobile a:hover { background: rgba(0,0,0,.05); }
+    .nav-mobile a.cta { background: var(--p); color: #fff; text-align: center; margin-top: 6px; }
+    .nav-links-desk { display: none; list-style: none; gap: 4px; justify-content: center; }
+    .nav-links-desk a { text-decoration: none; color: #444; font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: 8px; transition: background .15s; display: block; }
+    .nav-links-desk a:hover { background: rgba(0,0,0,.06); }
+    @media (min-width: 768px) {
+      .nav { padding: 0 40px; grid-template-columns: auto 1fr auto; }
+      .nav-logo { justify-self: start; } .nav-cta { justify-self: end; }
+      .nav-hamburger { display: none; } .nav-links-desk { display: flex; }
+    }
+
+    .page-wrap { max-width: 760px; margin: 0 auto; padding: 120px 24px 80px; }
+    .page-title { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; color: #111; margin-bottom: 8px; }
+    .page-updated { font-size: 13px; color: #888; margin-bottom: 48px; }
+    .page-wrap h2 { font-size: 18px; font-weight: 800; color: #111; margin: 36px 0 12px; letter-spacing: -.3px; }
+    .page-wrap p { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 14px; }
+    .page-wrap ul { padding-left: 20px; margin-bottom: 14px; }
+    .page-wrap ul li { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 6px; }
+    .page-wrap a { color: var(--p); text-decoration: none; }
+    .page-wrap a:hover { text-decoration: underline; }
+    .divider { border: none; border-top: 1px solid #E5E5E5; margin: 40px 0; }
+    .highlight-box { background: #F5F0EB; border-left: 3px solid var(--p); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #555; line-height: 1.6; }
+
+    /* Taraflar tablosu */
+    .parties-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 20px 0; }
+    @media (min-width: 600px) { .parties-grid { grid-template-columns: 1fr 1fr; } }
+    .party-card { border: 1px solid #E5E5E5; border-radius: 12px; padding: 20px; }
+    .party-role { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--p); margin-bottom: 10px; display: block; }
+    .party-card p { font-size: 13px; color: #444; line-height: 1.6; margin: 0; }
+    .party-card strong { color: #111; }
+
+    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.06); padding: 48px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+    .footer-band-logo { display: block; height: 28px; width: auto; margin-bottom: 12px; opacity: .85; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.5; max-width: 220px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+    .footer-links a { text-decoration: none; color: rgba(255,255,255,.45); font-size: 13px; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,.85); }
+    .footer-bottom { max-width: 1100px; margin: 20px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: rgba(255,255,255,.2); }
+    @media (min-width: 768px) {
+      footer { padding: 60px 40px 36px; }
+      .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="image.png" alt="KamKam"></a>
+  <ul class="nav-links-desk">
+    <li><a href="index.html#app">Nasıl Çalışır</a></li>
+    <li><a href="index.html#isletme">İşletmeler</a></li>
+    <li><a href="index.html#stats">Özellikler</a></li>
+  </ul>
+  <a href="index.html#app" class="nav-cta">Uygulamayı İndir</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav-mobile" id="mobile-menu">
+  <a href="index.html#app">Nasıl Çalışır</a>
+  <a href="index.html#isletme">İşletmeler</a>
+  <a href="index.html#stats">Özellikler</a>
+  <a href="index.html" class="cta">Ana Sayfa</a>
+</div>
+
+<main class="page-wrap">
+  <h1 class="page-title">Mesafeli Satış Sözleşmesi</h1>
+  <p class="page-updated">Son güncelleme: 1 Haziran 2026</p>
+
+  <div class="highlight-box">
+    Bu sözleşme, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ile Mesafeli Sözleşmeler Yönetmeliği (RG: 27.11.2014 / 29188) kapsamında, tarafların kimlik ve iletişim bilgilerine, satışa konu hizmete, ödeme ve teslimat koşullarına ilişkin ön bilgilendirmeyi ve sözleşme şartlarını içermektedir.
+  </div>
+
+  <h2>Madde 1 — Taraflar</h2>
+  <div class="parties-grid">
+    <div class="party-card">
+      <span class="party-role">Satıcı</span>
+      <p>
+        <strong>KamKam Teknoloji A.Ş.</strong><br>
+        Türkiye<br>
+        E-posta: <a href="mailto:info@kamkamapp.com">info@kamkamapp.com</a><br>
+        Web: kamkamapp.com
+      </p>
+    </div>
+    <div class="party-card">
+      <span class="party-role">Alıcı</span>
+      <p>
+        KamKam platformuna kayıt olan ve abonelik satın alan gerçek veya tüzel kişi işletme sahibi (kayıt formunda beyan edilen kimlik ve iletişim bilgileri geçerlidir).
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>Madde 2 — Sözleşmenin Konusu</h2>
+  <p>İşbu sözleşme, KamKam'ın işletmelere sunduğu aylık veya yıllık abonelik tabanlı Yazılım Hizmetinin (SaaS) mesafeli yollarla satışına ilişkin koşulları düzenlemektedir. Hizmet kapsamı şunlardır:</p>
+  <ul>
+    <li>İşletme yönetim paneline erişim</li>
+    <li>QR kod tabanlı müşteri sadakat altyapısı</li>
+    <li>Kampanya ve bildirim araçları</li>
+    <li>Müşteri analitik raporları</li>
+    <li>KamKam mobil uygulamasında işletme listelemesi</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Madde 3 — Hizmet Bedeli ve Ödeme</h2>
+  <p>Hizmet bedeli, satın alma anında ekranda gösterilen güncel fiyat listesine göre belirlenir. Ödeme aşağıdaki koşullarda gerçekleştirilir:</p>
+  <ul>
+    <li>Ödeme, abonelik başlangıcında peşin olarak tahsil edilir.</li>
+    <li>Aylık abonelikte her dönem başı otomatik yenileme gerçekleşir.</li>
+    <li>Yıllık abonelikte 12 aylık bedel tek seferde ödenir.</li>
+    <li>KDV dahil fiyat, ödeme sayfasında onay öncesinde açıkça gösterilir.</li>
+    <li>Kabul edilen ödeme yöntemleri: kredi kartı, banka kartı, havale/EFT.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Madde 4 — Hizmetin İfası ve Teslimat</h2>
+  <p>KamKam tamamen dijital bir hizmet sunmaktadır. Fiziksel teslimat yoktur.</p>
+  <ul>
+    <li>Ödeme onayının ardından hizmet <strong>en geç 15 dakika</strong> içinde aktive edilir.</li>
+    <li>Aktivasyon bildirimi kayıtlı e-posta adresine iletilir.</li>
+    <li>Hizmet, abonelik süresi boyunca 7/24 erişilebilir olarak sunulur (planlı bakım süreleri hariç).</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Madde 5 — Cayma Hakkı</h2>
+  <p>Alıcı, sözleşmenin kurulduğu tarihten itibaren <strong>14 (on dört) gün</strong> içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin sözleşmeden cayma hakkına sahiptir.</p>
+  <p>Cayma hakkı kullanımında:</p>
+  <ul>
+    <li>Cayma bildirimi yazılı olarak <a href="mailto:destek@kamkamapp.com">destek@kamkamapp.com</a> adresine iletilir.</li>
+    <li>KamKam, bildirimi aldığı tarihten itibaren <strong>14 (on dört) gün</strong> içinde tahsil edilen tutarı iade eder.</li>
+    <li>İade, ödemenin yapıldığı araçla gerçekleştirilir; farklı bir araç kullanımı için alıcının onayı aranır.</li>
+  </ul>
+  <p><strong>Cayma hakkının istisnaları (Yönetmelik Madde 15):</strong></p>
+  <ul>
+    <li>Alıcının onayıyla hizmetin cayma süresi içinde tam olarak ifa edilmesi halinde cayma hakkı kullanılamaz.</li>
+    <li>Dijital içeriklerin alıcının onayıyla ifaya başlanması halinde cayma hakkı düşer.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Madde 6 — Sözleşmenin Süresi ve Feshi</h2>
+  <ul>
+    <li>Sözleşme, seçilen abonelik dönemine (aylık / yıllık) göre kurulur ve her dönem sonunda otomatik olarak yenilenir.</li>
+    <li>Alıcı, aboneliği bir sonraki dönemden en az <strong>30 gün önce</strong> yazılı bildirimle feshedebilir.</li>
+    <li>KamKam, Kullanım Koşulları ihlali tespit etmesi halinde sözleşmeyi derhal feshedebilir; bu durumda ödenen bedel iade edilmez.</li>
+    <li>Fesih sonrası verilere erişim 30 gün süreyle korunur; bu süre içinde veri dışa aktarımı talep edilebilir.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Madde 7 — Gizlilik</h2>
+  <p>Sözleşme kapsamında işlenen kişisel veriler, <a href="privacy-policy.html">Gizlilik Politikası</a> ve 6698 sayılı KVKK hükümleri çerçevesinde korunmaktadır. Gizlilik Politikası bu sözleşmenin ayrılmaz bir parçasıdır.</p>
+
+  <hr class="divider">
+
+  <h2>Madde 8 — Uyuşmazlık Çözümü</h2>
+  <p>Bu sözleşmeden doğan uyuşmazlıklarda aşağıdaki başvuru yolları mevcuttur:</p>
+  <ul>
+    <li><strong>Tüketici Hakem Heyeti:</strong> Yasal parasal sınırlar dahilindeki uyuşmazlıklar için alıcının yerleşim yeri tüketici hakem heyetine başvurulabilir.</li>
+    <li><strong>Tüketici Mahkemesi:</strong> Hakem heyeti sınırını aşan uyuşmazlıklar için <strong>İstanbul</strong> Tüketici Mahkemeleri yetkilidir.</li>
+  </ul>
+  <p>Sözleşmeye Türk Hukuku uygulanır.</p>
+
+  <hr class="divider">
+
+  <h2>Madde 9 — Yürürlük</h2>
+  <p>İşbu sözleşme, alıcının KamKam platformunda abonelik satın alımını onaylamasıyla elektronik ortamda kurulmuş ve yürürlüğe girmiş sayılır. Sözleşmenin bir örneği alıcının kayıtlı e-posta adresine iletilir.</p>
+
+  <hr class="divider">
+
+  <h2>İletişim</h2>
+  <ul>
+    <li>E-posta: <a href="mailto:info@kamkamapp.com">info@kamkamapp.com</a></li>
+    <li>Destek: <a href="mailto:destek@kamkamapp.com">destek@kamkamapp.com</a></li>
+    <li>Web: <a href="https://kamkamapp.com">kamkamapp.com</a></li>
+  </ul>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="logo_band_white@3x.png" alt="KamKam" class="footer-band-logo">
+      <p class="footer-tagline">Şehri telefonunla keşfet. Özenle seçilmiş işletmeler, sınırsız ayrıcalık.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html#app">Nasıl Çalışır</a>
+      <a href="index.html#isletme">İşletmeler</a>
+      <a href="about.html">Hakkımızda</a>
+      <a href="privacy-policy.html">Gizlilik Politikası</a>
+      <a href="terms.html">Kullanım Şartları</a>
+      <a href="delivery-returns.html">Teslimat ve İade</a>
+      <a href="distance-sales.html">Mesafeli Satış</a>
+      <a href="mailto:info@kamkamapp.com">İletişim</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 KamKam. Tüm hakları saklıdır.</span>
+    <span>Türkiye'nin Şehir Rehberi</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('open', o); });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); }));
+</script>
+</body>
+</html>
