@@ -521,41 +521,23 @@
       font-size: 17px; color: var(--t1);
       margin-bottom: 44px; line-height: 1.7;
     }
-    .wl-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .wl-input {
-      background: rgba(255,255,255,.07);
-      border: 1px solid var(--bdr2);
-      border-radius: 12px; padding: 13px 16px;
-      font-size: 14px; font-family: inherit;
-      color: var(--t0); outline: none;
-      transition: border-color .2s, background .2s;
-    }
-    .wl-input::placeholder { color: var(--t2); }
-    .wl-input:focus { border-color: var(--p); background: rgba(255,255,255,.1); }
-    .wl-input.full { grid-column: span 2; }
-    .wl-btn {
-      grid-column: span 2;
-      background: var(--p); color: white;
-      border: none; cursor: pointer;
-      padding: 15px; border-radius: 12px;
-      font-size: 15px; font-weight: 700;
-      font-family: inherit;
+    .wl-cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--p); color: #fff;
+      text-decoration: none;
+      padding: 18px 36px; border-radius: 14px;
+      font-size: 17px; font-weight: 800; letter-spacing: -.2px;
       transition: background .15s, transform .15s, box-shadow .15s;
+      white-space: nowrap;
     }
-    .wl-btn:hover {
-      background: var(--pd); transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(232,25,44,.35);
+    .wl-cta-btn:hover {
+      background: var(--pd); transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(232,25,44,.4);
     }
-    .wl-success {
-      display: none; align-items: center; justify-content: center;
-      gap: 10px; color: var(--t1); font-size: 15px; font-weight: 600;
-      margin-top: 20px;
+    .wl-cta-btn:active { transform: scale(.98); }
+    @media (max-width: 560px) {
+      .wl-cta-btn { width: 100%; justify-content: center; font-size: 16px; padding: 16px 24px; }
     }
-    .wl-success.show { display: flex; }
 
     /* ── FOOTER ── */
     footer {
@@ -627,8 +609,6 @@
 
       /* Waitlist */
       .waitlist-sec { padding: 72px 5%; }
-      .wl-form { grid-template-columns: 1fr; }
-      .wl-input.full, .wl-btn { grid-column: span 1; }
 
       footer { flex-direction: column; text-align: center; }
     }
@@ -667,7 +647,7 @@
       .fb-wide { grid-column: span 1; }
       .fb { padding: 24px 20px; }
 
-      /* Waitlist */
+      /* Waitlist CTA */
       .waitlist-inner h2 { font-size: 28px; letter-spacing: -1px; }
       .waitlist-inner p { font-size: 15px; }
     }
@@ -693,12 +673,12 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#ozellikler">Özellikler</a></li>
       <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
-      <li><a href="#kayit">Kayıt Ol</a></li>
-      <li class="nav-mobile-cta" style="margin-top:8px"><a href="#kayit" style="background:var(--p);color:#fff;font-weight:700;text-align:center;justify-content:center">Erken Erişim Al</a></li>
+      <li><a href="isletme-kayit.html">Kayıt Ol</a></li>
+      <li class="nav-mobile-cta" style="margin-top:8px"><a href="isletme-kayit.html" style="background:var(--p);color:#fff;font-weight:700;text-align:center;justify-content:center">Kayıt Ol</a></li>
     </ul>
     <div class="nav-actions">
       <a href="index.html" class="btn-ghost">← Kullanıcı Sayfası</a>
-      <a href="#kayit" class="btn-primary">Erken Erişim Al</a>
+      <a href="isletme-kayit.html" class="btn-primary">Kayıt Ol →</a>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Menü">
         <span></span><span></span><span></span>
       </button>
@@ -711,8 +691,8 @@
       <h1>Mahallenin<br>Vazgeçilmezi <em>Ol</em></h1>
       <p class="hero-sub">Müşterini tanıyan işletme, mahallenin favorisi olur. Kim kaç kez geldi, hangi saatte yoğun, hangi teklif işe yaradı, hepsini bilmek artık çok kolay.</p>
       <div class="hero-actions">
-        <a href="#kayit" class="btn-hero-primary">
-          Erken Erişim Al
+        <a href="isletme-kayit.html" class="btn-hero-primary">
+          Hemen Kayıt Ol
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#nasil-calisir" class="btn-hero-ghost">Nasıl Çalışır</a>
@@ -1030,24 +1010,35 @@
     </div>
   </section>
 
-  <!-- WAITLIST -->
+  <!-- KAYIT CTA -->
   <section class="waitlist-sec" id="kayit">
     <div class="waitlist-glow"></div>
     <div class="waitlist-inner">
       <div class="fi">
-        <span class="tag-light" style="display:block;margin-bottom:14px">Erken Erişim</span>
-        <h2>Mahallenize Geliyoruz.</h2>
-        <p>Listeye kayıt ol, bölgende KamKam aktif olduğunda ilk sen haber al. Müşterilerini tanıyan ilk işletme sen ol.</p>
+        <span class="tag-light" style="display:block;margin-bottom:14px">İşletme Kaydı</span>
+        <h2>Mahallenizin<br>Favorisi Olun.</h2>
+        <p>Müşterilerinizi tanıyın, geri getirin, işinizi büyütün. Kayıt 3 dakika, kurulum 5 dakika.</p>
       </div>
-      <form class="wl-form fi" id="biz-wl-form" onsubmit="return bizWlSubmit(event)">
-        <input class="wl-input" type="text"  placeholder="İşletme adı" required>
-        <input class="wl-input" type="text"  placeholder="Sektör (Kafe, Berber...)" required>
-        <input class="wl-input full" type="email" placeholder="E-posta adresi" required autocomplete="email">
-        <input class="wl-input full" type="text"  placeholder="Şehir" required>
-        <button class="wl-btn" type="submit">Listeye Katıl, Ücretsiz →</button>
-      </form>
-      <div class="wl-success" id="biz-wl-success">
-        <span>🎉</span> Harika! Şehrinize gelince sizi haberdar edeceğiz.
+      <div class="fi" style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:8px">
+        <a href="isletme-kayit.html" class="wl-cta-btn">
+          İşletmemi Kaydet
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <p style="font-size:13px;color:rgba(255,255,255,.3);margin:0">Ücretsiz başlayın, istediğiniz zaman iptal edin.</p>
+      </div>
+      <div class="fi" style="display:flex;justify-content:center;gap:32px;margin-top:40px;flex-wrap:wrap">
+        <div style="text-align:center">
+          <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px">5dk</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px">Kurulum süresi</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px">0₺</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px">Başlangıç maliyeti</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px">24s</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px">Onay süresi</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1190,13 +1181,6 @@
       const auto = setInterval(() => goTo((current+1)%items.length), 3500);
     })();
 
-    // Waitlist submit
-    function bizWlSubmit(e) {
-      e.preventDefault();
-      document.getElementById('biz-wl-form').style.display    = 'none';
-      document.getElementById('biz-wl-success').classList.add('show');
-      return false;
-    }
   </script>
 </body>
 </html>
