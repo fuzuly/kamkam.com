@@ -159,100 +159,289 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      background: var(--hero-bg);
+      background: #fff;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 100px 24px 60px;
+      padding: 100px 5% 80px;
+      gap: 60px;
       overflow: hidden;
-      text-align: center;
     }
-    .hero-map {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      opacity: 0.22;
-      pointer-events: none;
+    .hero-text { flex: 1; max-width: 520px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(200,67,42,.08);
+      border: 1px solid rgba(200,67,42,.2);
+      color: var(--p); font-size: 12px; font-weight: 700;
+      padding: 5px 14px; border-radius: 999px;
+      margin-bottom: 24px; letter-spacing: .3px;
     }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 580px;
-    }
-    .hero-mark { margin-bottom: 32px; }
-    .hero-mark img {
-      height: 230px;
-      width: auto;
-      mix-blend-mode: multiply;
-      display: block;
-    }
-    @media (min-width: 600px) {
-      .hero-mark img { height: 306px; }
-    }
-
     .hero-h1 {
-      font-size: 38px;
+      font-size: 80px;
       font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1.08;
-      color: #111;
-      margin-bottom: 18px;
+      line-height: 1;
+      letter-spacing: -4px;
+      margin-bottom: 22px;
     }
+    .hero-h1 .h1-dark { display: block; color: #111; font-weight: 700; }
+    .hero-h1 .h1-red  { display: block; color: var(--p); font-weight: 900; }
     .hero-sub {
-      font-size: 15px;
-      color: #555;
-      line-height: 1.7;
+      font-size: 17px;
+      color: #666;
+      line-height: 1.75;
       margin-bottom: 36px;
       max-width: 400px;
     }
     .hero-btns {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      max-width: 360px;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
     .btn-fill {
-      display: block;
+      display: inline-flex; align-items: center; gap: 8px;
       background: var(--p);
       color: #fff;
       text-decoration: none;
-      padding: 17px 28px;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: inherit;
-      text-align: center;
-      transition: background .15s, transform .15s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-fill:hover { background: var(--pd); transform: translateY(-1px); }
-    .btn-outline {
-      display: block;
-      background: transparent;
-      color: var(--p);
-      text-decoration: none;
       padding: 15px 28px;
-      border-radius: 999px;
+      border-radius: 50px;
       font-size: 15px;
       font-weight: 700;
       font-family: inherit;
-      text-align: center;
+      transition: background .15s, transform .15s, box-shadow .15s;
+      border: none; cursor: pointer;
+    }
+    .btn-fill:hover { background: var(--pd); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(200,67,42,.3); }
+    .btn-ghost-play {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; border: none;
+      color: #222; text-decoration: none;
+      font-size: 15px; font-weight: 700;
+      transition: color .15s; cursor: pointer; font-family: inherit;
+    }
+    .btn-ghost-play:hover { color: var(--p); }
+    .play-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid #DDD;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: border-color .15s;
+    }
+    .btn-ghost-play:hover .play-circle { border-color: var(--p); }
+    .hero-proof {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: #999; margin-top: 28px;
+    }
+    .proof-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(34,197,94,.5);
+      animation: idxPulse 2s ease-in-out infinite;
+    }
+    @keyframes idxPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.7;transform:scale(1.3)} }
+
+    /* Phone mockup */
+    .hero-visual {
+      flex: 1; display: flex; justify-content: center; align-items: center;
+      position: relative; min-height: 540px;
+    }
+    .phone-mock {
+      width: 290px; height: 580px;
+      background: linear-gradient(160deg, #ff9a8b 0%, var(--p) 45%, #7a1010 100%);
+      border-radius: 46px;
+      border: 8px solid #111;
+      position: relative;
+      box-shadow: 0 48px 96px rgba(0,0,0,.16);
+      flex-shrink: 0; overflow: hidden;
+      animation: idxPhoneIn 1s cubic-bezier(.34,1.1,.64,1) .15s both;
+    }
+    @keyframes idxPhoneIn {
+      from { opacity: 0; transform: translateY(40px) scale(.95); }
+      to   { opacity: 1; transform: none; }
+    }
+    .phone-notch {
+      position: absolute; top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 86px; height: 22px;
+      background: #111; border-radius: 12px; z-index: 2;
+    }
+    .phone-shimmer {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .phone-btn-r {
+      position: absolute; right: -9px; top: 130px;
+      width: 4px; height: 64px; background: #222; border-radius: 0 3px 3px 0;
+    }
+    .phone-btn-l1 {
+      position: absolute; left: -9px; top: 108px;
+      width: 4px; height: 38px; background: #222; border-radius: 3px 0 0 3px;
+    }
+    .phone-btn-l2 {
+      position: absolute; left: -9px; top: 158px;
+      width: 4px; height: 38px; background: #222; border-radius: 3px 0 0 3px;
+    }
+    .phone-float-card {
+      position: absolute; bottom: 48px; left: -100px;
+      background: #fff; border-radius: 22px;
+      padding: 22px 28px;
+      box-shadow: 0 20px 64px rgba(0,0,0,.13);
+      display: flex; gap: 32px;
+      animation: idxCardIn 1s cubic-bezier(.34,1.1,.64,1) .4s both;
+    }
+    @keyframes idxCardIn {
+      from { opacity: 0; transform: translateY(20px) scale(.95); }
+      to   { opacity: 1; transform: none; }
+    }
+    .donut-item { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+    .donut-svg  { width: 88px; height: 88px; overflow: visible; }
+    .donut-track { fill: none; stroke: #F0F0F0; stroke-width: 9; }
+    .donut-fill  { fill: none; stroke: var(--p); stroke-width: 9; stroke-linecap: round;
+                   transform-origin: center; transform: rotate(-90deg); }
+    .donut-val   { font-size: 16px; font-weight: 900; fill: #111; text-anchor: middle; dominant-baseline: central; }
+    .donut-label { font-size: 13px; font-weight: 700; color: var(--p); }
+
+    /* ── PHONE SCREEN UI ── */
+    .phone-screen {
+      position: absolute; inset: 0;
+      background: #F2F2F7;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      padding-top: 46px;
+      font-family: 'Inter', sans-serif;
+    }
+    /* entrance animations */
+    .ps-animate {
+      opacity: 0; transform: translateY(12px);
+      animation: psIn .4s ease forwards;
+    }
+    @keyframes psIn { to { opacity: 1; transform: none; } }
+
+    /* status bar */
+    .ps-status {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 14px 6px;
+      font-size: 9px; font-weight: 700; color: #111;
+      animation-delay: .3s;
+    }
+    .ps-status-right { display: flex; align-items: center; gap: 4px; }
+    .ps-battery { width: 16px; height: 8px; border: 1.5px solid #333; border-radius: 2px; position: relative; }
+    .ps-battery::after { content:''; position: absolute; right: -4px; top: 50%; transform: translateY(-50%); width: 2px; height: 4px; background: #333; border-radius: 0 1px 1px 0; }
+    .ps-battery-fill { position: absolute; left: 1px; top: 1px; bottom: 1px; width: 65%; background: #22c55e; border-radius: 1px; }
+
+    /* header */
+    .ps-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 14px 10px;
+      background: #fff;
+      border-bottom: 1px solid #E8E8EC;
+      animation-delay: .45s;
+    }
+    .ps-loc { font-size: 9px; font-weight: 600; color: #888; margin-bottom: 2px; }
+    .ps-greeting { font-size: 13px; font-weight: 800; color: #111; letter-spacing: -.3px; }
+    .ps-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--p); color: #fff;
+      font-size: 11px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* points card */
+    .ps-pts-card {
+      margin: 10px 10px 0;
+      background: linear-gradient(135deg, var(--p) 0%, #8B1A0A 100%);
+      border-radius: 14px; padding: 14px 14px 12px;
+      animation-delay: .6s;
+    }
+    .ps-pts-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,.65); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .5px; }
+    .ps-pts-val { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1; margin-bottom: 8px; }
+    .ps-pts-bar-track { height: 4px; background: rgba(255,255,255,.2); border-radius: 2px; margin-bottom: 5px; overflow: hidden; }
+    .ps-pts-bar-fill {
+      height: 100%; width: 0; background: rgba(255,255,255,.75); border-radius: 2px;
+      transition: width 1.4s cubic-bezier(.22,1,.36,1);
+    }
+    .ps-pts-bar-fill.go { width: 73%; }
+    .ps-pts-next { font-size: 9px; color: rgba(255,255,255,.6); font-weight: 600; }
+
+    /* nearby section */
+    .ps-section-title {
+      font-size: 10px; font-weight: 800; color: #111; letter-spacing: -.2px;
+      padding: 10px 14px 4px; text-transform: uppercase; letter-spacing: .5px;
+      animation-delay: .75s;
+    }
+    .ps-biz-list { padding: 0 10px; display: flex; flex-direction: column; gap: 6px; }
+    .ps-biz-item {
+      display: flex; align-items: center; gap: 9px;
+      background: #fff; border-radius: 12px; padding: 10px 10px;
+    }
+    .ps-biz-item:nth-child(1) { animation-delay: .85s; }
+    .ps-biz-item:nth-child(2) { animation-delay: .98s; }
+    .ps-biz-item:nth-child(3) { animation-delay: 1.1s; }
+    .ps-biz-icon {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: #F5F0EB; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ps-biz-name { font-size: 11px; font-weight: 700; color: #111; margin-bottom: 2px; }
+    .ps-biz-meta { font-size: 9px; color: #888; font-weight: 500; }
+    .ps-biz-pts { margin-left: auto; font-size: 10px; font-weight: 800; color: var(--p); white-space: nowrap; }
+
+    /* live notification ping */
+    .ps-notif {
+      position: absolute; top: 46px; left: 10px; right: 10px;
+      background: #fff; border-radius: 12px; padding: 9px 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+      display: flex; align-items: center; gap: 8px;
+      opacity: 0; transform: translateY(-8px);
+      transition: opacity .35s, transform .35s;
+      z-index: 10;
+    }
+    .ps-notif.show { opacity: 1; transform: none; }
+    .ps-notif-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--p); flex-shrink: 0; }
+    .ps-notif-text { font-size: 10px; font-weight: 700; color: #111; line-height: 1.3; }
+
+    /* bottom nav */
+    .ps-bottom-nav {
+      margin-top: auto;
+      background: #fff; border-top: 1px solid #E8E8EC;
+      display: flex; padding: 8px 0 10px;
+      animation-delay: 1.2s;
+    }
+    .ps-nav-item {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+      font-size: 8px; font-weight: 600; color: #999;
+    }
+    .ps-nav-item.active { color: var(--p); }
+    .ps-nav-icon { font-size: 16px; line-height: 1; }
+
+    /* btn-outline kept for other sections */
+    .btn-outline {
+      display: inline-block;
+      background: transparent; color: var(--p);
+      text-decoration: none; padding: 15px 28px;
+      border-radius: 999px; font-size: 15px; font-weight: 700;
+      font-family: inherit; text-align: center;
       border: 2px solid var(--p);
-      transition: background .15s, transform .15s;
-      cursor: pointer;
+      transition: background .15s, transform .15s; cursor: pointer;
     }
     .btn-outline:hover { background: rgba(200,67,42,.06); transform: translateY(-1px); }
 
-    @media (min-width: 600px) {
-      .hero-h1 { font-size: 56px; letter-spacing: -3px; }
-      .hero-sub { font-size: 17px; }
-      .hero-btns { flex-direction: row; max-width: 460px; }
-      .btn-fill, .btn-outline { flex: 1; }
+    @media (min-width: 768px) {
+      .hero { padding: 100px 5% 80px; }
+    }
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; padding: 96px 24px 60px; gap: 48px; min-height: auto; }
+      .hero-text { max-width: 100%; }
+      .hero-h1 { font-size: 56px; letter-spacing: -2.5px; }
+      .hero-visual { min-height: auto; }
+      .phone-float-card { left: -40px; }
+    }
+    @media (max-width: 560px) {
+      .hero-h1 { font-size: 44px; letter-spacing: -2px; }
+      .hero-sub { font-size: 15px; }
+      .btn-fill { width: 100%; justify-content: center; }
+      .phone-mock { width: 240px; height: 480px; }
+      .phone-float-card { left: -16px; bottom: 28px; padding: 16px 18px; gap: 20px; }
+      .donut-svg { width: 72px; height: 72px; }
     }
 
     /* ── DARK DEMO ── */
@@ -697,62 +886,145 @@
 
 <!-- ── HERO ── -->
 <section class="hero" id="hero">
-  <!-- City map SVG background -->
-  <svg class="hero-map" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <!-- Main roads -->
-    <line x1="0" y1="175" x2="1000" y2="175" stroke="#888" stroke-width="1.8"/>
-    <line x1="0" y1="360" x2="1000" y2="360" stroke="#888" stroke-width="2.2"/>
-    <line x1="0" y1="520" x2="1000" y2="520" stroke="#888" stroke-width="1.8"/>
-    <line x1="155" y1="0" x2="155" y2="700" stroke="#888" stroke-width="1.8"/>
-    <line x1="420" y1="0" x2="420" y2="700" stroke="#888" stroke-width="2.2"/>
-    <line x1="690" y1="0" x2="690" y2="700" stroke="#888" stroke-width="1.8"/>
-    <line x1="880" y1="0" x2="880" y2="700" stroke="#888" stroke-width="1.2"/>
-    <!-- Secondary roads -->
-    <line x1="0" y1="60" x2="1000" y2="60" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="0" y1="270" x2="1000" y2="270" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="0" y1="440" x2="1000" y2="440" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="0" y1="620" x2="1000" y2="620" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="60" y1="0" x2="60" y2="700" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="265" y1="0" x2="265" y2="700" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="560" y1="0" x2="560" y2="700" stroke="#AAA" stroke-width="0.9"/>
-    <line x1="800" y1="0" x2="800" y2="700" stroke="#AAA" stroke-width="0.9"/>
-    <!-- Smaller streets -->
-    <line x1="0" y1="112" x2="420" y2="112" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="420" y1="112" x2="1000" y2="112" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="0" y1="315" x2="690" y2="315" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="0" y1="480" x2="1000" y2="480" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="0" y1="580" x2="880" y2="580" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="0" y1="655" x2="1000" y2="655" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="108" y1="0" x2="108" y2="520" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="340" y1="0" x2="340" y2="700" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="500" y1="0" x2="500" y2="700" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="625" y1="175" x2="625" y2="700" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="760" y1="0" x2="760" y2="520" stroke="#BBB" stroke-width="0.6"/>
-    <line x1="940" y1="0" x2="940" y2="700" stroke="#BBB" stroke-width="0.6"/>
-    <!-- Diagonal roads -->
-    <line x1="0" y1="360" x2="420" y2="0" stroke="#AAA" stroke-width="1"/>
-    <line x1="420" y1="700" x2="1000" y2="220" stroke="#AAA" stroke-width="1"/>
-    <line x1="690" y1="0" x2="1000" y2="360" stroke="#BBB" stroke-width="0.8"/>
-    <line x1="0" y1="520" x2="155" y2="700" stroke="#BBB" stroke-width="0.7"/>
-    <!-- Roundabouts -->
-    <circle cx="420" cy="360" r="24" fill="none" stroke="#888" stroke-width="1.8"/>
-    <circle cx="155" cy="175" r="14" fill="none" stroke="#AAA" stroke-width="1"/>
-    <circle cx="690" cy="520" r="18" fill="none" stroke="#AAA" stroke-width="1.2"/>
-    <circle cx="265" cy="60" r="8" fill="none" stroke="#BBB" stroke-width="0.7"/>
-  </svg>
-
-  <div class="hero-content fi">
-    <!-- KAM wave logo mark -->
-    <div class="hero-mark">
-      <img src="image.png" alt="KamKam">
-    </div>
-
-    <h1 class="hero-h1">Şehri Telefonunla Keşfet</h1>
-    <p class="hero-sub">Özenle seçilmiş yüzlerce işletme, şehrin en kaliteli rehberi, ayrıcalıklar, indirimler, kampanyalar ve çok daha fazlası...</p>
-
+  <div class="hero-text fi">
+    <h1 class="hero-h1">
+      <span class="h1-dark">Şehri</span>
+      <span class="h1-red">Keşfet</span>
+    </h1>
+    <p class="hero-sub">Özenle seçilmiş yüzlerce işletme, ayrıcalıklar, kampanyalar ve sadakat ödülleri. Telefonunu çıkar, şehri hisset.</p>
     <div class="hero-btns">
-      <a href="#app" class="btn-fill">Ayrıcalıkları Keşfet</a>
-      <a href="isletmeler.html" class="btn-outline">İşletme Olarak Katıl</a>
+      <a href="#app" class="btn-fill">
+        Uygulamayı İndir
+      </a>
+      <a href="isletmeler.html" class="btn-ghost-play">
+        <span class="play-circle">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
+            <path d="M1 1.5l10 5-10 5V1.5z" fill="#333" stroke="#333" stroke-width="1" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        İşletmeler için
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual fi">
+    <div class="phone-mock">
+      <div class="phone-notch"></div>
+      <div class="phone-btn-r"></div>
+      <div class="phone-btn-l1"></div>
+      <div class="phone-btn-l2"></div>
+
+      <!-- App screen -->
+      <div class="phone-screen">
+
+        <!-- Live notification (appears after 2s) -->
+        <div class="ps-notif" id="ps-notif">
+          <div class="ps-notif-dot"></div>
+          <div class="ps-notif-text">Boğaziçi Kafe'de bugün 2× puan! ☕</div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="ps-status ps-animate">
+          <span>9:41</span>
+          <div class="ps-status-right">
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
+              <rect x="0" y="4" width="2" height="6" rx="1" fill="#333" opacity=".4"/>
+              <rect x="3" y="2.5" width="2" height="7.5" rx="1" fill="#333" opacity=".6"/>
+              <rect x="6" y="1" width="2" height="9" rx="1" fill="#333" opacity=".8"/>
+              <rect x="9" y="0" width="2" height="10" rx="1" fill="#333"/>
+            </svg>
+            <div class="ps-battery"><div class="ps-battery-fill"></div></div>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="ps-header ps-animate">
+          <div>
+            <div class="ps-loc">📍 Beşiktaş, İstanbul</div>
+            <div class="ps-greeting">Merhaba, Ahmet 👋</div>
+          </div>
+          <div class="ps-avatar">A</div>
+        </div>
+
+        <!-- Points card -->
+        <div class="ps-pts-card ps-animate">
+          <div class="ps-pts-label">Toplam Puan</div>
+          <div class="ps-pts-val" id="phone-pts">0</div>
+          <div class="ps-pts-bar-track">
+            <div class="ps-pts-bar-fill" id="ps-bar"></div>
+          </div>
+          <div class="ps-pts-next">Sonraki ödüle 260 puan kaldı</div>
+        </div>
+
+        <!-- Nearby -->
+        <div class="ps-section-title ps-animate">Yakınında</div>
+        <div class="ps-biz-list">
+          <div class="ps-biz-item ps-animate">
+            <div class="ps-biz-icon">☕</div>
+            <div>
+              <div class="ps-biz-name">Boğaziçi Kafe</div>
+              <div class="ps-biz-meta">850m · 2× puan bugün</div>
+            </div>
+            <div class="ps-biz-pts">+80 puan</div>
+          </div>
+          <div class="ps-biz-item ps-animate">
+            <div class="ps-biz-icon">✂️</div>
+            <div>
+              <div class="ps-biz-name">Berber Mehmet</div>
+              <div class="ps-biz-meta">1.2km · Özel teklif</div>
+            </div>
+            <div class="ps-biz-pts">+120 puan</div>
+          </div>
+          <div class="ps-biz-item ps-animate">
+            <div class="ps-biz-icon">🍕</div>
+            <div>
+              <div class="ps-biz-name">Lezzet Durağı</div>
+              <div class="ps-biz-meta">1.8km · Yeni üye bonusu</div>
+            </div>
+            <div class="ps-biz-pts">+200 puan</div>
+          </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <div class="ps-bottom-nav ps-animate">
+          <div class="ps-nav-item active">
+            <span class="ps-nav-icon">🏠</span>
+            <span>Ana Sayfa</span>
+          </div>
+          <div class="ps-nav-item">
+            <span class="ps-nav-icon">🔍</span>
+            <span>Keşfet</span>
+          </div>
+          <div class="ps-nav-item">
+            <span class="ps-nav-icon">⭐</span>
+            <span>Puanlar</span>
+          </div>
+          <div class="ps-nav-item">
+            <span class="ps-nav-icon">👤</span>
+            <span>Profil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-float-card">
+      <div class="donut-item">
+        <svg class="donut-svg" viewBox="0 0 88 88">
+          <circle class="donut-track" cx="44" cy="44" r="34"/>
+          <circle class="donut-fill" cx="44" cy="44" r="34"
+            stroke-dasharray="213.6" stroke-dashoffset="42.7"/>
+          <text class="donut-val" x="44" y="44">80%</text>
+        </svg>
+        <span class="donut-label">Geri Dönüş</span>
+      </div>
+      <div class="donut-item">
+        <svg class="donut-svg" viewBox="0 0 88 88">
+          <circle class="donut-track" cx="44" cy="44" r="34"/>
+          <circle class="donut-fill" cx="44" cy="44" r="34"
+            stroke-dasharray="213.6" stroke-dashoffset="64.1"/>
+          <text class="donut-val" x="44" y="44">70%</text>
+        </svg>
+        <span class="donut-label">Memnuniyet</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1133,6 +1405,68 @@
       lenis.scrollTo(target, { offset: -72, duration: 1.4 });
     });
   });
+
+  // ── PHONE SCREEN ANIMATIONS ──
+  (function() {
+    const phone = document.querySelector('.phone-mock');
+    if (!phone) return;
+
+    let triggered = false;
+    const obs = new IntersectionObserver(entries => {
+      if (triggered || !entries[0].isIntersecting) return;
+      triggered = true;
+      obs.disconnect();
+
+      // Points counter: 0 → 1240
+      const ptsEl = document.getElementById('phone-pts');
+      const target = 1240;
+      const dur = 1600;
+      const delay = 700;
+      setTimeout(() => {
+        const t0 = performance.now();
+        (function tick(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          const v = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+          ptsEl.textContent = v.toLocaleString('tr-TR');
+          if (p < 1) requestAnimationFrame(tick);
+        })(performance.now());
+      }, delay);
+
+      // Progress bar fill
+      setTimeout(() => {
+        document.getElementById('ps-bar')?.classList.add('go');
+      }, 900);
+
+      // Live notification after 2.2s, hide after 3.8s
+      setTimeout(() => {
+        const n = document.getElementById('ps-notif');
+        if (n) {
+          n.classList.add('show');
+          setTimeout(() => n.classList.remove('show'), 2800);
+        }
+      }, 2200);
+    }, { threshold: 0.3 });
+    obs.observe(phone);
+
+    // Subtle parallax
+    const heroEl = document.querySelector('.hero');
+    const card = document.querySelector('.phone-float-card');
+    if (!heroEl) return;
+    let tx=0, ty=0, cx=0, cy=0;
+    heroEl.addEventListener('mousemove', e => {
+      const r = heroEl.getBoundingClientRect();
+      tx = (e.clientX - (r.left + r.width * .5)) / (r.width * .5);
+      ty = (e.clientY - (r.top + r.height * .5)) / (r.height * .5);
+    });
+    heroEl.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    (function tick() {
+      cx = lerp(cx, tx, .06); cy = lerp(cy, ty, .06);
+      phone.style.transform = `perspective(1000px) rotateY(${cx*6}deg) rotateX(${-cy*3}deg)`;
+      if (card) card.style.transform = `perspective(1000px) rotateY(${cx*4}deg) rotateX(${-cy*2}deg) translateZ(20px)`;
+      requestAnimationFrame(tick);
+    })();
+  })();
 </script>
 </body>
 </html>
