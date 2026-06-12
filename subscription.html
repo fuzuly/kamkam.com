@@ -271,7 +271,7 @@
       d.setMonth(d.getMonth() - i);
       return {
         date: d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }),
-        amount: '999,00 TL',
+        amount: '2.000,00 TL',
         status: 'paid',
         invoice_url: '#'
       };
@@ -279,7 +279,7 @@
 
     return {
       business_name: 'KamKam İşletme',
-      package: { name: 'Growth', price: '999', currency: 'TL', period: 'ay' },
+      package: { name: 'Growth', price: '2.000', currency: 'TL', period: 'ay' },
       renewal_date: renewal.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }),
       payment_history: history,
       payment_method: { last4: '4242', brand: 'Visa', expiry: '12/26', holder: 'İşletme Adı' }
