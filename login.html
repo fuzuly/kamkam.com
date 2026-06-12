@@ -197,6 +197,8 @@
     return await res.json();
   }
 
+  const TEST_USER = { email: 'demo@kamkamapp.com', password: 'kamkam2026', name: 'KamKam Demo', role: 'merchant' };
+
   async function handleLogin(e) {
     e.preventDefault();
     const email    = document.getElementById('email').value.trim();
@@ -207,6 +209,14 @@
     errEl.classList.remove('show');
     btn.classList.add('loading');
     btn.disabled = true;
+
+    // Test user bypass (remove when API is live)
+    if (email === TEST_USER.email && password === TEST_USER.password) {
+      localStorage.setItem('kamkam_token', 'demo-token');
+      localStorage.setItem('kamkam_user', JSON.stringify({ name: TEST_USER.name, role: TEST_USER.role, email }));
+      window.location.href = 'subscription.html';
+      return;
+    }
 
     try {
       const data = await fetchLogin(email, password);
