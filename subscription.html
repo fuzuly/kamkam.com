@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abonelik Paneli — KamKam</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C8432A'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #111; background: #F0EBE4; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    :root { --p: #C8432A; --pd: #A83520; --dark: #0D0D0D; }
+
+    /* NAV */
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 300; height: 68px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 20px; background: rgba(240,235,228,.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+    .nav-logo { justify-self: start; text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 52px; width: auto; mix-blend-mode: multiply; }
+    .nav-user { justify-self: center; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #444; }
+    .nav-user-dot { width: 8px; height: 8px; border-radius: 50%; background: #22C55E; }
+    .nav-out-btn { justify-self: end; background: none; border: 1.5px solid #DDD; color: #666; padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; transition: border-color .15s, color .15s; white-space: nowrap; }
+    .nav-out-btn:hover { border-color: var(--p); color: var(--p); }
+    .nav-hamburger { justify-self: end; display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; }
+    @media (max-width: 767px) {
+      .nav { grid-template-columns: auto 1fr auto; }
+      .nav-user { display: none; }
+      .nav-out-btn { font-size: 12px; padding: 7px 14px; }
+    }
+
+    /* Layout */
+    .panel { max-width: 960px; margin: 0 auto; padding: 100px 20px 60px; }
+
+    /* Business header */
+    .biz-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .biz-avatar { width: 60px; height: 60px; border-radius: 16px; background: var(--p); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; color: #fff; flex-shrink: 0; }
+    .biz-name { font-size: 22px; font-weight: 900; letter-spacing: -.5px; color: #111; }
+    .biz-badge { display: inline-flex; align-items: center; gap: 5px; background: #DCFCE7; color: #15803D; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; margin-top: 4px; }
+    .biz-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22C55E; }
+
+    /* Cards grid */
+    .cards-top { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .card { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+    .card-label { font-size: 11px; font-weight: 700; letter-spacing: .6px; color: #999; text-transform: uppercase; margin-bottom: 20px; }
+
+    /* Mevcut Paket card */
+    .pkg-name { font-size: 26px; font-weight: 900; letter-spacing: -.6px; color: #111; margin-bottom: 4px; }
+    .pkg-price { font-size: 15px; color: #888; margin-bottom: 20px; }
+    .pkg-price strong { font-size: 20px; font-weight: 800; color: #111; }
+    .pkg-divider { height: 1px; background: #F0F0F0; margin-bottom: 16px; }
+    .pkg-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; }
+    .pkg-row:last-child { margin-bottom: 0; }
+    .pkg-row .label { color: #888; }
+    .pkg-row .value { font-weight: 600; color: #111; }
+    .status-pill { display: inline-flex; align-items: center; gap: 4px; background: #DCFCE7; color: #15803D; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+    .status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22C55E; }
+    .btn-upgrade { margin-top: 20px; width: 100%; background: var(--p); color: #fff; border: none; border-radius: 10px; padding: 12px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .15s; }
+    .btn-upgrade:hover { background: var(--pd); }
+
+    /* Ödeme Yöntemi card */
+    .card-visual { background: linear-gradient(135deg, #1E1E1E 0%, #3A3A3A 100%); border-radius: 16px; padding: 20px; margin-bottom: 20px; aspect-ratio: 1.586; position: relative; overflow: hidden; }
+    .card-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 0%, rgba(200,67,42,.3) 0%, transparent 60%); }
+    .card-chip { width: 34px; height: 26px; background: linear-gradient(135deg, #D4A843 0%, #F0C860 50%, #D4A843 100%); border-radius: 5px; margin-bottom: 20px; }
+    .card-num { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.9); letter-spacing: 2px; font-family: monospace; }
+    .card-foot { display: flex; justify-content: space-between; margin-top: 12px; }
+    .card-foot-label { font-size: 9px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .5px; }
+    .card-foot-val { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); margin-top: 2px; }
+    .card-brand { position: absolute; bottom: 16px; right: 16px; }
+    .visa-logo { font-size: 20px; font-weight: 900; color: #fff; font-style: italic; letter-spacing: -1px; }
+    .pm-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F5F5F5; font-size: 13px; }
+    .pm-row:last-child { border-bottom: none; }
+    .pm-row .label { color: #888; }
+    .pm-row .value { font-weight: 600; }
+    .btn-update-card { margin-top: 16px; width: 100%; background: none; border: 1.5px solid #E0E0E0; color: #555; border-radius: 10px; padding: 11px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: border-color .15s, color .15s; }
+    .btn-update-card:hover { border-color: var(--p); color: var(--p); }
+
+    /* Ödeme Geçmişi full-width card */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .6px; color: #BBB; text-transform: uppercase; padding: 0 0 14px; border-bottom: 1px solid #F0F0F0; }
+    tbody tr { border-bottom: 1px solid #F7F7F7; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 14px 0; vertical-align: middle; color: #333; }
+    .td-amount { font-weight: 700; }
+    .badge-paid { display: inline-flex; align-items: center; gap: 4px; background: #DCFCE7; color: #15803D; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+    .badge-paid::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #22C55E; }
+    .badge-pending { background: #FEF9C3; color: #854D0E; }
+    .badge-pending::before { background: #EAB308; }
+    .td-invoice a { color: var(--p); text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+    .td-invoice a:hover { text-decoration: underline; }
+
+    /* Logout */
+    .logout-wrap { margin-top: 28px; text-align: center; }
+    .btn-logout { background: none; border: 1.5px solid #DDD; color: #999; padding: 12px 32px; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: border-color .15s, color .15s; }
+    .btn-logout:hover { border-color: #E53935; color: #E53935; }
+
+    /* Loading skeleton */
+    .skeleton { background: linear-gradient(90deg, #F5F5F5 25%, #EBEBEB 50%, #F5F5F5 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    /* Footer */
+    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.06); padding: 48px 24px 32px; margin-top: 40px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+    .footer-band-logo { display: block; height: 28px; width: auto; margin-bottom: 12px; opacity: .85; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.5; max-width: 220px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+    .footer-links a { text-decoration: none; color: rgba(255,255,255,.45); font-size: 13px; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,.85); }
+    .footer-bottom { max-width: 1100px; margin: 20px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: rgba(255,255,255,.2); }
+
+    @media (min-width: 768px) {
+      footer { padding: 60px 40px 36px; }
+      .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+    @media (max-width: 680px) {
+      .cards-top { grid-template-columns: 1fr; }
+      .panel { padding: 88px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="image.png" alt="KamKam"></a>
+  <div class="nav-user" id="nav-user-info">
+    <span class="nav-user-dot"></span>
+    <span id="nav-biz-name">Yükleniyor…</span>
+  </div>
+  <button class="nav-out-btn" onclick="logout()">Çıkış Yap</button>
+</nav>
+
+<main class="panel" id="panel">
+
+  <!-- Business header -->
+  <div class="biz-header">
+    <div class="biz-avatar" id="biz-avatar">K</div>
+    <div>
+      <div class="biz-name" id="biz-name-title">—</div>
+      <div class="biz-badge" id="biz-status-badge">Aktif Abonelik</div>
+    </div>
+  </div>
+
+  <!-- Top two cards -->
+  <div class="cards-top">
+
+    <!-- Card 1: Mevcut Paket -->
+    <div class="card">
+      <div class="card-label">Mevcut Paket</div>
+      <div class="pkg-name" id="pkg-name">Growth</div>
+      <div class="pkg-price"><strong id="pkg-price">999 TL</strong> / ay</div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-row">
+        <span class="label">Durum</span>
+        <span class="status-pill">Aktif</span>
+      </div>
+      <div class="pkg-row">
+        <span class="label">Yenileme Tarihi</span>
+        <span class="value" id="renewal-date">—</span>
+      </div>
+      <div class="pkg-row">
+        <span class="label">Fatura Dönemi</span>
+        <span class="value">Aylık</span>
+      </div>
+      <button class="btn-upgrade" onclick="alert('Paket yükseltme yakında aktif olacak.')">Paketi Yükselt →</button>
+    </div>
+
+    <!-- Card 3: Ödeme Yöntemi -->
+    <div class="card">
+      <div class="card-label">Ödeme Yöntemi</div>
+      <div class="card-visual">
+        <div class="card-chip"></div>
+        <div class="card-num" id="card-num">•••• •••• •••• 4242</div>
+        <div class="card-foot">
+          <div>
+            <div class="card-foot-label">Kart Sahibi</div>
+            <div class="card-foot-val" id="card-holder">—</div>
+          </div>
+          <div>
+            <div class="card-foot-label">Son Kullanma</div>
+            <div class="card-foot-val" id="card-expiry">12/26</div>
+          </div>
+        </div>
+        <div class="card-brand"><div class="visa-logo">VISA</div></div>
+      </div>
+      <div class="pm-row">
+        <span class="label">Kart Numarası</span>
+        <span class="value" id="pm-card-num">•••• 4242</span>
+      </div>
+      <div class="pm-row">
+        <span class="label">Kart Türü</span>
+        <span class="value" id="pm-card-brand">Visa</span>
+      </div>
+      <div class="pm-row">
+        <span class="label">Son Kullanma</span>
+        <span class="value" id="pm-expiry">12/26</span>
+      </div>
+      <button class="btn-update-card" onclick="alert('Kart güncelleme yakında aktif olacak.')">Kartı Güncelle</button>
+    </div>
+
+  </div>
+
+  <!-- Card 2: Ödeme Geçmişi (full width) -->
+  <div class="card">
+    <div class="card-label">Ödeme Geçmişi</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tarih</th>
+            <th>Tutar</th>
+            <th>Durum</th>
+            <th>Fatura</th>
+          </tr>
+        </thead>
+        <tbody id="payment-tbody">
+          <tr><td colspan="4" style="padding:20px 0;color:#CCC;font-size:13px;">Yükleniyor…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Logout -->
+  <div class="logout-wrap">
+    <button class="btn-logout" onclick="logout()">Çıkış Yap</button>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="logo_band_white@3x.png" alt="KamKam" class="footer-band-logo">
+      <p class="footer-tagline">Şehri birlikte keşfedelim.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="isletmeler.html">İşletmeler</a>
+      <a href="privacy-policy.html">Gizlilik Politikası</a>
+      <a href="terms.html">Kullanım Şartları</a>
+      <a href="mailto:info@kamkamapp.com">İletişim</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 KamKam. Tüm hakları saklıdır.</span>
+    <span>İstanbul, Türkiye</span>
+  </div>
+</footer>
+
+<script>
+  // ── AUTH GUARD ──
+  const token = localStorage.getItem('kamkam_token');
+  if (!token) { window.location.replace('login.html'); }
+
+  // ── MOCK DATA (swap this function when API ready) ──
+  async function fetchSubscriptionData(authToken) {
+    // To connect real API, replace the return below with:
+    // const res = await fetch('https://api.kamkamapp.com/api/merchant/subscription', {
+    //   headers: { 'Authorization': `Bearer ${authToken}` }
+    // });
+    // if (!res.ok) throw new Error('fetch');
+    // return await res.json();
+
+    const today = new Date();
+    const renewal = new Date(today);
+    renewal.setMonth(renewal.getMonth() + 1);
+
+    const history = [1, 2, 3].map(i => {
+      const d = new Date(today);
+      d.setMonth(d.getMonth() - i);
+      return {
+        date: d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }),
+        amount: '999,00 TL',
+        status: 'paid',
+        invoice_url: '#'
+      };
+    });
+
+    return {
+      business_name: 'KamKam İşletme',
+      package: { name: 'Growth', price: '999', currency: 'TL', period: 'ay' },
+      renewal_date: renewal.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }),
+      payment_history: history,
+      payment_method: { last4: '4242', brand: 'Visa', expiry: '12/26', holder: 'İşletme Adı' }
+    };
+  }
+
+  function logout() {
+    localStorage.removeItem('kamkam_token');
+    localStorage.removeItem('kamkam_user');
+    window.location.href = 'login.html';
+  }
+
+  function initials(name) {
+    return (name || 'K').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  }
+
+  async function init() {
+    // Fill nav name from localStorage user object first (instant)
+    try {
+      const u = JSON.parse(localStorage.getItem('kamkam_user') || '{}');
+      if (u.name) {
+        document.getElementById('nav-biz-name').textContent = u.name;
+        document.getElementById('biz-name-title').textContent = u.name;
+        document.getElementById('biz-avatar').textContent = initials(u.name);
+        document.getElementById('card-holder').textContent = u.name;
+      }
+    } catch (_) {}
+
+    try {
+      const data = await fetchSubscriptionData(token);
+
+      // Business header
+      const bizName = data.business_name || '—';
+      document.getElementById('biz-name-title').textContent = bizName;
+      document.getElementById('nav-biz-name').textContent = bizName;
+      document.getElementById('biz-avatar').textContent = initials(bizName);
+
+      // Package card
+      document.getElementById('pkg-name').textContent = data.package.name;
+      document.getElementById('pkg-price').textContent = `${data.package.price} ${data.package.currency}`;
+      document.getElementById('renewal-date').textContent = data.renewal_date;
+
+      // Payment method card
+      const pm = data.payment_method;
+      document.getElementById('card-num').textContent = `•••• •••• •••• ${pm.last4}`;
+      document.getElementById('card-holder').textContent = pm.holder || bizName;
+      document.getElementById('card-expiry').textContent = pm.expiry;
+      document.getElementById('pm-card-num').textContent = `•••• ${pm.last4}`;
+      document.getElementById('pm-card-brand').textContent = pm.brand;
+      document.getElementById('pm-expiry').textContent = pm.expiry;
+
+      // Payment history table
+      const tbody = document.getElementById('payment-tbody');
+      if (!data.payment_history || data.payment_history.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="padding:20px 0;color:#CCC;font-size:13px;">Ödeme geçmişi bulunamadı.</td></tr>';
+      } else {
+        tbody.innerHTML = data.payment_history.map(p => `
+          <tr>
+            <td>${p.date}</td>
+            <td class="td-amount">${p.amount}</td>
+            <td>
+              <span class="badge-paid${p.status === 'pending' ? ' badge-pending' : ''}">
+                ${p.status === 'paid' ? 'Ödendi' : p.status === 'pending' ? 'Bekliyor' : p.status}
+              </span>
+            </td>
+            <td class="td-invoice">
+              <a href="${p.invoice_url}" target="_blank" rel="noopener">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Fatura
+              </a>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+    } catch (err) {
+      console.error('Subscription data error:', err);
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
