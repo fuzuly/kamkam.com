@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KamKam İşletmeler, Müşterilerini Geri Getir</title>
   <meta name="description" content="Sadakat programını 5 dakikada kur. Müşterilerini geri getir, işini büyüt.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8192C'/><text x='16' y='23' font-family='system-ui,sans-serif' font-size='20' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23C8432A'/><text x='16' y='23' font-family='system-ui,sans-serif' font-size='20' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :focus-visible { outline: 2px solid var(--p); outline-offset: 3px; border-radius: 4px; }
+    :focus:not(:focus-visible) { outline: none; }
     html { scroll-behavior: auto; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 16px; line-height: 1.6;
       color: #F4F4F5;
       background: #09090B;
@@ -21,8 +23,8 @@
     }
 
     :root {
-      --p:   #E8192C;
-      --pd:  #C41020;
+      --p:   #C8432A;
+      --pd:  #A83520;
       --bg:  #09090B;
       --c1:  #111113;
       --c2:  #18181B;
@@ -104,7 +106,7 @@
     /* ── HERO ── */
     .hero {
       background:
-        radial-gradient(ellipse 70% 60% at 65% 50%, rgba(232,25,44,.13) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 60% at 65% 50%, rgba(200,67,42,.13) 0%, transparent 65%),
         radial-gradient(circle, rgba(255,255,255,.055) 1px, transparent 1px);
       background-size: auto, 28px 28px;
       background-color: var(--bg);
@@ -118,15 +120,15 @@
     .hero-text { flex: 1; max-width: 540px; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,25,44,.12);
-      border: 1px solid rgba(232,25,44,.25);
+      background: rgba(200,67,42,.12);
+      border: 1px solid rgba(200,67,42,.25);
       color: #FF5C6C; font-size: 12px; font-weight: 700;
       padding: 5px 14px; border-radius: 999px;
       margin-bottom: 28px; letter-spacing: .3px;
     }
     .hero h1 {
       font-size: 64px; font-weight: 900;
-      line-height: 1.05; letter-spacing: -3px;
+      line-height: 1.05; letter-spacing: -2.5px;
       color: var(--t0); margin-bottom: 20px;
     }
     .hero h1 em { font-style: normal; color: var(--p); }
@@ -147,7 +149,7 @@
     }
     .btn-hero-primary:hover {
       background: var(--pd); transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(232,25,44,.35);
+      box-shadow: 0 10px 28px rgba(200,67,42,.35);
     }
     .btn-hero-ghost {
       display: inline-flex; align-items: center; gap: 8px;
@@ -182,7 +184,7 @@
     .dash-glow {
       position: absolute;
       width: 400px; height: 300px;
-      background: radial-gradient(ellipse, rgba(232,25,44,.22) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(200,67,42,.22) 0%, transparent 70%);
       pointer-events: none; z-index: 0;
     }
     .dashboard {
@@ -303,7 +305,7 @@
     .pain-desc  { font-size: 14px; color: var(--lm); line-height: 1.7; }
     .pain-solution {
       text-align: center; margin-top: 56px;
-      padding: 40px; background: linear-gradient(135deg, var(--p) 0%, #FF3A4A 100%);
+      padding: 40px; background: linear-gradient(135deg, var(--p) 0%, #D85030 100%);
       border-radius: 24px;
       color: white;
     }
@@ -453,7 +455,7 @@
     .fb:hover { transform: translateY(-5px); box-shadow: 0 24px 52px rgba(0,0,0,.08); }
     .fb-wide { grid-column: span 2; }
     .fb-dark { background: var(--lt); border-color: transparent; }
-    .fb-red  { background: linear-gradient(140deg, var(--p) 0%, #FF3A4A 100%); border-color: transparent; }
+    .fb-red  { background: linear-gradient(140deg, var(--p) 0%, #D85030 100%); border-color: transparent; }
 
     .fb-icon  { font-size: 36px; display: block; margin-bottom: 18px; }
     .fb-tag   { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--p); margin-bottom: 8px; display: block; }
@@ -469,12 +471,12 @@
     /* Mini chart in analytics card */
     .mini-bars { display: flex; align-items: flex-end; gap: 5px; height: 60px; margin-top: 20px; }
     .mini-bar {
-      flex: 1; background: rgba(232,25,44,.15);
+      flex: 1; background: rgba(200,67,42,.15);
       border-radius: 4px 4px 0 0;
       transition: background .2s;
     }
     .mini-bar:last-child { background: var(--p); }
-    .fb:hover .mini-bar { background: rgba(232,25,44,.25); }
+    .fb:hover .mini-bar { background: rgba(200,67,42,.25); }
     .fb:hover .mini-bar:last-child { background: var(--p); }
 
     /* ── WAITLIST ── */
@@ -488,7 +490,7 @@
     }
     .waitlist-glow {
       position: absolute; width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(232,25,44,.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(200,67,42,.15) 0%, transparent 70%);
       top: 50%; left: 50%; transform: translate(-50%,-50%);
       pointer-events: none;
     }
@@ -516,7 +518,7 @@
     }
     .wl-cta-btn:hover {
       background: var(--pd); transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(232,25,44,.4);
+      box-shadow: 0 12px 32px rgba(200,67,42,.4);
     }
     .wl-cta-btn:active { transform: scale(.98); }
     @media (max-width: 560px) {
@@ -689,8 +691,8 @@
         <svg width="0" height="0" style="position:absolute">
           <defs>
             <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#E8192C" stop-opacity=".25"/>
-              <stop offset="100%" stop-color="#E8192C" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#C8432A" stop-opacity=".25"/>
+              <stop offset="100%" stop-color="#C8432A" stop-opacity="0"/>
             </linearGradient>
           </defs>
         </svg>
@@ -727,11 +729,11 @@
             <line x1="0" y1="68" x2="480" y2="68" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
             <path class="chart-area" d="M0 80 C40 72,70 65,100 55 C125 47,145 60,175 48 C200 38,225 43,255 32 C278 23,300 36,330 22 C355 11,390 17,420 9 C445 4,465 6,480 7 L480 90 L0 90 Z"/>
             <path class="chart-line" id="chart-line" d="M0 80 C40 72,70 65,100 55 C125 47,145 60,175 48 C200 38,225 43,255 32 C278 23,300 36,330 22 C355 11,390 17,420 9 C445 4,465 6,480 7"/>
-            <circle cx="100" cy="55" r="4" fill="#E8192C" opacity=".8"/>
-            <circle cx="175" cy="48" r="4" fill="#E8192C" opacity=".8"/>
-            <circle cx="255" cy="32" r="4" fill="#E8192C" opacity=".8"/>
-            <circle cx="330" cy="22" r="4" fill="#E8192C" opacity=".8"/>
-            <circle cx="480" cy="7"  r="5" fill="#E8192C"/>
+            <circle cx="100" cy="55" r="4" fill="#C8432A" opacity=".8"/>
+            <circle cx="175" cy="48" r="4" fill="#C8432A" opacity=".8"/>
+            <circle cx="255" cy="32" r="4" fill="#C8432A" opacity=".8"/>
+            <circle cx="330" cy="22" r="4" fill="#C8432A" opacity=".8"/>
+            <circle cx="480" cy="7"  r="5" fill="#C8432A"/>
           </svg>
         </div>
         <div class="dash-feed">
