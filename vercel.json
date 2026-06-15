@@ -1,3 +1,11 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "functions": {
+    "api/create-payment.js": { "memory": 256, "maxDuration": 30 },
+    "api/payment-callback.js": { "memory": 256, "maxDuration": 30 }
+  },
+  "routes": [
+    { "src": "/api/create-payment", "dest": "/api/create-payment.js" },
+    { "src": "/api/payment-callback", "dest": "/api/payment-callback.js" }
+  ]
 }

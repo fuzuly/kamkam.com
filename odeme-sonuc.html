@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ödeme Sonucu — KamKam</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C8432A'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='900' fill='white' text-anchor='middle'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :focus-visible { outline: 2px solid var(--p); outline-offset: 3px; border-radius: 4px; }
+    :focus:not(:focus-visible) { outline: none; }
+    html { scroll-behavior: auto; }
+    body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; color: #111; background: #F0EBE4; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    :root { --p: #C8432A; --pd: #A83520; --dark: #0D0D0D; --radius-lg: 24px; }
+
+    /* NAV */
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 300; height: 68px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 20px; background: rgba(240,235,228,.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+    .nav-logo { justify-self: start; text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 52px; width: auto; mix-blend-mode: multiply; }
+    .nav-cta { justify-self: center; background: var(--p); color: #fff; text-decoration: none; padding: 11px 24px; border-radius: 999px; font-size: 14px; font-weight: 700; font-family: inherit; white-space: nowrap; transition: background .15s; }
+    .nav-cta:hover { background: var(--pd); }
+    .nav-hamburger { justify-self: end; display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; transition: transform .22s, opacity .22s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(240,235,228,.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 10px 16px 20px; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 299; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { text-decoration: none; color: #111; font-size: 16px; font-weight: 600; padding: 12px 14px; border-radius: 10px; transition: background .15s; }
+    .nav-mobile a:hover { background: rgba(0,0,0,.05); }
+    .nav-mobile a.cta { background: var(--p); color: #fff; text-align: center; margin-top: 6px; }
+    .nav-links-desk { display: none; list-style: none; gap: 4px; justify-content: center; }
+    .nav-links-desk a { text-decoration: none; color: #444; font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: 8px; transition: background .15s; display: block; }
+    .nav-links-desk a:hover { background: rgba(0,0,0,.06); }
+    @media (min-width: 768px) {
+      .nav { padding: 0 40px; grid-template-columns: auto 1fr auto; }
+      .nav-logo { justify-self: start; } .nav-cta { justify-self: end; }
+      .nav-hamburger { display: none; } .nav-links-desk { display: flex; }
+    }
+
+    /* Result page */
+    .result-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 88px 16px 60px; }
+    .result-card { background: #fff; border-radius: var(--radius-lg); padding: 48px 40px; width: 100%; max-width: 460px; box-shadow: 0 8px 48px rgba(0,0,0,.10); border: 1px solid rgba(0,0,0,.06); text-align: center; }
+
+    /* Success */
+    .icon-wrap { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .icon-wrap.success { background: #DCFCE7; }
+    .icon-wrap.fail { background: #FFF2F2; }
+
+    .result-title { font-size: 24px; font-weight: 900; letter-spacing: -.6px; margin-bottom: 10px; }
+    .result-title.success { color: #15803D; }
+    .result-title.fail { color: #C62828; }
+    .result-sub { font-size: 15px; color: #666; line-height: 1.65; margin-bottom: 28px; }
+
+    .result-meta { background: #F7F7F7; border-radius: 12px; padding: 16px 20px; margin-bottom: 28px; text-align: left; }
+    .result-meta-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid #EFEFEF; }
+    .result-meta-row:last-child { border-bottom: none; }
+    .result-meta-row .label { color: #888; }
+    .result-meta-row .value { font-weight: 600; color: #111; }
+
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: var(--p); color: #fff; text-decoration: none; border: none; border-radius: 12px; padding: 15px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .15s, box-shadow .15s; }
+    .btn-primary:hover { background: var(--pd); box-shadow: 0 8px 24px rgba(200,67,42,.28); }
+    .btn-secondary { display: inline-flex; align-items: center; justify-content: center; width: 100%; background: none; border: 1.5px solid #DDD; color: #555; text-decoration: none; border-radius: 12px; padding: 13px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: border-color .15s, color .15s; margin-top: 10px; }
+    .btn-secondary:hover { border-color: var(--p); color: var(--p); }
+
+    /* Confetti canvas */
+    #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+    /* Footer */
+    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.06); padding: 48px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+    .footer-band-logo { display: block; height: 28px; width: auto; margin-bottom: 12px; opacity: .85; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.5; max-width: 220px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+    .footer-links a { text-decoration: none; color: rgba(255,255,255,.45); font-size: 13px; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,.85); }
+    .footer-bottom { max-width: 1100px; margin: 20px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: rgba(255,255,255,.2); }
+    @media (min-width: 768px) {
+      footer { padding: 60px 40px 36px; }
+      .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="image.png" alt="KamKam"></a>
+  <ul class="nav-links-desk">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="isletmeler.html">İşletmeler</a></li>
+  </ul>
+  <a href="index.html" class="nav-cta">Ana Sayfa</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="mobile-menu">
+  <a href="index.html">Ana Sayfa</a>
+  <a href="isletmeler.html" class="cta">İşletmeler</a>
+</div>
+
+<div class="result-wrap">
+  <div class="result-card" id="result-card">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="logo_band_white@3x.png" alt="KamKam" class="footer-band-logo">
+      <p class="footer-tagline">Şehri birlikte keşfedelim.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="privacy-policy.html">Gizlilik Politikası</a>
+      <a href="terms.html">Kullanım Şartları</a>
+      <a href="delivery-returns.html">Teslimat ve İade</a>
+      <a href="mailto:destek@kamkamapp.com">Destek</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 KamKam. Tüm hakları saklıdır.</span>
+    <span>İstanbul, Türkiye</span>
+  </div>
+</footer>
+
+<script>
+  // Nav
+  document.getElementById('hamburger').addEventListener('click', function() {
+    this.classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  // Read URL params
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  const paymentId = params.get('paymentId') || '';
+  const conversationId = params.get('conversationId') || '';
+  const price = params.get('price') || '30';
+  const reason = params.get('reason') || '';
+
+  const card = document.getElementById('result-card');
+  const isSuccess = status === 'success';
+
+  if (isSuccess) {
+    const now = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+    const renewal = new Date();
+    renewal.setMonth(renewal.getMonth() + 1);
+    const renewalStr = renewal.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    card.innerHTML = `
+      <div class="icon-wrap success">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h1 class="result-title success">Ödemeniz alındı!</h1>
+      <p class="result-sub">Hoş geldiniz! KamKam Starter aboneliğiniz aktive edildi. Panele giriş yapabilirsiniz.</p>
+      ${paymentId ? `
+      <div class="result-meta">
+        <div class="result-meta-row"><span class="label">Paket</span><span class="value">KamKam Starter</span></div>
+        <div class="result-meta-row"><span class="label">Tutar</span><span class="value">₺${price} / ay</span></div>
+        <div class="result-meta-row"><span class="label">Ödeme Tarihi</span><span class="value">${now}</span></div>
+        <div class="result-meta-row"><span class="label">Sonraki Yenileme</span><span class="value">${renewalStr}</span></div>
+        <div class="result-meta-row"><span class="label">Ödeme No</span><span class="value">${paymentId}</span></div>
+      </div>` : ''}
+      <a href="subscription.html" class="btn-primary">Panele Git →</a>
+      <a href="index.html" class="btn-secondary">Ana Sayfaya Dön</a>
+    `;
+
+    launchConfetti();
+  } else {
+    const reasonMap = {
+      'missing_token': 'Ödeme oturumu bulunamadı.',
+      'invalid_method': 'Geçersiz istek.',
+      'payment_failed': 'Ödeme işlemi tamamlanamadı.',
+    };
+    const reasonText = reasonMap[reason] || reason || 'Ödeme işlemi tamamlanamadı.';
+
+    card.innerHTML = `
+      <div class="icon-wrap fail">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </div>
+      <h1 class="result-title fail">Ödeme başarısız</h1>
+      <p class="result-sub">Ödeme işleminiz tamamlanamadı. ${reasonText}<br><br>Tekrar denemek için aşağıdaki butona tıklayın veya destek ekibimizle iletişime geçin.</p>
+      <a href="satin-al.html" class="btn-primary">Tekrar Dene</a>
+      <a href="mailto:destek@kamkamapp.com" class="btn-secondary">Destek Al</a>
+    `;
+  }
+
+  // Confetti
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#C8432A','#F59E0B','#22C55E','#3B82F6','#A855F7','#EC4899','#F0EBE4'];
+    const particles = Array.from({ length: 120 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      w: Math.random() * 10 + 5,
+      h: Math.random() * 6 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - .5) * 3,
+      vy: Math.random() * 4 + 2,
+      rot: Math.random() * Math.PI * 2,
+      vrot: (Math.random() - .5) * .2,
+      alpha: 1,
+    }));
+
+    let frame;
+    function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.rot += p.vrot;
+        if (p.y > canvas.height * .7) p.alpha -= .02;
+        if (p.alpha > 0) alive = true;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      if (alive) frame = requestAnimationFrame(tick);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    tick();
+    setTimeout(() => { cancelAnimationFrame(frame); ctx.clearRect(0, 0, canvas.width, canvas.height); }, 4000);
+  }
+</script>
+</body>
+</html>
