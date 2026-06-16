@@ -23,8 +23,8 @@ module.exports = async function handler(req, res) {
   const request = {
     locale: Iyzipay.LOCALE.TR,
     conversationId,
-    price: '30',
-    paidPrice: '30',
+    price: '3',
+    paidPrice: '3',
     currency: Iyzipay.CURRENCY.TRY,
     basketId: `basket-${conversationId}`,
     paymentGroup: Iyzipay.PAYMENT_GROUP.SUBSCRIPTION,
@@ -62,7 +62,7 @@ module.exports = async function handler(req, res) {
         category1: 'Yazılım',
         category2: 'SaaS Abonelik',
         itemType: Iyzipay.BASKET_ITEM_TYPE.VIRTUAL,
-        price: '30',
+        price: '3',
       },
     ],
   };
