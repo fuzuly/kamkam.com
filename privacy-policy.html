@@ -285,7 +285,7 @@
 <!-- ── CONTENT ── -->
 <main class="page-wrap">
   <h1 class="page-title">Gizlilik Politikası</h1>
-  <p class="page-updated">Son güncelleme: 1 Haziran 2026</p>
+  <p class="page-updated">Son güncelleme: 20 Haziran 2026</p>
 
   <div class="highlight-box">
     Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında KamKam uygulaması kullanıcılarının kişisel verilerinin nasıl toplandığını, işlendiğini ve korunduğunu açıklamaktadır.
@@ -311,11 +311,19 @@
 
   <h3>2.2 Konum Bilgileri</h3>
   <ul>
-    <li>Yakınındaki işletmeleri göstermek amacıyla anlık konum verileri (izin vermeniz halinde)</li>
+    <li>Yakınındaki işletmeleri ve kampanyaları göstermek amacıyla yaklaşık ve hassas konum verileri (yalnızca uygulama ön plandayken, izin vermeniz halinde)</li>
     <li>Uygulama içi arama ve keşif geçmişi</li>
   </ul>
+  <p>Konum iznini vermemeniz durumunda uygulama çalışmaya devam eder; ancak size yakın işletmeler otomatik olarak listelenmez. İzni her zaman iOS Ayarlar → KamKam → Konum yolundan değiştirebilirsiniz.</p>
 
-  <h3>2.3 İşlem ve Kullanım Verileri</h3>
+  <h3>2.3 Kamera</h3>
+  <ul>
+    <li>İşletme kasalarında QR kod okutarak puan kazanmak amacıyla kamera erişimi kullanılmaktadır.</li>
+    <li>Kamera görüntüleri kaydedilmez, sunucularımıza gönderilmez; yalnızca anlık QR kod çözümleme için cihaz üzerinde işlenir.</li>
+  </ul>
+  <p>Kamera iznini iOS Ayarlar → KamKam → Kamera yolundan her zaman geri alabilirsiniz. İzin verilmemesi halinde QR okutma özelliği kullanılamaz.</p>
+
+  <h3>2.4 İşlem ve Kullanım Verileri</h3>
   <ul>
     <li>QR kod okutma geçmişi</li>
     <li>Kazanılan puan ve kullanılan ayrıcalıklar</li>
@@ -323,7 +331,7 @@
     <li>Uygulama içi tıklama ve gezinme davranışları</li>
   </ul>
 
-  <h3>2.4 Cihaz ve Teknik Veriler</h3>
+  <h3>2.5 Cihaz ve Teknik Veriler</h3>
   <ul>
     <li>Cihaz türü, işletim sistemi ve sürümü</li>
     <li>IP adresi</li>
@@ -331,7 +339,14 @@
     <li>Uygulama çökme raporları</li>
   </ul>
 
-  <h3>2.5 Üçüncü Taraf Girişi</h3>
+  <h3>2.6 Bildirimler (Push Notifications)</h3>
+  <ul>
+    <li>Size özel kampanya ve puan bildirimlerini iletmek için APNs (Apple Push Notification service) aracılığıyla oluşturulan cihaz bildirimi tokeni</li>
+    <li>Bildirim açma ve tıklama davranışı (hangi bildirimlerin açıldığı)</li>
+  </ul>
+  <p>Bildirim izinleri iOS Ayarlar → Bildirimler → KamKam yolundan her zaman yönetilebilir. İzin vermemeniz halinde kampanya bildirimleri almazsınız; uygulamanın diğer işlevleri etkilenmez.</p>
+
+  <h3>2.7 Üçüncü Taraf Girişi</h3>
   <p>Google, Facebook veya Apple ile giriş yapmanız durumunda ilgili platformların paylaştığı profil bilgileri (ad, e-posta, profil fotoğrafı) işlenebilir.</p>
 
   <hr class="divider">
@@ -408,24 +423,38 @@
   </ul>
   <p>Bu haklarınızı kullanmak için <a href="mailto:kvkk@kamkamapp.com">kvkk@kamkamapp.com</a> adresine e-posta gönderebilir veya uygulama içi "Hesap Ayarları" bölümünden talepte bulunabilirsiniz. Talepler 30 gün içinde yanıtlanır.</p>
 
+  <h3>Hesap Silme</h3>
+  <p>Hesabınızı ve ilgili tüm kişisel verilerinizi kalıcı olarak silmek için uygulama içi <strong>Profil → Ayarlar → Hesabı Sil</strong> seçeneğini kullanabilir veya <a href="mailto:kvkk@kamkamapp.com">kvkk@kamkamapp.com</a> adresine "Hesap Silme Talebi" konusuyla e-posta gönderebilirsiniz. Yasal saklama sürelerine (bkz. Bölüm 6) tabi olmayan veriler 30 gün içinde sistemlerimizden tamamen silinir.</p>
+
   <hr class="divider">
 
-  <h2>9. Çocukların Gizliliği</h2>
+  <h2>9. iOS Uygulama İzinleri</h2>
+  <p>KamKam iOS uygulaması aşağıdaki sistem izinlerini kullanmaktadır:</p>
+  <ul>
+    <li><strong>Konum (Yalnızca Kullanılırken):</strong> Yakınındaki işletmeleri ve kampanyaları listelemek için. Arka planda konum verisi toplanmaz.</li>
+    <li><strong>Kamera:</strong> İşletme kasasında QR kod okutarak puan kazanmak için. Görüntüler cihaz dışına çıkmaz.</li>
+    <li><strong>Bildirimler:</strong> Size özel kampanya ve puan uyarıları göndermek için. İsteğe bağlıdır.</li>
+  </ul>
+  <p>Tüm izinler iOS Ayarlar → KamKam menüsünden değiştirilebilir. İzin vermediğiniz özellikler çalışmaz; uygulamanın geri kalanı etkilenmez.</p>
+
+  <hr class="divider">
+
+  <h2>10. Çocukların Gizliliği</h2>
   <p>KamKam hizmetleri 13 yaşın altındaki bireylere yönelik değildir. 13 yaşın altında bir çocuğa ait kişisel verinin farkında olmadan toplandığını tespit etmemiz durumunda söz konusu veriler derhal silinecektir.</p>
 
   <hr class="divider">
 
-  <h2>10. Uluslararası Veri Transferleri</h2>
+  <h2>11. Uluslararası Veri Transferleri</h2>
   <p>Verileriniz yurt dışına aktarılması gerektiğinde KVKK Madde 9 kapsamında gerekli güvenceler sağlanır. Aktarım yapılan ülkelerin KVKK ile uyumlu veri koruma mekanizmalarına sahip olması koşulu aranır.</p>
 
   <hr class="divider">
 
-  <h2>11. Politika Değişiklikleri</h2>
+  <h2>12. Politika Değişiklikleri</h2>
   <p>Bu politikada yapılacak önemli değişiklikler uygulama bildirimi veya e-posta yoluyla size duyurulacaktır. Güncelleme tarihinden itibaren uygulamayı kullanmaya devam etmeniz, değişikliği kabul ettiğiniz anlamına gelir.</p>
 
   <hr class="divider">
 
-  <h2>12. İletişim</h2>
+  <h2>13. İletişim</h2>
   <p>Gizlilik politikamız veya kişisel verilerinizin işlenmesi hakkında sorularınız için:</p>
   <ul>
     <li>E-posta: <a href="mailto:kvkk@kamkamapp.com">kvkk@kamkamapp.com</a></li>
