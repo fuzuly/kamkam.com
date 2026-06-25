@@ -30,8 +30,8 @@ export async function POST(req: NextRequest) {
     const payload: Record<string, unknown> = {
       locale: 'tr',
       conversationId,
-      price: '2000',
-      paidPrice: '2000',
+      price: '2400',
+      paidPrice: '2400',
       currency: 'TRY',
       basketId: `enterprise-${conversationId}`,
       paymentGroup: 'PRODUCT',
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
           name: 'KamKam Enterprise Kurulum',
           category1: 'İşletme Yazılımı',
           itemType: 'VIRTUAL',
-          price: '2000',
+          price: '2400',
         },
       ],
     };
