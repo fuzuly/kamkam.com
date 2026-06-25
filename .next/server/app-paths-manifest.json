@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/gizlilik/page": "app/gizlilik/page.js",
+  "/indir/page": "app/indir/page.js",
+  "/isletmeler/page": "app/isletmeler/page.js",
+  "/kesfet/page": "app/kesfet/page.js",
+  "/kullanim-sartlari/page": "app/kullanim-sartlari/page.js",
+  "/mesafeli-satis/page": "app/mesafeli-satis/page.js",
+  "/nedir/page": "app/nedir/page.js",
+  "/page": "app/page.js",
+  "/teslimat/page": "app/teslimat/page.js"
+}

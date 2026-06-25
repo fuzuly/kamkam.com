@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand: #D9381E;
+  --color-foreground: #0F172A;
+  --color-background: #FFFFFF;
+  --color-muted: #64748B;
+  --color-border: #E2E8F0;
+}
+
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    overscroll-behavior-x: none;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: white;
+  }
+}

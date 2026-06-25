@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/teslimat/layout,_N_T_/teslimat/page,_N_T_/teslimat"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/teslimat/__PAGE__",
+    "/teslimat",
+    "/_index",
+    "/_head"
+  ]
+}

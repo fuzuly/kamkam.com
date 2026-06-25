@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/gizlilik/page": "/gizlilik",
+  "/indir/page": "/indir",
+  "/isletmeler/page": "/isletmeler",
+  "/kesfet/page": "/kesfet",
+  "/kullanim-sartlari/page": "/kullanim-sartlari",
+  "/mesafeli-satis/page": "/mesafeli-satis",
+  "/nedir/page": "/nedir",
+  "/page": "/",
+  "/teslimat/page": "/teslimat"
+}
