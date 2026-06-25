@@ -1,12 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-// @ts-expect-error no types for iyzipay
-import Iyzipay from 'iyzipay';
-
-const iyzipay = new Iyzipay({
-  apiKey: process.env.IYZICO_API_KEY,
-  secretKey: process.env.IYZICO_SECRET_KEY,
-  uri: process.env.IYZICO_BASE_URL,
-});
 
 export async function POST(req: NextRequest) {
   const { name, surname, email, phone } = await req.json();
@@ -14,6 +6,14 @@ export async function POST(req: NextRequest) {
   if (!name || !surname || !email || !phone) {
     return NextResponse.json({ error: 'Tüm alanlar zorunludur.' }, { status: 400 });
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const Iyzipay = require('iyzipay');
+  const iyzipay = new Iyzipay({
+    apiKey: process.env.IYZICO_API_KEY,
+    secretKey: process.env.IYZICO_SECRET_KEY,
+    uri: process.env.IYZICO_BASE_URL ?? 'https://sandbox-api.iyzipay.com',
+  });
 
   const baseUrl = process.env.BASE_URL ?? 'https://kamkamapp.com';
   const conversationId = `kamkam-${Date.now()}`;

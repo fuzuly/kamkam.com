@@ -1,12 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-// @ts-expect-error no types for iyzipay
-import Iyzipay from 'iyzipay';
-
-const iyzipay = new Iyzipay({
-  apiKey: process.env.IYZICO_API_KEY,
-  secretKey: process.env.IYZICO_SECRET_KEY,
-  uri: 'https://api.iyzipay.com',
-});
 
 export async function POST(req: NextRequest) {
   const { name, surname, email, phone, bizName, taxNumber } = await req.json();
@@ -15,13 +7,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Tüm alanlar zorunludur.' }, { status: 400 });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const Iyzipay = require('iyzipay');
+  const iyzipay = new Iyzipay({
+    apiKey: process.env.IYZICO_API_KEY,
+    secretKey: process.env.IYZICO_SECRET_KEY,
+    uri: 'https://api.iyzipay.com',
+  });
+
   const baseUrl = process.env.BASE_URL ?? 'https://kamkamapp.com';
   const conversationId = `biz-${Date.now()}`;
 
   const rawPhone = phone.replace(/\D/g, '');
-  const iyziPhone = rawPhone.startsWith('0')
-    ? `+90${rawPhone.slice(1)}`
-    : `+90${rawPhone}`;
+  const iyziPhone = rawPhone.startsWith('0') ? `+90${rawPhone.slice(1)}` : `+90${rawPhone}`;
 
   const request = {
     locale: 'tr',
@@ -39,7 +37,7 @@ export async function POST(req: NextRequest) {
       surname,
       gsmNumber: iyziPhone,
       email,
-      identityNumber: taxNumber.length === 11 ? taxNumber : '11111111111',
+      identityNumber: taxNumber.replace(/\D/g, '').slice(0, 11).padEnd(11, '0'),
       registrationAddress: 'Türkiye',
       city: 'Istanbul',
       country: 'Turkey',
