@@ -14,7 +14,6 @@
     "framer-motion": "^12.40.0",
     "lenis": "^1.3.23",
     "lightningcss": "^1.32.0",
-    "lightningcss-darwin-arm64": "^1.32.0",
     "lucide-react": "^1.21.0",
     "next": "16.2.9",
     "react": "19.2.4",
