@@ -1,4 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHmac } from 'crypto';
+
+// iyzipay v2 auth — matches utils.js generateHashV2 exactly
+function iyziAuthHeader(apiKey: string, secretKey: string, rnd: string, path: string, body: unknown): string {
+  const sig = createHmac('sha256', secretKey)
+    .update(rnd + path + JSON.stringify(body))
+    .digest('hex');
+  const params = `apiKey:${apiKey}&randomKey:${rnd}&signature:${sig}`;
+  return 'IYZWSv2 ' + Buffer.from(params).toString('base64');
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,21 +18,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Tüm alanlar zorunludur.' }, { status: 400 });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Iyzipay = require('iyzipay');
-    const iyzipay = new Iyzipay({
-      apiKey: process.env.IYZICO_API_KEY,
-      secretKey: process.env.IYZICO_SECRET_KEY,
-      uri: 'https://api.iyzipay.com',
-    });
-
+    const apiKey = process.env.IYZICO_API_KEY!;
+    const secretKey = process.env.IYZICO_SECRET_KEY!;
     const baseUrl = process.env.BASE_URL ?? 'https://kamkamapp.com';
     const conversationId = `biz-${Date.now()}`;
 
     const rawPhone = phone.replace(/\D/g, '');
     const iyziPhone = rawPhone.startsWith('0') ? `+90${rawPhone.slice(1)}` : `+90${rawPhone}`;
+    const identityNumber = taxNumber.replace(/\D/g, '').slice(0, 11).padEnd(11, '0');
 
-    const request = {
+    const payload: Record<string, unknown> = {
       locale: 'tr',
       conversationId,
       price: '2000',
@@ -38,7 +43,7 @@ export async function POST(req: NextRequest) {
         surname,
         gsmNumber: iyziPhone,
         email,
-        identityNumber: taxNumber.replace(/\D/g, '').slice(0, 11).padEnd(11, '0'),
+        identityNumber,
         registrationAddress: 'Türkiye',
         city: 'Istanbul',
         country: 'Turkey',
@@ -66,23 +71,32 @@ export async function POST(req: NextRequest) {
       ],
     };
 
-    const result = await new Promise<Record<string, unknown>>((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error('iyzipay timeout (8s)')), 8000);
-      iyzipay.checkoutFormInitialize.create(request, (err: Error, res: Record<string, unknown>) => {
-        clearTimeout(timer);
-        if (err) reject(err);
-        else resolve(res);
-      });
+    const path = '/payment/iyzipos/checkoutform/initialize/auth/ecom';
+    const rnd = `${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
+    const auth = iyziAuthHeader(apiKey, secretKey, rnd, path, payload);
+
+    const res = await fetch(`https://api.iyzipay.com${path}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth,
+        'x-iyzi-rnd': rnd,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.69',
+      },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(8000),
     });
 
-    if (result.status !== 'success') {
+    const data = await res.json() as Record<string, unknown>;
+
+    if (data.status !== 'success') {
       return NextResponse.json(
-        { error: (result.errorMessage as string) ?? 'Ödeme formu oluşturulamadı.' },
+        { error: (data.errorMessage as string) ?? 'Ödeme formu oluşturulamadı.' },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ checkoutFormContent: result.checkoutFormContent });
+    return NextResponse.json({ checkoutFormContent: data.checkoutFormContent });
 
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
