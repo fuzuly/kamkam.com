@@ -218,7 +218,7 @@ export default function Header() {
               </div>
 
             <Magnetic strength={0.3}>
-              <a href="/isletme-kayit.html" data-magnetic="true" className="bg-brand text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/30">
+              <a href="https://isletme.kamkamapp.com" data-magnetic="true" className="bg-brand text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/30">
                 İşletmeni Kaydet
               </a>
             </Magnetic>
@@ -319,7 +319,7 @@ export default function Header() {
                 )}
                 <span>{activeLang === "TR" ? "Türkçe / TR" : "English / EN"}</span>
               </button>
-              <a href="/isletme-kayit.html" className="bg-transparent border-[1.5px] border-brand text-brand py-4 rounded-full font-bold text-lg text-center transition-all duration-300 active:scale-95 active:bg-brand/5">
+              <a href="https://isletme.kamkamapp.com" className="bg-transparent border-[1.5px] border-brand text-brand py-4 rounded-full font-bold text-lg text-center transition-all duration-300 active:scale-95 active:bg-brand/5">
                 İşletmeni Kaydet
               </a>
             </div>
