@@ -9,10 +9,21 @@ import MotionProvider from "@/components/MotionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "KamKam | B2B2C Sadakat ve Veri Ekosistemi",
+  title: "Keşfet. Kullan. Kazan.",
+  applicationName: "KamKam",
   description: "Donanımsız sadakat ve B2B2C veri ekosistemi. Şehri telefonunla keşfet, özenle seçilmiş işletmeler ve sınırsız ayrıcalıklara ulaş.",
   keywords: ["Sadakat Programı", "B2B2C", "Veri Ekosistemi", "Şehir Rehberi", "KamKam", "Avantaj", "Müşteri Sadakati"],
   authors: [{ name: "KamKam" }],
+  icons: {
+    icon: [
+      { url: "/icon.svg?v=kamkam-2", type: "image/svg+xml" },
+      { url: "/icon.png?v=kamkam-2", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/icon.svg?v=kamkam-2",
+    apple: [
+      { url: "/apple-icon.png?v=kamkam-2", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "KamKam | Şehir Artık Cebinizde",
     description: "Yüzlerce seçkin işletme, kişiselleştirilmiş ayrıcalıklar ve sınır tanımayan ödüller. Şehri yepyeni, elit bir boyutta deneyimleyin.",
