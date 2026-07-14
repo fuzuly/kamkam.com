@@ -8,12 +8,6 @@ const APP_STORE_URL = "https://apps.apple.com/app/id6779172167";
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=com.kamkam.app";
 
-const SOCIAL_PROOF = [
-  "50.000+ kullanıcı",
-  "500+ işletme",
-  "4.8 ★ App Store",
-];
-
 function PhoneMockup() {
   return (
     <div className="phone-float relative mx-auto w-[196px] sm:w-[230px] lg:w-[270px]">
@@ -179,18 +173,7 @@ export default function IndirPage() {
               İstanbul&apos;un en iyi işletmeleri, en iyi fırsatlar
             </p>
 
-            <div className="mt-6 flex flex-wrap justify-center gap-2 md:justify-start">
-              {SOCIAL_PROOF.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-red-100 bg-white/80 px-3 py-2 text-[10px] font-bold text-slate-600 shadow-[0_4px_14px_rgba(211,47,47,0.07)] backdrop-blur sm:text-xs"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-7 md:mx-0">
+            <div className="mt-8 md:mx-0">
               {showFallback ? (
                 <StoreButtons />
               ) : (
