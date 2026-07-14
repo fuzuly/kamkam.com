@@ -10,7 +10,7 @@ const GOOGLE_PLAY_URL =
 
 function PhoneMockup() {
   return (
-    <div className="phone-float relative mx-auto w-[196px] sm:w-[230px] lg:w-[270px]">
+    <div className="phone-float relative mx-auto w-[clamp(176px,52vw,196px)] sm:w-[230px] lg:w-[270px]">
       <div className="absolute -inset-8 rounded-full bg-[#FF5252]/20 blur-3xl" />
       <div className="relative aspect-[9/18.6] rounded-[2.55rem] border-[7px] border-[#171717] bg-[#111] p-1.5 shadow-[0_28px_70px_rgba(211,47,47,0.25),0_10px_28px_rgba(15,23,42,0.22)]">
         <div className="absolute left-1/2 top-2.5 z-20 h-4 w-[34%] -translate-x-1/2 rounded-full bg-[#111]" />
@@ -143,7 +143,7 @@ export default function IndirPage() {
       <div className="absolute right-[-80px] top-[-100px] h-64 w-64 rounded-full border-[50px] border-[#D32F2F]/5" />
       <div className="absolute bottom-[-110px] left-[-100px] h-72 w-72 rounded-full bg-[#FF5252]/5 blur-2xl" />
 
-      <div className="page-enter relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-5 py-7 sm:px-8 lg:justify-center lg:py-10">
+      <div className="download-shell page-enter relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col lg:justify-center">
         <header className="flex items-center justify-between">
           <Link
             href="/"
@@ -219,6 +219,13 @@ export default function IndirPage() {
           animation: indir-page-enter 700ms ease-out both;
         }
 
+        .download-shell {
+          padding-top: max(1.75rem, env(safe-area-inset-top));
+          padding-right: max(1.25rem, env(safe-area-inset-right));
+          padding-bottom: max(1.75rem, env(safe-area-inset-bottom));
+          padding-left: max(1.25rem, env(safe-area-inset-left));
+        }
+
         .phone-float {
           animation: indir-phone-float 5s ease-in-out infinite;
         }
@@ -234,6 +241,26 @@ export default function IndirPage() {
 
         .store-button:active {
           transform: scale(0.985);
+        }
+
+        @media (min-width: 640px) {
+          .download-shell {
+            padding-right: max(2rem, env(safe-area-inset-right));
+            padding-left: max(2rem, env(safe-area-inset-left));
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .download-shell {
+            padding-top: max(2.5rem, env(safe-area-inset-top));
+            padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+          }
+        }
+
+        @media (max-width: 767px) and (max-height: 700px) {
+          .phone-float {
+            width: 160px;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
