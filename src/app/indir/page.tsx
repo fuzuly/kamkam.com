@@ -1,44 +1,83 @@
-import Footer from "@/components/Footer";
+"use client";
+
 import { IconBrandApple, IconBrandGooglePlay } from "@tabler/icons-react";
-import Magnetic from "@/components/Magnetic";
+import { useEffect, useState } from "react";
+
+const APP_STORE_URL = "https://apps.apple.com/app/id6779172167";
+const GOOGLE_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.kamkam.app";
 
 export default function IndirPage() {
+  const [showFallback, setShowFallback] = useState(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent;
+    const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+    const isAndroid = /Android/i.test(userAgent);
+
+    const fallbackTimer = window.setTimeout(() => {
+      setShowFallback(true);
+    }, isIOS || isAndroid ? 2000 : 0);
+
+    if (isIOS || isAndroid) {
+      window.location.replace(isIOS ? APP_STORE_URL : GOOGLE_PLAY_URL);
+    }
+
+    return () => window.clearTimeout(fallbackTimer);
+  }, []);
+
   return (
-    <main className="min-h-screen bg-black flex flex-col pt-32">
-      <div className="flex-grow flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6">
-          Şehri Cebine İndir
+    <main className="fixed inset-0 z-[10000] flex min-h-dvh items-center justify-center overflow-y-auto bg-white px-6 py-12 text-slate-950">
+      <section className="flex w-full max-w-md flex-col items-center text-center">
+        <h1 className="text-5xl font-black tracking-[-0.06em] text-[#D32F2F] sm:text-6xl">
+          KamKam
         </h1>
-        <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-12">
-          KamKam uygulamasını hemen indirerek ayrıcalıklarla dolu şehir deneyimine ilk adımı atın.
+
+        {showFallback ? (
+          <div className="mt-12 w-full" aria-live="polite">
+            <p className="text-base font-medium text-slate-600">
+              Uygulamayı indirmek için mağazanızı seçin.
+            </p>
+
+            <div className="mt-6 flex flex-col gap-3">
+              <a
+                href={APP_STORE_URL}
+                className="flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-black px-6 py-4 text-base font-bold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                <IconBrandApple aria-hidden="true" size={27} stroke={1.8} />
+                <span>App Store&apos;dan İndir</span>
+              </a>
+
+              <a
+                href={GOOGLE_PLAY_URL}
+                className="flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-[#148A3A] px-6 py-4 text-base font-bold text-white shadow-sm transition hover:bg-[#107332] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#148A3A]"
+              >
+                <IconBrandGooglePlay
+                  aria-hidden="true"
+                  size={26}
+                  stroke={1.8}
+                />
+                <span>Google Play&apos;den İndir</span>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="mt-12 flex flex-col items-center"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="h-8 w-8 animate-spin rounded-full border-[3px] border-red-100 border-t-[#D32F2F]" />
+            <p className="mt-4 text-base font-medium text-slate-600">
+              Yönlendiriliyor...
+            </p>
+          </div>
+        )}
+
+        <p className="mt-12 text-sm text-slate-400">
+          KamKam - Keşfet. Kullan. Kazan.
         </p>
-        
-        <div className="flex flex-col sm:flex-row gap-6">
-          <Magnetic strength={0.2}>
-            <button data-magnetic="true" className="flex items-center gap-4 bg-white text-black px-8 py-4 rounded-full font-bold hover:-translate-y-1 transition-all duration-300">
-              <IconBrandApple size={28} />
-              <div className="flex flex-col items-start">
-                <span className="text-[10px] uppercase tracking-wider text-slate-500">App Store'dan</span>
-                <span className="text-base leading-none">İndirin</span>
-              </div>
-            </button>
-          </Magnetic>
-
-          <Magnetic strength={0.2}>
-            <button data-magnetic="true" className="flex items-center gap-4 bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-bold hover:bg-white/20 hover:-translate-y-1 transition-all duration-300">
-              <IconBrandGooglePlay size={28} />
-              <div className="flex flex-col items-start">
-                <span className="text-[10px] uppercase tracking-wider text-slate-400">Google Play'den</span>
-                <span className="text-base leading-none">Edinin</span>
-              </div>
-            </button>
-          </Magnetic>
-        </div>
-      </div>
-
-      <div className="relative z-0 mt-24">
-        <Footer />
-      </div>
+      </section>
     </main>
   );
 }
