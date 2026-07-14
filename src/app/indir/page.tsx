@@ -103,7 +103,7 @@ export default function IndirPage() {
             className="flex items-center text-white"
             aria-label="KamKam ana sayfa"
           >
-            <Logo className="h-10 w-auto sm:h-12" />
+            <Logo className="h-10 w-auto sm:h-12" accentColor="white" />
           </Link>
           <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-sm backdrop-blur sm:text-xs">
             Şehir senin

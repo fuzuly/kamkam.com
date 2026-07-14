@@ -1,4 +1,10 @@
-export default function Logo({ className = "" }: { className?: string }) {
+export default function Logo({
+  className = "",
+  accentColor = "#d9381e",
+}: {
+  className?: string;
+  accentColor?: string;
+}) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="110 290 580 220" className={className} preserveAspectRatio="xMidYMid meet">
       <defs>
@@ -16,7 +22,7 @@ export default function Logo({ className = "" }: { className?: string }) {
       <g transform="matrix(1, 0, 0, 1, 118, 300)">
         <g clipPath="url(#b59aafff3a)">
           <g clipPath="url(#f5e6202323)">
-            <path strokeLinecap="round" transform="matrix(0, 1.067202, -1.067202, 0, 26.762652, 0.314155)" fill="none" strokeLinejoin="miter" d="M 12.498277 12.500703 L 183.689194 12.500703 " stroke="#d9381e" strokeWidth="25" strokeOpacity="1" strokeMiterlimit="4"/>
+            <path strokeLinecap="round" transform="matrix(0, 1.067202, -1.067202, 0, 26.762652, 0.314155)" fill="none" strokeLinejoin="miter" d="M 12.498277 12.500703 L 183.689194 12.500703 " stroke={accentColor} strokeWidth="25" strokeOpacity="1" strokeMiterlimit="4"/>
           </g>
           <g clipPath="url(#f326562673)">
             <path strokeLinecap="round" transform="matrix(-0.733806, -0.774887, 0.774887, -0.733806, 264.772151, 146.478132)" fill="none" strokeLinejoin="miter" d="M 9.999991 10.000802 L 113.967779 9.999733 " stroke="currentColor" strokeWidth="20" strokeOpacity="1" strokeMiterlimit="4"/>
