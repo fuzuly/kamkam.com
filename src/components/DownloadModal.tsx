@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { m as motion, AnimatePresence, PanInfo } from "framer-motion";
-import { X, Smartphone, Download } from "lucide-react";
+import { X, Smartphone } from "lucide-react";
 import Logo from "@/components/Logo";
+import Image from "next/image";
+import Link from "next/link";
 
 import { useLenis } from "lenis/react";
 
@@ -41,7 +43,10 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
     };
   }, [isOpen, lenis]);
 
-  const handleDragEnd = (event: any, info: PanInfo) => {
+  const handleDragEnd = (
+    _event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => {
     if (info.offset.y > 100 || info.velocity.y > 500) {
       onClose();
     }
@@ -105,7 +110,14 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
               {/* QR Code Container (Glassmorphic) */}
               <div className="w-full p-6 bg-white/60 backdrop-blur-xl border border-black/[0.08] rounded-[24px] flex flex-col items-center relative z-10 shadow-sm transition-transform hover:scale-[1.02] duration-300">
                 <div className="bg-white p-3 rounded-[18px] shadow-sm mb-5 border border-black/[0.04]">
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://kamkam.com/download" alt="QR Code" className="w-[140px] h-[140px] rounded-lg" />
+                  <Image
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://kamkamapp.com/indir"
+                    alt="KamKam indirme sayfası QR kodu"
+                    width={140}
+                    height={140}
+                    unoptimized
+                    className="h-[140px] w-[140px] rounded-lg"
+                  />
                 </div>
                 <div className="flex items-center gap-2 mb-1">
                   <Smartphone className="w-4 h-4 text-black/40" />
@@ -153,22 +165,22 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
 
                   {/* Buttons */}
                   <div className="flex flex-col gap-4 w-full">
-                    <button className="w-full py-4 bg-black text-white rounded-[20px] font-bold flex items-center justify-center gap-3 active:scale-95 transition-transform text-[17px] shadow-xl shadow-black/20">
+                    <Link href="/indir" className="w-full py-4 bg-black text-white rounded-[20px] font-bold flex items-center justify-center gap-3 active:scale-95 transition-transform text-[17px] shadow-xl shadow-black/20">
                       <svg viewBox="0 0 384 512" className="w-6 h-6 fill-current">
                         <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                       </svg>
-                      App Store'dan İndir
-                    </button>
+                      App Store&apos;dan İndir
+                    </Link>
                     
-                    <button className="w-full py-4 bg-white border border-black/10 text-black rounded-[20px] font-bold flex items-center justify-center gap-3 active:scale-95 transition-all text-[17px] hover:bg-gray-50 shadow-sm">
+                    <Link href="/indir" className="w-full py-4 bg-white border border-black/10 text-black rounded-[20px] font-bold flex items-center justify-center gap-3 active:scale-95 transition-all text-[17px] hover:bg-gray-50 shadow-sm">
                       <svg viewBox="0 0 512 512" className="w-6 h-6">
                         <path fill="#4CAF50" d="M325.3 234.3L104.6 13.6C95.2 4.2 82.5-1 69 1c-19.2 2.8-34 20-34 39.5v431c0 19.5 14.8 36.7 34 39.5 13.5 2 26.2-3.2 35.6-12.6l220.7-220.7c4.8-4.8 7.4-11.3 7.4-18.1s-2.6-13.3-7.4-18.1z"/>
                         <path fill="#FFEB3B" d="M362.5 271.5l104.6 104.6c14.1 14.1 14.1 36.9 0 51l-43.2 43.2c-14.1 14.1-36.9 14.1-51 0L268.3 365.7l94.2-94.2z"/>
                         <path fill="#F44336" d="M472.9 203.9L368.3 99.3c-14.1-14.1-36.9-14.1-51 0L212.7 203.9l160.2 160.2 100-100c14.1-14.1 14.1-36.9 0-51z"/>
                         <path fill="#2196F3" d="M325.3 234.3l94.2-94.2-51-51-263.9 263.9 160.2 160.2 60.5-60.5v-218.4z"/>
                       </svg>
-                      Google Play'den İndir
-                    </button>
+                      Google Play&apos;den İndir
+                    </Link>
                   </div>
                 </div>
               </div>

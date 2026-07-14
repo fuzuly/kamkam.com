@@ -3,8 +3,8 @@
 import { m as motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Magnetic from "./Magnetic";
-import { IconDownload } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Showcase() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,12 +37,12 @@ export default function Showcase() {
           </p>
           
           <Magnetic strength={0.2}>
-            <button data-magnetic="true" className="group relative flex items-center justify-center gap-4 bg-white text-black px-8 py-4 rounded-full font-bold text-sm overflow-hidden transition-all duration-500 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+            <Link href="/indir" data-magnetic="true" className="group relative flex items-center justify-center gap-4 bg-white text-black px-8 py-4 rounded-full font-bold text-sm overflow-hidden transition-all duration-500 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
               <span className="relative z-10 flex items-center justify-center">
                 Uygulamayı İndir
               </span>
               <div className="absolute inset-0 bg-slate-200 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            </button>
+            </Link>
           </Magnetic>
         </motion.div>
 

@@ -7,7 +7,6 @@ import Link from "next/link";
 import clsx from "clsx";
 import Logo from "@/components/Logo";
 import Magnetic from "./Magnetic";
-import DownloadModal from "./DownloadModal";
 import Image from "next/image";
 
 import { usePathname } from "next/navigation";
@@ -25,7 +24,6 @@ export default function Header() {
   const [isOverDarkSection, setIsOverDarkSection] = useState(pathname === "/"); 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
   const [activeLang, setActiveLang] = useState("TR");
   const langRef = useRef<HTMLDivElement>(null);
 
@@ -126,33 +124,18 @@ export default function Header() {
             {/* CENTER: DESKTOP NAVIGATION */}
             <nav className="hidden md:flex items-center gap-8">
               {NAV_LINKS.map((link) => (
-                link.href === "/indir" ? (
-                  <button
-                    key={link.label}
-                    onClick={() => setIsDownloadModalOpen(true)}
-                    className={clsx(
-                      "relative text-[15px] font-semibold transition-colors duration-200 group",
-                      textColor,
-                      hoverColor
-                    )}
-                  >
-                    {link.label}
-                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-                  </button>
-                ) : (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className={clsx(
-                      "relative text-[15px] font-semibold transition-colors duration-200 group",
-                      textColor,
-                      hoverColor
-                    )}
-                  >
-                    {link.label}
-                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-                  </Link>
-                )
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={clsx(
+                    "relative text-[15px] font-semibold transition-colors duration-200 group",
+                    textColor,
+                    hoverColor
+                  )}
+                >
+                  {link.label}
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+                </Link>
               ))}
             </nav>
 
@@ -283,25 +266,13 @@ export default function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 + 0.2 }}
                 >
-                  {link.href === "/indir" ? (
-                    <button
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        setIsDownloadModalOpen(true);
-                      }}
-                      className="text-2xl font-semibold text-foreground hover:text-brand transition-colors text-left"
-                    >
-                      {link.label}
-                    </button>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-2xl font-semibold text-foreground hover:text-brand transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  )}
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-2xl font-semibold text-foreground hover:text-brand transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </motion.div>
               ))}
             </nav>
@@ -326,12 +297,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <DownloadModal 
-        isOpen={isDownloadModalOpen} 
-        onClose={() => setIsDownloadModalOpen(false)} 
-        placeName="" 
-      />
     </>
   );
 }
