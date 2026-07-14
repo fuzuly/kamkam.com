@@ -1,6 +1,7 @@
 "use client";
 
 import { IconBrandApple, IconBrandGooglePlay } from "@tabler/icons-react";
+import Logo from "@/components/Logo";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -99,10 +100,10 @@ export default function IndirPage() {
         <header className="flex items-center justify-between">
           <Link
             href="/"
-            className="text-3xl font-black tracking-[-0.06em] text-white sm:text-4xl"
+            className="flex items-center text-white"
             aria-label="KamKam ana sayfa"
           >
-            KamKam
+            <Logo className="h-10 w-auto sm:h-12" />
           </Link>
           <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-sm backdrop-blur sm:text-xs">
             Şehir senin
