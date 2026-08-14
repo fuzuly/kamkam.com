@@ -2,8 +2,11 @@
 
 import { m as motion } from "framer-motion";
 import { User, Building2 } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function NedirExplanation() {
+  const t = useTranslation("nedir.explanation");
+
   return (
     <section className="w-full pt-36 pb-12 md:py-16 bg-white text-black relative overflow-hidden">
       
@@ -18,7 +21,7 @@ export default function NedirExplanation() {
           className="text-center mb-10 md:mb-10"
         >
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-black">
-            Nedir?
+            {t("title")}
           </h2>
         </motion.div>
 
@@ -43,11 +46,11 @@ export default function NedirExplanation() {
               </div>
               
               <h3 className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-white/70 mb-3 md:mb-4 uppercase">
-                Kullanıcılarımız İçin
+                {t("users.eyebrow")}
               </h3>
               
               <p className="text-lg md:text-2xl lg:text-[1.75rem] font-semibold tracking-tight leading-[1.3] md:leading-[1.4] text-white">
-                Sadece mekanlara gitmeyin, gittiğiniz her yerde ayrıcalığı hissedin. Kusursuz bir sadakat ağıyla çalışan KamKam; her ziyaretinizi anında bir kampanyaya, her girişinizi <span className="text-white relative whitespace-nowrap"><span className="relative z-10">prestijli bir karşılamaya</span><span className="absolute bottom-0.5 md:bottom-1.5 left-0 w-full h-1.5 md:h-2 bg-black/20 -z-0 rounded-sm"></span></span> dönüştüren akıllı şehir rehberinizdir.
+                {t("users.beforeHighlight")} <span className="text-white relative whitespace-nowrap"><span className="relative z-10">{t("users.highlight")}</span><span className="absolute bottom-0.5 md:bottom-1.5 left-0 w-full h-1.5 md:h-2 bg-black/20 -z-0 rounded-sm"></span></span> {t("users.afterHighlight")}
               </p>
             </div>
           </motion.div>
@@ -70,11 +73,11 @@ export default function NedirExplanation() {
               </div>
               
               <h3 className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-white/50 mb-3 md:mb-4 uppercase">
-                İşletmelerimiz İçin
+                {t("businesses.eyebrow")}
               </h3>
               
               <p className="text-lg md:text-2xl lg:text-[1.75rem] font-semibold tracking-tight leading-[1.3] md:leading-[1.4] text-white">
-                Markanızı ucuzlatmadan ve sizi hiç yormadan, kapıdan giren müşteriyi <span className="text-white relative whitespace-nowrap"><span className="relative z-10">kendi kendine geri getiren</span><span className="absolute bottom-0.5 md:bottom-1.5 left-0 w-full h-1.5 md:h-2 bg-white/20 -z-0 rounded-sm"></span></span> arka plan gücüdür.
+                {t("businesses.beforeHighlight")} <span className="text-white relative whitespace-nowrap"><span className="relative z-10">{t("businesses.highlight")}</span><span className="absolute bottom-0.5 md:bottom-1.5 left-0 w-full h-1.5 md:h-2 bg-white/20 -z-0 rounded-sm"></span></span> {t("businesses.afterHighlight")}
               </p>
             </div>
           </motion.div>

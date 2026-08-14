@@ -2,11 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
-import { X, Check } from "lucide-react";
-import { CATEGORIES } from "@/data/demo-isletmeler";
-import { useLenis } from "lenis/react";
+import { X } from "lucide-react";
 
 import { KesfetFilters } from "@/app/kesfet/page";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface FilterModalProps {
   isOpen: boolean;
@@ -15,36 +14,34 @@ interface FilterModalProps {
 }
 
 export default function FilterModal({ isOpen, onClose, filters }: FilterModalProps) {
+  const t = useTranslation("kesfet");
   const [sheetState, setSheetState] = useState<"half" | "full">("half");
 
   // Scroll ref
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
-  // Lenis instance
-  const lenis = useLenis();
-
   // Scroll lock & Reset State
   useEffect(() => {
+    let resetFrame: number | undefined;
+
     if (isOpen) {
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
-      lenis?.stop();
-      setSheetState("half"); // Always open in half state
+      resetFrame = window.requestAnimationFrame(() => setSheetState("half"));
     } else {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-      lenis?.start();
     }
     return () => {
+      if (resetFrame !== undefined) window.cancelAnimationFrame(resetFrame);
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-      lenis?.start();
     };
-  }, [isOpen, lenis]);
+  }, [isOpen]);
 
-  const SORT_OPTIONS = ["Önerilen", "En Yakın", "En Yüksek Puan"];
+  const SORT_OPTIONS = ["recommended", "nearest", "highestRated"];
   const PRICE_OPTIONS = ["₺", "₺₺", "₺₺₺", "₺₺₺₺"];
-  const DISTANCE_OPTIONS = ["Yürüme Mesafesi", "Araçla Kısa", "Farketmez"];
+  const DISTANCE_OPTIONS = ["walking", "shortDrive", "any"];
 
   const togglePrice = (price: string) => {
     filters.setActivePrices(
@@ -53,9 +50,9 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
   };
 
   const handleClear = () => {
-    filters.setActiveSort("Önerilen");
+    filters.setActiveSort("recommended");
     filters.setActivePrices([]);
-    filters.setActiveDistance("Farketmez");
+    filters.setActiveDistance("any");
     filters.setOpenNow(false);
     filters.setHasPromo(false);
   };
@@ -73,15 +70,17 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
   const isHalf = sheetState === "half";
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 640);
-    setVh35(window.innerHeight * 0.35);
-    
     const handleResize = () => {
       setIsMobile(window.innerWidth < 640);
       setVh35(window.innerHeight * 0.35);
     };
+
+    const initialFrame = window.requestAnimationFrame(handleResize);
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.cancelAnimationFrame(initialFrame);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -157,9 +156,10 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
 
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900">Filtreler</h2>
+              <h2 className="text-xl font-bold text-gray-900">{t("filters.title")}</h2>
               <button 
                 onClick={onClose}
+                aria-label={t("filters.closeAriaLabel")}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
               >
                 <X className="w-5 h-5" />
@@ -185,7 +185,7 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
 
               {/* Sort By */}
               <div className="space-y-3">
-                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Sıralama</h3>
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">{t("filters.sortHeading")}</h3>
                 <div className="flex flex-wrap gap-2">
                   {SORT_OPTIONS.map(opt => (
                     <button
@@ -197,7 +197,7 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
                           : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
                       }`}
                     >
-                      {opt}
+                      {t(`sort.${opt}`)}
                     </button>
                   ))}
                 </div>
@@ -205,7 +205,7 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
 
               {/* Price */}
               <div className="space-y-3">
-                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Fiyat Seviyesi</h3>
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">{t("filters.priceHeading")}</h3>
                 <div className="flex gap-2">
                   {PRICE_OPTIONS.map(price => {
                     const isActive = filters.activePrices.includes(price);
@@ -228,7 +228,7 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
 
               {/* Distance */}
               <div className="space-y-3">
-                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Mesafe</h3>
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">{t("filters.distanceHeading")}</h3>
                 <div className="flex flex-wrap gap-2">
                   {DISTANCE_OPTIONS.map(opt => (
                     <button
@@ -240,7 +240,7 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
                           : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
                       }`}
                     >
-                      {opt}
+                      {t(`distance.${opt}`)}
                     </button>
                   ))}
                 </div>
@@ -252,11 +252,13 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
                 {/* Open Now */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-base font-bold text-gray-900">Şu An Açık</h4>
-                    <p className="text-sm text-gray-500">Sadece şu an açık olan işletmeler</p>
+                    <h4 className="text-base font-bold text-gray-900">{t("filters.openNowTitle")}</h4>
+                    <p className="text-sm text-gray-500">{t("filters.openNowDescription")}</p>
                   </div>
                   <button 
                     onClick={() => filters.setOpenNow(!filters.openNow)}
+                    aria-label={t("filters.openNowAriaLabel")}
+                    aria-pressed={filters.openNow}
                     className={`w-12 h-7 rounded-full p-1 transition-colors ${filters.openNow ? 'bg-green-500' : 'bg-gray-200'}`}
                   >
                     <div className={`w-5 h-5 bg-white rounded-full shadow-sm transform transition-transform ${filters.openNow ? 'translate-x-5' : 'translate-x-0'}`} />
@@ -266,11 +268,13 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
                 {/* Has Promo */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-base font-bold text-gray-900">Kampanyalılar</h4>
-                    <p className="text-sm text-gray-500">Aktif indirimi olan işletmeler</p>
+                    <h4 className="text-base font-bold text-gray-900">{t("filters.promotionsTitle")}</h4>
+                    <p className="text-sm text-gray-500">{t("filters.promotionsDescription")}</p>
                   </div>
                   <button 
                     onClick={() => filters.setHasPromo(!filters.hasPromo)}
+                    aria-label={t("filters.promotionsAriaLabel")}
+                    aria-pressed={filters.hasPromo}
                     className={`w-12 h-7 rounded-full p-1 transition-colors ${filters.hasPromo ? 'bg-brand' : 'bg-gray-200'}`}
                   >
                     <div className={`w-5 h-5 bg-white rounded-full shadow-sm transform transition-transform ${filters.hasPromo ? 'translate-x-5' : 'translate-x-0'}`} />
@@ -289,13 +293,13 @@ export default function FilterModal({ isOpen, onClose, filters }: FilterModalPro
                 onClick={handleClear}
                 className="px-6 py-3.5 text-sm font-bold text-gray-600 hover:text-gray-900 transition-colors"
               >
-                Temizle
+                {t("filters.clear")}
               </button>
               <button 
                 onClick={onClose}
                 className="flex-1 bg-brand text-white py-3.5 rounded-xl font-bold shadow-lg shadow-brand/25 hover:bg-brand/90 transition-colors"
               >
-                Sonuçları Göster
+                {t("filters.showResults")}
               </button>
             </div>
           </motion.div>

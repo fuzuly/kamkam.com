@@ -3,8 +3,10 @@
 import { useRef } from "react";
 import { m as motion, useScroll, useTransform } from "framer-motion";
 import Logo from "@/components/Logo";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Hero() {
+  const t = useTranslation("home.hero");
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -38,8 +40,6 @@ export default function Hero() {
     },
   };
 
-  const titleWords = "Şehri Keşfet".split(" ");
-
   return (
     <section data-theme="dark" ref={containerRef} className="relative w-full h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-[#101010]">
       {/* 1. KAT: PARALLAX VİDEO */}
@@ -63,7 +63,7 @@ export default function Hero() {
       </motion.div>
 
       {/* 2. KAT: KARARTMA, BLUR VE GRADIENT (GEÇİŞ) KATMANLARI */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 backdrop-blur-[6px] z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 z-10 pointer-events-none" />
 
       {/* 3. KAT: SVG "NOISE" (FİLM GRENİ) FİLTRESİ */}
       <div className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay opacity-30">
@@ -94,15 +94,15 @@ export default function Hero() {
         >
           {/* Main Headline */}
           <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-black text-white text-center leading-[1.1] tracking-tight max-w-5xl">
-            Her Şey. Tek Yerde. <br />
+            {t("title")} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-rose-500 to-orange-500">
-              Sınır Yok.
+              {t("highlight")}
             </span>
           </h1>
 
           {/* Subtext */}
           <p className="mt-8 text-lg md:text-xl text-slate-200 text-center max-w-2xl font-medium leading-relaxed drop-shadow-md">
-            Karmaşaya veda edin. Keşif, ödül ve prestij tek bir dijital anahtarda buluştu. Parçalanmış sistemleri geride bırakın; şehri adımlarınıza göre şekillendiren bu ayrıcalıklı deneyimi yaşayın.
+            {t("description")}
           </p>
         </motion.div>
 
@@ -113,7 +113,7 @@ export default function Hero() {
           
           {/* Slogan */}
           <h3 className="text-lg md:text-xl font-bold tracking-[0.3em] text-slate-100 uppercase">
-            KEŞFET. KULLAN. KAZAN.
+            {t("slogan")}
           </h3>
         </motion.div>
 

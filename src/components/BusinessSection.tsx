@@ -2,9 +2,11 @@
 
 import { m as motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { IconChartLine, IconUsersGroup, IconDeviceAnalytics, IconArrowUpRight } from "@tabler/icons-react";
+import { IconChartLine, IconUsersGroup, IconArrowUpRight } from "@tabler/icons-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function BusinessSection() {
+  const t = useTranslation("home.business");
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -35,7 +37,7 @@ export default function BusinessSection() {
               className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-6 lg:mb-8 w-full"
             >
               <span className="w-8 sm:w-12 h-px bg-brand" />
-              <span className="text-brand font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs text-center">İşletmeler İçin</span>
+              <span className="text-brand font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs text-center">{t("eyebrow")}</span>
               <span className="w-8 sm:w-12 h-px bg-brand lg:hidden" />
             </motion.div>
 
@@ -46,9 +48,9 @@ export default function BusinessSection() {
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[1.05] mb-6 drop-shadow-lg"
             >
-              Karanlıkta İlerlemeyin. <br />
+              {t("title")} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">
-                Kusursuz İçgörüyle Büyüyün.
+                {t("highlight")}
               </span>
             </motion.h2>
 
@@ -59,7 +61,7 @@ export default function BusinessSection() {
               transition={{ delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-slate-400 leading-relaxed font-medium mb-10 lg:mb-12 max-w-lg"
             >
-              Müşteriyi elde tutmak agresif kampanyalarla değil, kusursuz bir deneyimle başlar. Etkileşimi o kadar pürüzsüz kılın ki, misafiriniz daha kapıdan çıkmadan bir sonraki gelişini planlasın.
+              {t("description")}
             </motion.p>
 
             {/* FEATURE LIST */}
@@ -75,8 +77,8 @@ export default function BusinessSection() {
                   <IconChartLine size={20} />
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-base sm:text-lg">Premium Saha Desteği</h4>
-                  <p className="text-slate-500 text-xs sm:text-sm">Yazılımı kurup sizi yalnız bırakmıyoruz. Özel saha ekibimizle tüm süreçte fiziksel olarak yanınızdayız. Kusursuz teknoloji, insani dokunuş.</p>
+                  <h4 className="text-white font-bold text-base sm:text-lg">{t("features.fieldSupport.title")}</h4>
+                  <p className="text-slate-500 text-xs sm:text-sm">{t("features.fieldSupport.description")}</p>
                 </div>
               </div>
               
@@ -85,8 +87,8 @@ export default function BusinessSection() {
                   <IconUsersGroup size={20} />
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-base sm:text-lg">Çapraz Müşteri Ağı</h4>
-                  <p className="text-slate-500 text-xs sm:text-sm">Sadece kendi müşterinizle yetinmeyin. Ağımızda puan kazanan binlerce kullanıcıyı işletmenize çekin, şehrin akışına anında katılın.</p>
+                  <h4 className="text-white font-bold text-base sm:text-lg">{t("features.customerNetwork.title")}</h4>
+                  <p className="text-slate-500 text-xs sm:text-sm">{t("features.customerNetwork.description")}</p>
                 </div>
               </div>
             </motion.div>
@@ -98,12 +100,12 @@ export default function BusinessSection() {
             {/* ANA EKRAN (Tam Merkezde) */}
             <motion.div 
               style={{ y: yDashboard }}
-              className="relative w-full max-w-[480px] h-[340px] sm:h-[400px] bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-[2rem] shadow-2xl p-6 sm:p-8 pt-10 sm:pt-14 flex flex-col z-10"
+              className="relative w-full max-w-[480px] h-[340px] sm:h-[400px] bg-[#0d0d0d] border border-white/10 rounded-[2rem] shadow-2xl p-6 sm:p-8 pt-10 sm:pt-14 flex flex-col z-10"
             >
               {/* Header */}
               <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
                 <div>
-                  <div className="text-white/50 text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-1">Aylık İşlem Hacmi</div>
+                  <div className="text-white/50 text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-1">{t("dashboard.monthlyVolume")}</div>
                   <div className="text-white font-bold text-2xl sm:text-4xl">₺3.2M<span className="text-emerald-400 text-[10px] sm:text-sm ml-2">+14%</span></div>
                 </div>
                 <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand/20 flex items-center justify-center text-brand">
@@ -131,24 +133,24 @@ export default function BusinessSection() {
               {/* UÇAN KART 1: Sol Üst Köşeye Sabitlendi - Daha yukarı alındı */}
               <motion.div 
                 style={{ y: yCard1 }}
-                className="absolute -top-16 sm:-top-14 -left-2 sm:-left-12 w-36 sm:w-48 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-3 sm:p-4 shadow-2xl z-20"
+                className="absolute -top-16 sm:-top-14 -left-2 sm:-left-12 w-36 sm:w-48 bg-[#222] border border-white/20 rounded-2xl p-3 sm:p-4 shadow-2xl z-20"
               >
                 <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
                   <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-brand"></span>
                   </span>
-                  <span className="text-white/60 text-[9px] sm:text-xs font-semibold uppercase">Aktif Müşteri</span>
+                  <span className="text-white/60 text-[9px] sm:text-xs font-semibold uppercase">{t("dashboard.activeCustomer")}</span>
                 </div>
-                <div className="text-white font-bold text-lg sm:text-2xl">42<span className="text-white/40 text-[10px] sm:text-sm font-normal ml-1">mağazada</span></div>
+                <div className="text-white font-bold text-lg sm:text-2xl">42<span className="text-white/40 text-[10px] sm:text-sm font-normal ml-1">{t("dashboard.stores")}</span></div>
               </motion.div>
 
               {/* UÇAN KART 2: Sağ Alt Köşeye Sabitlendi */}
               <motion.div 
                 style={{ y: yCard2 }}
-                className="absolute -bottom-10 -right-2 sm:-right-10 w-44 sm:w-56 bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl z-20"
+                className="absolute -bottom-10 -right-2 sm:-right-10 w-44 sm:w-56 bg-[#0a0a0a] border border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl z-20"
               >
-                <div className="text-white/50 text-[9px] sm:text-xs font-semibold uppercase mb-1.5 sm:mb-2">Kampanya Dönüşümü</div>
+                <div className="text-white/50 text-[9px] sm:text-xs font-semibold uppercase mb-1.5 sm:mb-2">{t("dashboard.campaignConversion")}</div>
                 <div className="flex items-end gap-2 sm:gap-4">
                   <div className="text-white font-bold text-xl sm:text-3xl">%68</div>
                   <div className="flex items-center text-emerald-400 text-[10px] sm:text-sm font-semibold mb-1">
@@ -163,14 +165,14 @@ export default function BusinessSection() {
               {/* UÇAN KART 3: Sağ Üst Kenara Sabitlendi (Yeni Katılımcı) */}
               <motion.div 
                 style={{ y: yCard3 }}
-                className="absolute -top-6 sm:-top-8 -right-2 sm:-right-8 bg-white/[0.05] backdrop-blur-md border border-white/10 rounded-full py-1.5 px-2.5 sm:py-2 sm:px-4 shadow-xl z-20 flex items-center gap-1.5 sm:gap-3"
+                className="absolute -top-6 sm:-top-8 -right-2 sm:-right-8 bg-[#161616] border border-white/10 rounded-full py-1.5 px-2.5 sm:py-2 sm:px-4 shadow-xl z-20 flex items-center gap-1.5 sm:gap-3"
               >
                 <div className="flex -space-x-1.5 sm:-space-x-2">
                   <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-slate-700 border-2 border-[#050505]" />
                   <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-slate-600 border-2 border-[#050505]" />
                   <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-brand border-2 border-[#050505] flex items-center justify-center text-[7px] sm:text-[10px] text-white font-bold">+1k</div>
                 </div>
-                <div className="text-white/80 text-[9px] sm:text-xs font-medium">Yeni Katılım</div>
+                <div className="text-white/80 text-[9px] sm:text-xs font-medium">{t("dashboard.newMember")}</div>
               </motion.div>
 
             </motion.div>

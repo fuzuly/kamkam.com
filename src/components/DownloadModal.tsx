@@ -6,8 +6,7 @@ import { X, Smartphone } from "lucide-react";
 import Logo from "@/components/Logo";
 import Image from "next/image";
 import Link from "next/link";
-
-import { useLenis } from "lenis/react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -16,8 +15,8 @@ interface DownloadModalProps {
 }
 
 export default function DownloadModal({ isOpen, onClose, placeName }: DownloadModalProps) {
+  const t = useTranslation("kesfet.downloadModal");
   const [isDesktop, setIsDesktop] = useState(true);
-  const lenis = useLenis();
 
   useEffect(() => {
     const checkWidth = () => setIsDesktop(window.innerWidth >= 768);
@@ -30,18 +29,15 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
     if (isOpen) {
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
-      lenis?.stop();
     } else {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-      lenis?.start();
     }
     return () => {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-      lenis?.start();
     };
-  }, [isOpen, lenis]);
+  }, [isOpen]);
 
   const handleDragEnd = (
     _event: MouseEvent | TouchEvent | PointerEvent,
@@ -86,6 +82,7 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
 
               <button 
                 onClick={onClose}
+                aria-label={t("closeAriaLabel")}
                 className="absolute top-5 right-5 p-2.5 bg-black/5 hover:bg-black/10 text-black/60 hover:text-black rounded-full transition-all duration-300 z-20"
               >
                 <X className="w-5 h-5" />
@@ -100,11 +97,11 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
               </div>
 
               <h2 className="text-[28px] font-bold text-black tracking-tight text-center mb-3 leading-[1.1] relative z-10">
-                {placeName ? `${placeName} Sizi Bekliyor!` : "Ayrıcalığı Cebinize Taşıyın"}
+                {placeName ? t("placeTitle", { placeName }) : t("title")}
               </h2>
               
               <p className="text-gray-500 text-center mb-10 px-2 leading-relaxed text-[15px] font-medium relative z-10">
-                Sıradanlığı geride bırakın. Tüm kampanyalar ve prestijli mekanlar tek bir dokunuş uzağınızda.
+                {t("description")}
               </p>
 
               {/* QR Code Container (Glassmorphic) */}
@@ -112,7 +109,7 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
                 <div className="bg-white p-3 rounded-[18px] shadow-sm mb-5 border border-black/[0.04]">
                   <Image
                     src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://kamkamapp.com/indir"
-                    alt="KamKam indirme sayfası QR kodu"
+                    alt={t("qrAlt")}
                     width={140}
                     height={140}
                     unoptimized
@@ -121,9 +118,9 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
                 </div>
                 <div className="flex items-center gap-2 mb-1">
                   <Smartphone className="w-4 h-4 text-black/40" />
-                  <p className="text-[12px] font-bold tracking-[0.15em] text-black/60 uppercase">Kameraya Okutun</p>
+                  <p className="text-[12px] font-bold tracking-[0.15em] text-black/60 uppercase">{t("scanQr")}</p>
                 </div>
-                <p className="text-[13px] text-gray-400 font-medium">Hemen indirmek için tarayın</p>
+                <p className="text-[13px] text-gray-400 font-medium">{t("scanDescription")}</p>
               </div>
             </motion.div>
           ) : (
@@ -157,10 +154,10 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
                   </div>
 
                   <h2 className="text-[28px] font-bold text-black tracking-tight text-center mb-3 leading-[1.15]">
-                    {placeName ? `${placeName} Sizi Bekliyor!` : "Ayrıcalığı Cebinize Taşıyın"}
+                    {placeName ? t("placeTitle", { placeName }) : t("title")}
                   </h2>
                   <p className="text-gray-500 text-center mb-10 px-2 leading-relaxed text-[16px] font-medium">
-                    Sıradanlığı geride bırakın. Tüm kampanyalar ve prestijli mekanlar tek bir dokunuş uzağınızda.
+                    {t("description")}
                   </p>
 
                   {/* Buttons */}
@@ -169,7 +166,7 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
                       <svg viewBox="0 0 384 512" className="w-6 h-6 fill-current">
                         <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                       </svg>
-                      App Store&apos;dan İndir
+                      {t("appStore")}
                     </Link>
                     
                     <Link href="/indir" className="w-full py-4 bg-white border border-black/10 text-black rounded-[20px] font-bold flex items-center justify-center gap-3 active:scale-95 transition-all text-[17px] hover:bg-gray-50 shadow-sm">
@@ -179,7 +176,7 @@ export default function DownloadModal({ isOpen, onClose, placeName }: DownloadMo
                         <path fill="#F44336" d="M472.9 203.9L368.3 99.3c-14.1-14.1-36.9-14.1-51 0L212.7 203.9l160.2 160.2 100-100c14.1-14.1 14.1-36.9 0-51z"/>
                         <path fill="#2196F3" d="M325.3 234.3l94.2-94.2-51-51-263.9 263.9 160.2 160.2 60.5-60.5v-218.4z"/>
                       </svg>
-                      Google Play&apos;den İndir
+                      {t("googlePlay")}
                     </Link>
                   </div>
                 </div>

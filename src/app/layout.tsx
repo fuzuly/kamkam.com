@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import MotionProvider from "@/components/MotionProvider";
 
@@ -49,16 +48,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="tr" suppressHydrationWarning>
       <body className={`${inter.className} bg-background text-foreground antialiased overflow-x-clip w-full relative`}>
         <Preloader />
         <MotionProvider>
-          <SmoothScroll>
-            <div className="relative w-full flex flex-col min-h-screen">
-              <Header />
-              {children}
-            </div>
-          </SmoothScroll>
+          <div className="relative w-full flex flex-col min-h-screen">
+            <Header />
+            {children}
+          </div>
         </MotionProvider>
       </body>
     </html>

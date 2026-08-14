@@ -4,37 +4,18 @@ import { useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
-const faqs = [
-  {
-    id: 1,
-    question: "KamKam sıradan bir indirim veya fırsat uygulaması mı?",
-    answer: "Hayır. KamKam markanızı ucuzlatan sıradan indirim veya fırsat platformlarından tamamen farklıdır. Müşteri kitlenizi özenle seçilmiş, kaliteli hizmeti takdir eden kullanıcılardan oluşturur ve işletmenizin prestijini artıracak bir sadakat ekosistemi sunar."
-  },
-  {
-    id: 2,
-    question: "Kasa sırasında kod söylemek veya kart göstermek zorunda mıyım?",
-    answer: "Kesinlikle hayır. KamKam'ın görünmez teknolojisi sayesinde kasada ekstra hiçbir fiziksel kart göstermenize veya kod söylemenize gerek kalmaz. Sadece telefonunuzu okutarak tüm işlemlerinizi saniyeler içinde, pürüzsüz bir şekilde tamamlarsınız."
-  },
-  {
-    id: 3,
-    question: "İşletmeme yeni bir POS cihazı veya kablolu donanım kurulacak mı?",
-    answer: "Herhangi bir donanım karmaşasına son verdik. Kasanızı yoran, ekstra bakım gerektiren hantal POS cihazları veya kablolu donanımlara ihtiyacınız yok. Sisteme anında, dijital olarak entegre olabilir ve saniyeler içinde kullanmaya başlayabilirsiniz."
-  },
-  {
-    id: 4,
-    question: "Sisteme dahil olup kullanmaya başlamak ne kadar zamanımı alır?",
-    answer: "Dakikalar içinde. Karmaşık başvuru süreçleri, haftalarca süren onay aşamaları veya teknik entegrasyon bekleme süreleri yoktur. Formu doldurduğunuz an sistem altyapınız oluşturulur ve hemen müşterilerinizi ağırlamaya başlayabilirsiniz."
-  },
-  {
-    id: 5,
-    question: "İşletme ve müşteri verilerim uygulamanın içinde ne kadar güvende?",
-    answer: "Güvenlik en büyük önceliğimizdir. Tüm verileriniz uluslararası standartlarda, uçtan uca şifrelemeyle korunur. Müşteri verileriniz asla 3. taraflarla paylaşılmaz ve sadece sizin işletmenizin büyümesi için izole bir şekilde saklanır."
-  }
-];
+const FAQ_KEYS = ["discountApp", "checkout", "hardware", "onboarding", "security"];
 
 export default function NedirFAQ() {
+  const t = useTranslation("nedir.faq");
   const [openId, setOpenId] = useState<number | null>(null);
+  const faqs = FAQ_KEYS.map((key, index) => ({
+    id: index + 1,
+    question: t(`items.${key}.question`),
+    answer: t(`items.${key}.answer`),
+  }));
 
   const toggleOpen = (id: number) => {
     setOpenId(openId === id ? null : id);
@@ -64,7 +45,7 @@ export default function NedirFAQ() {
           <div className="inline-flex items-center justify-center gap-2 mb-8">
             <Image 
               src="/akademilogo.svg" 
-              alt="KamKam Akademi" 
+              alt={t("logoAlt")}
               width={240} 
               height={60} 
               className="w-auto h-10 sm:h-12 object-contain"
@@ -72,10 +53,10 @@ export default function NedirFAQ() {
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-6">
-            Sorular ve Cevaplar
+            {t("title")}
           </h2>
           <p className="text-lg md:text-xl text-gray-400 font-medium max-w-2xl mx-auto leading-relaxed">
-            Soru işaretlerinin yerini mutlak güvene bıraktığı nokta. Sistemin arka planındaki o tıkır tıkır işleyen yapıyı tüm netliğiyle keşfedin.
+            {t("description")}
           </p>
         </motion.div>
 
@@ -107,6 +88,8 @@ export default function NedirFAQ() {
                   {/* Header Button */}
                   <button
                     onClick={() => toggleOpen(faq.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${faq.id}`}
                     className="w-full text-left px-8 py-6 md:py-8 flex items-center justify-between gap-6 relative z-20"
                   >
                     <h3 className={`text-lg md:text-xl font-semibold tracking-tight pr-8 transition-colors duration-300 ${isOpen ? "text-black" : "text-white"}`}>
@@ -121,6 +104,7 @@ export default function NedirFAQ() {
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
+                        id={`faq-answer-${faq.id}`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}

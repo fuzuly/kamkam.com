@@ -1,29 +1,18 @@
 "use client";
 
-import { m as motion, useScroll, useTransform } from "framer-motion";
+import { m as motion, useScroll } from "framer-motion";
 import { useRef } from "react";
-
-const cards = [
-  {
-    num: "01",
-    title: "Şehri Keşfetmeye Başlayın",
-    desc: "Saniyeler içinde profilinizi oluşturun ve sizin için anlaştığımız işletmelerden oluşan KamKam ağına adım atın. Karmaşık kayıt süreçleri veya cüzdan şişiren plastik kartlar yok; sadece size özel fırsatlarla dolu yepyeni bir şehir deneyimi var."
-  },
-  {
-    num: "02",
-    title: "Sadece Okutun",
-    desc: "Tam ihtiyacınız olan işletmeyi bulun ve keyfini çıkarın. Kasaya geldiğinizde telefon numaranızı söylemekle veya form doldurmakla uğraşmayın. Sadece telefonunuzdaki QR kodu gösterin ve saniyeler içinde puanınızı cebinize koyun."
-  },
-  {
-    num: "03",
-    title: "Özgürce Harcayın, Kendinizi Şımartın",
-    desc: "Biriken puanlarınızı KamKam ağındaki tüm mekanlarda dilediğiniz gibi harcayın. Kazandığınız ödüller tek bir işletmeye bağlı kalmaz; kahve içerken kazandığınız puanla bir sonraki gün başka bir mekanda kendinizi şımartın. Şehrin tadını ayrıcalıklı çıkarın."
-  }
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function HowItWorks() {
+  const t = useTranslation("home.howItWorks");
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollXProgress } = useScroll({ container: scrollRef });
+  const cards = ["discover", "scan", "spend"].map((step) => ({
+    num: t(`steps.${step}.number`),
+    title: t(`steps.${step}.title`),
+    desc: t(`steps.${step}.description`),
+  }));
 
   return (
     <section className="relative w-full bg-background" id="how-it-works">
@@ -39,7 +28,7 @@ export default function HowItWorks() {
               className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-4 sm:mb-6 w-full"
             >
               <span className="w-8 sm:w-12 h-px bg-brand" />
-              <span className="text-brand font-bold tracking-[0.2em] uppercase text-[10px] sm:text-sm text-center">Hemen Başlayın</span>
+              <span className="text-brand font-bold tracking-[0.2em] uppercase text-[10px] sm:text-sm text-center">{t("eyebrow")}</span>
               <span className="w-8 sm:w-12 h-px bg-brand lg:hidden" />
             </motion.div>
             
@@ -50,8 +39,8 @@ export default function HowItWorks() {
               transition={{ delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tight leading-[1.1] mb-6 sm:mb-8 text-center md:text-left"
             >
-              Beklemek Yok. <br />
-              <span className="text-slate-500">3 Adımda İçeridesiniz.</span>
+              {t("title")} <br />
+              <span className="text-slate-500">{t("highlight")}</span>
             </motion.h2>
 
             <motion.p 
@@ -61,7 +50,7 @@ export default function HowItWorks() {
               transition={{ delay: 0.2 }}
               className="text-sm sm:text-base md:text-lg text-slate-400 max-w-xl leading-relaxed font-medium mb-12 sm:mb-16 text-center md:text-left mx-auto md:mx-0"
             >
-              Sadece 3 adımda dijital kimliğinizi oluşturun ve KamKam dünyasının ayrıcalıklarını yaşamaya hemen başlayın.
+              {t("description")}
             </motion.p>
             
             {/* MOBİL İÇİN SCROLL PROGRESS (Sadece mobilde görünür) */}

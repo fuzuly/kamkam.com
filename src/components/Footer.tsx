@@ -7,8 +7,10 @@ import { m as motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Magnetic from "./Magnetic";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Footer() {
+  const t = useTranslation("home.footer");
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Parallax / Reveal Effect
@@ -33,28 +35,28 @@ export default function Footer() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   const trustFeatures = [
-    { icon: <IconShieldCheck size={28} stroke={1.5} />, title: "KVKK Uyumlu" },
-    { icon: <IconLock size={28} stroke={1.5} />, title: "SSL Şifreli" },
-    { icon: <IconBuildingStore size={28} stroke={1.5} />, title: "100+ İşletme" },
-    { icon: <IconDeviceMobile size={28} stroke={1.5} />, title: "Ücretsiz App" },
+    { icon: <IconShieldCheck size={28} stroke={1.5} />, title: t("trust.kvkk") },
+    { icon: <IconLock size={28} stroke={1.5} />, title: t("trust.ssl") },
+    { icon: <IconBuildingStore size={28} stroke={1.5} />, title: t("trust.businesses") },
+    { icon: <IconDeviceMobile size={28} stroke={1.5} />, title: t("trust.freeApp") },
   ];
 
   const mainLinks = [
-    { label: "Keşfet", href: "/kesfet" },
-    { label: "Kamkam Nedir?", href: "/nedir" },
-    { label: "Hakkımızda", href: "/hakkimizda" },
-    { label: "İletişim", href: "/iletisim" },
+    { label: t("mainLinks.discover"), href: "/kesfet" },
+    { label: t("mainLinks.about"), href: "/nedir" },
+    { label: t("mainLinks.aboutUs"), href: "/hakkimizda" },
+    { label: t("mainLinks.contact"), href: "/iletisim" },
   ];
 
   const legalLinks = [
-    { label: "Gizlilik Politikası", href: "/gizlilik" },
-    { label: "Kullanım Şartları", href: "/kullanim-sartlari" },
-    { label: "Teslimat ve İade", href: "/teslimat" },
-    { label: "Mesafeli Satış", href: "/mesafeli-satis" },
+    { label: t("legalLinks.privacy"), href: "/gizlilik" },
+    { label: t("legalLinks.terms"), href: "/kullanim-sartlari" },
+    { label: t("legalLinks.delivery"), href: "/teslimat" },
+    { label: t("legalLinks.distanceSales"), href: "/mesafeli-satis" },
   ];
 
   return (
@@ -80,9 +82,9 @@ export default function Footer() {
           >
             {[...Array(10)].map((_, i) => (
               <span key={i} className="flex items-center gap-8">
-                <span>Keşfet</span><span className="w-1 h-1 rounded-full bg-brand" />
-                <span>Kullan</span><span className="w-1 h-1 rounded-full bg-brand" />
-                <span>Kazan</span><span className="w-1 h-1 rounded-full bg-brand" />
+                <span>{t("marquee.discover")}</span><span className="w-1 h-1 rounded-full bg-brand" />
+                <span>{t("marquee.use")}</span><span className="w-1 h-1 rounded-full bg-brand" />
+                <span>{t("marquee.earn")}</span><span className="w-1 h-1 rounded-full bg-brand" />
               </span>
             ))}
           </motion.div>
@@ -109,27 +111,27 @@ export default function Footer() {
             
             {/* Col 1: Brand & Slogan */}
             <div className="md:col-span-5 flex flex-col items-start">
-              <Link href="/" className="inline-block mb-8 group" aria-label="KamKam Anasayfa">
+              <Link href="/" className="inline-block mb-8 group" aria-label={t("homeAriaLabel")}>
                 <Logo className="h-14 w-auto text-white group-hover:opacity-80 transition-opacity" />
               </Link>
               <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter leading-[1.1] mb-6">
-                Hazır mısınız?
+                {t("title")}
               </h2>
               <p className="text-lg text-slate-400 leading-relaxed max-w-sm mb-10 font-medium">
-                Şehri telefonunla keşfet. Özenle seçilmiş işletmeler, sınırsız ayrıcalık.
+                {t("description")}
               </p>
               
               {/* Newsletter AJAX Input */}
               <div className="w-full max-w-sm relative group">
                 <input 
                   type="email" 
-                  placeholder="E-posta adresiniz..." 
+                  placeholder={t("emailPlaceholder")}
                   className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-6 pr-32 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand/50 focus:bg-white/10 transition-all duration-300"
                 />
                 <div className="absolute right-1 top-1 bottom-1">
                   <Magnetic strength={0.2}>
                     <button data-magnetic="true" className="h-full bg-brand text-white px-6 rounded-full text-sm font-semibold hover:bg-brand/90 transition-colors">
-                      Katıl
+                      {t("join")}
                     </button>
                   </Magnetic>
                 </div>
@@ -138,7 +140,7 @@ export default function Footer() {
 
             {/* Col 2: Main Links */}
             <div className="md:col-span-3 md:col-start-7">
-              <h4 className="text-white font-bold mb-8 tracking-wider text-sm uppercase opacity-50">Keşfet</h4>
+              <h4 className="text-white font-bold mb-8 tracking-wider text-sm uppercase opacity-50">{t("mainHeading")}</h4>
               <ul className="space-y-5">
                 {mainLinks.map((link) => (
                   <li key={link.label}>
@@ -157,7 +159,7 @@ export default function Footer() {
 
             {/* Col 3: Legal Links */}
             <div className="md:col-span-3">
-              <h4 className="text-white font-bold mb-8 tracking-wider text-sm uppercase opacity-50">Kurumsal</h4>
+              <h4 className="text-white font-bold mb-8 tracking-wider text-sm uppercase opacity-50">{t("legalHeading")}</h4>
               <ul className="space-y-5">
                 {legalLinks.map((link) => (
                   <li key={link.label}>
@@ -179,12 +181,12 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-center mb-12 relative border-t border-white/5 pt-12">
             <div className="absolute inset-0 w-64 h-24 bg-white/5 blur-3xl rounded-full mx-auto" />
             <p className="text-[10px] text-slate-500 mb-6 tracking-[0.3em] uppercase font-bold">
-              Güvenli Ödeme Altyapısı
+              {t("securePayment")}
             </p>
             <div className="relative group cursor-default">
               <Image 
                 src="/iyzico_logo.svg" 
-                alt="iyzico ile Öde - Visa ve Mastercard" 
+                alt={t("paymentLogoAlt")}
                 width={150}
                 height={40}
                 className="h-10 w-auto opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105"
@@ -196,11 +198,11 @@ export default function Footer() {
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <p className="text-sm text-slate-500">
-                © 2026 KamKam. Tüm hakları saklıdır.
+                {t("copyright")}
               </p>
               <span className="text-slate-700 hidden md:inline">|</span>
               <p className="text-sm font-medium text-slate-400 hidden md:inline">
-                Türkiye'nin Şehir Rehberi
+                {t("cityGuide")}
               </p>
             </div>
             
@@ -211,10 +213,10 @@ export default function Footer() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                Tüm Sistemler Aktif
+                {t("systemsActive")}
               </div>
               <div className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
-                IST {time}
+                {t("timezone")} {time}
               </div>
             </div>
 
@@ -228,7 +230,7 @@ export default function Footer() {
               data-magnetic="true"
               onClick={scrollToTop}
               className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-brand hover:border-brand transition-all duration-300 shadow-xl"
-              aria-label="Yukarı Çık"
+              aria-label={t("backToTopAriaLabel")}
             >
               <IconArrowUp size={20} />
             </button>

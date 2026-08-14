@@ -29,10 +29,10 @@ export interface KesfetFilters {
 
 export default function KesfetPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Tümü");
-  const [activeSort, setActiveSort] = useState("Önerilen");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeSort, setActiveSort] = useState("recommended");
   const [activePrices, setActivePrices] = useState<string[]>([]);
-  const [activeDistance, setActiveDistance] = useState("Farketmez");
+  const [activeDistance, setActiveDistance] = useState("any");
   const [openNow, setOpenNow] = useState(false);
   const [hasPromo, setHasPromo] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);

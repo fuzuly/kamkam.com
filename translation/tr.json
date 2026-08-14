@@ -1,0 +1,334 @@
+{
+  "home": {
+    "header": {
+      "homeAriaLabel": "KamKam Anasayfa",
+      "businessLogoAlt": "KamKam İşletmeler",
+      "languageAriaLabel": "Dil Seçimi",
+      "openMenuAriaLabel": "Menüyü Aç",
+      "closeMenuAriaLabel": "Menüyü Kapat",
+      "registerBusiness": "İşletmeni Kaydet",
+      "nav": {
+        "discover": "Keşfet",
+        "businesses": "İşletmeler İçin",
+        "about": "Kamkam Nedir?",
+        "download": "Uygulamayı İndir"
+      },
+      "languages": {
+        "turkish": "Türkçe",
+        "english": "İngilizce",
+        "turkishMobile": "Türkçe / TR",
+        "englishMobile": "English / EN"
+      }
+    },
+    "preloader": {
+      "companyName": "KamKam Teknoloji ve Ticaret Anonim Şirketi"
+    },
+    "hero": {
+      "title": "Her Şey. Tek Yerde.",
+      "highlight": "Sınır Yok.",
+      "description": "Karmaşaya veda edin. Keşif, ödül ve prestij tek bir dijital anahtarda buluştu. Parçalanmış sistemleri geride bırakın; şehri adımlarınıza göre şekillendiren bu ayrıcalıklı deneyimi yaşayın.",
+      "slogan": "KEŞFET. KULLAN. KAZAN."
+    },
+    "showcase": {
+      "eyebrow": "Parçaları Birleştirdik",
+      "title": "Dağınıklığa",
+      "highlight": "Son.",
+      "description": "Telefonunuzu yoran kalabalığa veda edin. Şehrin tüm ritmi tek bir kusursuz alanda birleşti. Daha hızlı, daha keskin ve tamamen size özel.",
+      "download": "Uygulamayı İndir",
+      "mockupAlt": "KamKam mobil uygulama ekranı"
+    },
+    "features": {
+      "eyebrow": "Kuralları Biz Koyarız",
+      "title": "Yenilik Değil.",
+      "highlight": "Devrim.",
+      "description": "Kasa kuyruklarını ve şişirilmiş sadakat programlarını yok ettik. Sadece okut, al ve çık.",
+      "items": {
+        "scan": {
+          "title": "Tek Hareketle Çözüm",
+          "description": "Numara veya formlarla uğraşmadan sadece kodunuzu okutun, ayrıcalıklar anında cüzdanınıza yansısın."
+        },
+        "guide": {
+          "title": "Kişisel Şehir Rehberiniz",
+          "description": "Karmaşık listelerde kaybolmadan, şehrin ritmini ve modunuza en uygun seçkin mekanları haritadan keşfedin."
+        },
+        "rewards": {
+          "title": "Zincirsiz, Özgür Ödüller",
+          "description": "Ödüllerinizi tek mekana hapsetmeyin; kazandığınız puanları KamKam ağındaki dilediğiniz işletmede özgürce harcayın."
+        },
+        "lifestyle": {
+          "title": "Sıkıcı Değil, Dinamik ve Eğlenceli",
+          "description": "Sıradan rutinleri geride bırakın; şehrin ritmine katıldıkça sürekli yenilenen avantajlarla KamKam'ı eğlenceli bir yaşam tarzı haline getirin."
+        }
+      },
+      "mockups": {
+        "leftAlt": "KamKam uygulaması sol ekranı",
+        "rightAlt": "KamKam uygulaması sağ ekranı",
+        "centerAlt": "KamKam uygulaması ana ekranı"
+      }
+    },
+    "business": {
+      "eyebrow": "İşletmeler İçin",
+      "title": "Karanlıkta İlerlemeyin.",
+      "highlight": "Kusursuz İçgörüyle Büyüyün.",
+      "description": "Müşteriyi elde tutmak agresif kampanyalarla değil, kusursuz bir deneyimle başlar. Etkileşimi o kadar pürüzsüz kılın ki, misafiriniz daha kapıdan çıkmadan bir sonraki gelişini planlasın.",
+      "features": {
+        "fieldSupport": {
+          "title": "Premium Saha Desteği",
+          "description": "Yazılımı kurup sizi yalnız bırakmıyoruz. Özel saha ekibimizle tüm süreçte fiziksel olarak yanınızdayız. Kusursuz teknoloji, insani dokunuş."
+        },
+        "customerNetwork": {
+          "title": "Çapraz Müşteri Ağı",
+          "description": "Sadece kendi müşterinizle yetinmeyin. Ağımızda puan kazanan binlerce kullanıcıyı işletmenize çekin, şehrin akışına anında katılın."
+        }
+      },
+      "dashboard": {
+        "monthlyVolume": "Aylık İşlem Hacmi",
+        "activeCustomer": "Aktif Müşteri",
+        "stores": "mağazada",
+        "campaignConversion": "Kampanya Dönüşümü",
+        "newMember": "Yeni Katılım"
+      }
+    },
+    "howItWorks": {
+      "eyebrow": "Hemen Başlayın",
+      "title": "Beklemek Yok.",
+      "highlight": "3 Adımda İçeridesiniz.",
+      "description": "Sadece 3 adımda dijital kimliğinizi oluşturun ve KamKam dünyasının ayrıcalıklarını yaşamaya hemen başlayın.",
+      "steps": {
+        "discover": {
+          "number": "01",
+          "title": "Şehri Keşfetmeye Başlayın",
+          "description": "Saniyeler içinde profilinizi oluşturun ve sizin için anlaştığımız işletmelerden oluşan KamKam ağına adım atın. Karmaşık kayıt süreçleri veya cüzdan şişiren plastik kartlar yok; sadece size özel fırsatlarla dolu yepyeni bir şehir deneyimi var."
+        },
+        "scan": {
+          "number": "02",
+          "title": "Sadece Okutun",
+          "description": "Tam ihtiyacınız olan işletmeyi bulun ve keyfini çıkarın. Kasaya geldiğinizde telefon numaranızı söylemekle veya form doldurmakla uğraşmayın. Sadece telefonunuzdaki QR kodu gösterin ve saniyeler içinde puanınızı cebinize koyun."
+        },
+        "spend": {
+          "number": "03",
+          "title": "Özgürce Harcayın, Kendinizi Şımartın",
+          "description": "Biriken puanlarınızı KamKam ağındaki tüm mekanlarda dilediğiniz gibi harcayın. Kazandığınız ödüller tek bir işletmeye bağlı kalmaz; kahve içerken kazandığınız puanla bir sonraki gün başka bir mekanda kendinizi şımartın. Şehrin tadını ayrıcalıklı çıkarın."
+        }
+      }
+    },
+    "footer": {
+      "marquee": {
+        "discover": "Keşfet",
+        "use": "Kullan",
+        "earn": "Kazan"
+      },
+      "trust": {
+        "kvkk": "KVKK Uyumlu",
+        "ssl": "SSL Şifreli",
+        "businesses": "100+ İşletme",
+        "freeApp": "Ücretsiz App"
+      },
+      "homeAriaLabel": "KamKam Anasayfa",
+      "title": "Hazır mısınız?",
+      "description": "Şehri telefonunla keşfet. Özenle seçilmiş işletmeler, sınırsız ayrıcalık.",
+      "emailPlaceholder": "E-posta adresiniz...",
+      "join": "Katıl",
+      "mainHeading": "Keşfet",
+      "mainLinks": {
+        "discover": "Keşfet",
+        "about": "Kamkam Nedir?",
+        "aboutUs": "Hakkımızda",
+        "contact": "İletişim"
+      },
+      "legalHeading": "Kurumsal",
+      "legalLinks": {
+        "privacy": "Gizlilik Politikası",
+        "terms": "Kullanım Şartları",
+        "delivery": "Teslimat ve İade",
+        "distanceSales": "Mesafeli Satış"
+      },
+      "securePayment": "Güvenli Ödeme Altyapısı",
+      "paymentLogoAlt": "iyzico ile Öde - Visa ve Mastercard",
+      "copyright": "© 2026 KamKam. Tüm hakları saklıdır.",
+      "cityGuide": "Türkiye'nin Şehir Rehberi",
+      "systemsActive": "Tüm Sistemler Aktif",
+      "timezone": "IST",
+      "backToTopAriaLabel": "Yukarı Çık"
+    }
+  },
+  "kesfet": {
+    "categories": {
+      "all": "Tümü",
+      "food": "Yeme",
+      "drink": "İçme",
+      "dessert": "Tatlı",
+      "beauty": "Güzellik",
+      "health": "Sağlık",
+      "care": "Bakım",
+      "petServices": "Pet Hizmetleri",
+      "car": "Araba",
+      "carCare": "Araç Bakım",
+      "industry": "Sanayi"
+    },
+    "sort": {
+      "recommended": "Önerilen",
+      "nearest": "En Yakın",
+      "highestRated": "En Yüksek Puan"
+    },
+    "distance": {
+      "walking": "Yürüme Mesafesi",
+      "shortDrive": "Araçla Kısa",
+      "any": "Farketmez"
+    },
+    "status": {
+      "open": "Açık",
+      "closed": "Kapalı"
+    },
+    "hero": {
+      "imageAlt": "KamKam Keşfet arayüzü",
+      "title": "Şehri Kendi",
+      "highlight": "Kurallarınla",
+      "titleEnd": "Keşfet",
+      "description": "KamKam’lıların şu an nerede, hangi ayrıcalıkları yaşadığını gör. Senin için özenle seçilmiş mekanların güncel fırsatlarına göz at.",
+      "openFiltersAriaLabel": "Filtreleri Aç"
+    },
+    "featured": {
+      "title": "Öne Çıkanlar",
+      "viewAll": "Hepsini Gör",
+      "scrollLeftAriaLabel": "Sola Kaydır",
+      "scrollRightAriaLabel": "Sağa Kaydır",
+      "logoAlt": "{name} logosu"
+    },
+    "listings": {
+      "searchPlaceholder": "Hadi sen de KamKam'la...",
+      "title": "Tüm İşletmeler",
+      "sortLabel": "Sırala:",
+      "openNowBadge": "Şu An Açık",
+      "promotionsBadge": "Kampanyalılar",
+      "removeFilterAriaLabel": "{filter} filtresini kaldır",
+      "favoriteAriaLabel": "{name} işletmesini favorilere ekle",
+      "unfavoriteAriaLabel": "{name} işletmesini favorilerden çıkar",
+      "emptyTitle": "Sonuç Bulunamadı",
+      "emptyDescription": "Görünüşe göre seçtiğin kriterlere uygun bir mekan yok. Filtreleri esneterek yeniden deneyebilirsin.",
+      "clearFilters": "Filtreleri Temizle"
+    },
+    "filters": {
+      "title": "Filtreler",
+      "closeAriaLabel": "Filtreleri Kapat",
+      "sortHeading": "Sıralama",
+      "priceHeading": "Fiyat Seviyesi",
+      "distanceHeading": "Mesafe",
+      "openNowTitle": "Şu An Açık",
+      "openNowDescription": "Sadece şu an açık olan işletmeler",
+      "openNowAriaLabel": "Şu an açık işletmeleri göster",
+      "promotionsTitle": "Kampanyalılar",
+      "promotionsDescription": "Aktif indirimi olan işletmeler",
+      "promotionsAriaLabel": "Kampanyalı işletmeleri göster",
+      "clear": "Temizle",
+      "showResults": "Sonuçları Göster"
+    },
+    "promotions": {
+      "artisanDiscount": "%15 KamKam İndirimi",
+      "coffeeGift": "1+1 Kahve Hediyesi",
+      "freeCheck": "Ücretsiz Kontrol",
+      "tenPercentDiscount": "%10 İndirim",
+      "firstMonthDiscount": "İlk Ay %50 İndirim",
+      "vipWashGift": "VIP Yıkama Hediyesi",
+      "wineTreat": "Özel Şarap İkramı",
+      "weekendDiscount": "Hafta Sonu %25 İndirim",
+      "ceramicCoating": "Seramik Kaplama",
+      "secondCoffeeGift": "İkinci Kahve Hediye",
+      "firstGroomingDiscount": "İlk Tıraş %30 İndirim",
+      "freeFirstClass": "Ücretsiz İlk Ders"
+    },
+    "downloadModal": {
+      "closeAriaLabel": "İndirme penceresini kapat",
+      "placeTitle": "{placeName} Sizi Bekliyor!",
+      "title": "Ayrıcalığı Cebinize Taşıyın",
+      "description": "Sıradanlığı geride bırakın. Tüm kampanyalar ve prestijli mekanlar tek bir dokunuş uzağınızda.",
+      "qrAlt": "KamKam indirme sayfası QR kodu",
+      "scanQr": "Kameraya Okutun",
+      "scanDescription": "Hemen indirmek için tarayın",
+      "appStore": "App Store'dan İndir",
+      "googlePlay": "Google Play'den İndir"
+    }
+  },
+  "nedir": {
+    "hero": {
+      "title": "Bir Uygulamadan",
+      "highlight": "Daha Fazlası.",
+      "description": "İyi yaşamanın ve kaliteli hizmetin ödüllendirildiği seçkin bir ekosistem.",
+      "descriptionHighlight": "Şehrin ritmini belirleyen mekanlarda size özel ayrıcalıkları keşfedin, deneyimin merkezinde yer alın.",
+      "privilegesCard": {
+        "titleBefore": "Artık",
+        "highlight": "Hak Ettiğin",
+        "titleAfter": "Ayrıcalıklar",
+        "description": "Her dokunuşta cebinde."
+      },
+      "scanCard": {
+        "titleBefore": "Kasada",
+        "titleMiddle": "Sadece",
+        "highlight": "Okut ve Çık.",
+        "description": "Anında hesabına yansıt."
+      }
+    },
+    "faq": {
+      "logoAlt": "KamKam Akademi",
+      "title": "Sorular ve Cevaplar",
+      "description": "Soru işaretlerinin yerini mutlak güvene bıraktığı nokta. Sistemin arka planındaki o tıkır tıkır işleyen yapıyı tüm netliğiyle keşfedin.",
+      "items": {
+        "discountApp": {
+          "question": "KamKam sıradan bir indirim veya fırsat uygulaması mı?",
+          "answer": "Hayır. KamKam markanızı ucuzlatan sıradan indirim veya fırsat platformlarından tamamen farklıdır. Müşteri kitlenizi özenle seçilmiş, kaliteli hizmeti takdir eden kullanıcılardan oluşturur ve işletmenizin prestijini artıracak bir sadakat ekosistemi sunar."
+        },
+        "checkout": {
+          "question": "Kasa sırasında kod söylemek veya kart göstermek zorunda mıyım?",
+          "answer": "Kesinlikle hayır. KamKam'ın görünmez teknolojisi sayesinde kasada ekstra hiçbir fiziksel kart göstermenize veya kod söylemenize gerek kalmaz. Sadece telefonunuzu okutarak tüm işlemlerinizi saniyeler içinde, pürüzsüz bir şekilde tamamlarsınız."
+        },
+        "hardware": {
+          "question": "İşletmeme yeni bir POS cihazı veya kablolu donanım kurulacak mı?",
+          "answer": "Herhangi bir donanım karmaşasına son verdik. Kasanızı yoran, ekstra bakım gerektiren hantal POS cihazları veya kablolu donanımlara ihtiyacınız yok. Sisteme anında, dijital olarak entegre olabilir ve saniyeler içinde kullanmaya başlayabilirsiniz."
+        },
+        "onboarding": {
+          "question": "Sisteme dahil olup kullanmaya başlamak ne kadar zamanımı alır?",
+          "answer": "Dakikalar içinde. Karmaşık başvuru süreçleri, haftalarca süren onay aşamaları veya teknik entegrasyon bekleme süreleri yoktur. Formu doldurduğunuz an sistem altyapınız oluşturulur ve hemen müşterilerinizi ağırlamaya başlayabilirsiniz."
+        },
+        "security": {
+          "question": "İşletme ve müşteri verilerim uygulamanın içinde ne kadar güvende?",
+          "answer": "Güvenlik en büyük önceliğimizdir. Tüm verileriniz uluslararası standartlarda, uçtan uca şifrelemeyle korunur. Müşteri verileriniz asla 3. taraflarla paylaşılmaz ve sadece sizin işletmenizin büyümesi için izole bir şekilde saklanır."
+        }
+      }
+    },
+    "explanation": {
+      "title": "Nedir?",
+      "users": {
+        "eyebrow": "Kullanıcılarımız İçin",
+        "beforeHighlight": "Sadece mekanlara gitmeyin, gittiğiniz her yerde ayrıcalığı hissedin. Kusursuz bir sadakat ağıyla çalışan KamKam; her ziyaretinizi anında bir kampanyaya, her girişinizi",
+        "highlight": "prestijli bir karşılamaya",
+        "afterHighlight": "dönüştüren akıllı şehir rehberinizdir."
+      },
+      "businesses": {
+        "eyebrow": "İşletmelerimiz İçin",
+        "beforeHighlight": "Markanızı ucuzlatmadan ve sizi hiç yormadan, kapıdan giren müşteriyi",
+        "highlight": "kendi kendine geri getiren",
+        "afterHighlight": "arka plan gücüdür."
+      }
+    },
+    "company": {
+      "manifestoTitle": "KamKam Teknoloji ve Ticaret A.Ş. olarak, iyi hizmetin ve kaliteli yaşamın tesadüflere bırakılamayacağına inanıyoruz.",
+      "manifestoDescription": "Eski kuralları geride bırakarak; şehrin ritmini belirleyenleri tek bir ağda topluyoruz. Geliştirdiğimiz teknolojiyle, sadece bir işlem platformu değil, herkesin kazandığı ayrıcalıklı bir yaşam tarzı sunuyoruz.",
+      "changeTitle": "Neleri Değiştiriyoruz?",
+      "positiveChange": "Kitlelerle işletmeleri buluşturan pürüzsüz bir rehberlik.",
+      "eliminated": {
+        "emptyStatistics": "Nakde dönüşmeyen, göz boyayan boş istatistikler.",
+        "checkoutDelays": "Kasada bekleten SMS ve telefon numaraları.",
+        "hardware": "Kasanızı yoran, bakım gerektiren hantal donanımlar.",
+        "discountHunters": "Markanızı ucuzlatan geçici indirim avcıları."
+      },
+      "vision": {
+        "title": "Vizyon",
+        "description": "Ticaretin ve sosyalleşmenin en ayrıcalıklı halini tasarlamak. Şehrin ritmini ve kusursuzluğun yeni standardını belirlemek."
+      },
+      "mission": {
+        "title": "Misyon",
+        "description": "Sıradanlığı reddedenleri tek bir ağda toplamak. Karmaşık sistemleri ve fiziksel sınırları ortadan kaldırarak; seçkin kitleyi, hak ettiği kaliteyle görünmez bir teknoloji üzerinden pürüzsüzce buluşturmak."
+      }
+    }
+  }
+}

@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Preloader() {
+  const t = useTranslation("home.preloader");
   const [progress, setProgress] = useState(0);
   const [showText, setShowText] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -105,7 +107,7 @@ export default function Preloader() {
                   className="w-full px-4 text-center"
                 >
                   <p className="text-[9px] sm:text-[11px] md:text-[13px] font-bold text-gray-400 tracking-[0.1em] sm:tracking-[0.2em] uppercase leading-relaxed">
-                    KamKam Teknoloji ve Ticaret Anonim Şirketi
+                    {t("companyName")}
                   </p>
                 </motion.div>
               )}

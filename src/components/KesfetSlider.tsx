@@ -5,12 +5,14 @@ import { Gift, MapPin, ChevronRight, ChevronLeft } from "lucide-react";
 import Image from "next/image";
 
 import { FEATURED } from "@/data/demo-isletmeler";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface KesfetSliderProps {
   onCardClick?: (placeName: string) => void;
 }
 
 export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
+  const t = useTranslation("kesfet");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Force scroll position to 0 on mount to fix history navigation restoring scroll state
@@ -35,13 +37,13 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
       {/* Header Row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3 flex justify-between items-center">
         <h2 className="text-[15px] sm:text-[17px] font-extrabold text-[#37474F]">
-          Öne Çıkanlar
+          {t("featured.title")}
         </h2>
         <a 
           href="/one-cikanlar" 
           className="flex items-center gap-0.5 px-3.5 py-2 bg-white border border-[#E3E7EC] rounded-full text-[12px] sm:text-[13px] font-bold text-[#37474F] hover:bg-gray-50 transition-colors shadow-sm"
         >
-          Hepsini Gör
+          {t("featured.viewAll")}
           <ChevronRight className="w-3.5 h-3.5 text-[#78828A]" strokeWidth={2.5} />
         </a>
       </div>
@@ -54,7 +56,7 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
           <button 
             onClick={() => scroll('left')}
             className="absolute -left-4 top-[77px] -translate-y-1/2 z-30 w-11 h-11 bg-white/90 backdrop-blur-sm border border-[#E3E7EC] shadow-[0_4px_20px_rgba(0,0,0,0.08)] rounded-full flex items-center justify-center text-[#37474F] hover:text-[#D9381E] hover:scale-105 transition-all opacity-0 group-hover:opacity-100 disabled:opacity-0 pointer-events-auto"
-            aria-label="Sola Kaydır"
+            aria-label={t("featured.scrollLeftAriaLabel")}
           >
             <ChevronLeft className="w-6 h-6" strokeWidth={2} />
           </button>
@@ -62,7 +64,7 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
           <button 
             onClick={() => scroll('right')}
             className="absolute -right-4 top-[77px] -translate-y-1/2 z-30 w-11 h-11 bg-white/90 backdrop-blur-sm border border-[#E3E7EC] shadow-[0_4px_20px_rgba(0,0,0,0.08)] rounded-full flex items-center justify-center text-[#37474F] hover:text-[#D9381E] hover:scale-105 transition-all opacity-0 group-hover:opacity-100 disabled:opacity-0 pointer-events-auto"
-            aria-label="Sağa Kaydır"
+            aria-label={t("featured.scrollRightAriaLabel")}
           >
             <ChevronRight className="w-6 h-6" strokeWidth={2} />
           </button>
@@ -134,7 +136,7 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
                 <div className="absolute top-[9px] left-[9px]">
                   <Image
                     src={item.avatar}
-                    alt={`${item.name} logo`}
+                    alt={t("featured.logoAlt", { name: item.name })}
                     width={53}
                     height={53}
                     className="rounded-full border-2 border-white object-contain p-1.5 shadow-sm bg-white"
@@ -150,7 +152,7 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
                     </h3>
                     {item.category && (
                       <div className="flex items-center gap-0.5 text-[11px] font-semibold text-white/90 shrink-0">
-                        <span>{item.category}</span>
+                        <span>{t(`categories.${item.category}`)}</span>
                       </div>
                     )}
                   </div>
@@ -160,7 +162,7 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
                     {/* Left: Promo Tag */}
                     <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md px-1.5 py-0.5 rounded-full text-[9px] font-medium text-white truncate">
                       <Gift className="w-2.5 h-2.5 shrink-0" />
-                      <span className="truncate">{item.promoOffer}</span>
+                      <span className="truncate">{t(`promotions.${item.promotion}`)}</span>
                     </div>
 
                     {/* Right: Metadata (Location & Status) */}
@@ -173,9 +175,9 @@ export default function KesfetSlider({ onCardClick }: KesfetSliderProps) {
                       )}
                       {item.status && (
                         <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-bold text-white ${
-                          item.status === 'Açık' ? 'bg-[#2E7D32]' : 'bg-[#E53935]'
+                          item.status === "open" ? "bg-[#2E7D32]" : "bg-[#E53935]"
                         }`}>
-                          {item.status}
+                          {t(`status.${item.status}`)}
                         </span>
                       )}
                     </div>

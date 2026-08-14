@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import { m as motion } from "framer-motion";
-import { Filter, Search, Map as MapIcon, Grid } from "lucide-react";
-import Logo from "@/components/Logo";
+import { Filter } from "lucide-react";
 import Image from "next/image";
 
 import { CATEGORIES } from "@/data/demo-isletmeler";
 import { KesfetFilters } from "@/app/kesfet/page";
 
 import FilterModal from "./FilterModal";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
+  const t = useTranslation("kesfet");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   return (
@@ -37,7 +38,7 @@ export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
       >
         <Image 
           src="/14.svg" 
-          alt="KamKam Keşfet Arayüzü" 
+          alt={t("hero.imageAlt")}
           width={600}
           height={1300}
           priority
@@ -54,7 +55,7 @@ export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
       >
         <Image 
           src="/14.svg" 
-          alt="KamKam Keşfet Arayüzü" 
+          alt={t("hero.imageAlt")}
           width={600}
           height={1300}
           priority
@@ -83,11 +84,11 @@ export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="max-w-[75%] sm:max-w-none text-4xl sm:text-5xl lg:text-7xl font-extrabold text-[#050505] tracking-tighter leading-[1.1] mb-6 md:mb-8"
           >
-            Şehri Kendi <br />
+            {t("hero.title")} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-rose-500 to-orange-500">
-              Kurallarınla
+              {t("hero.highlight")}
             </span> <br />
-            Keşfet
+            {t("hero.titleEnd")}
           </motion.h1>
 
           <motion.p 
@@ -96,7 +97,7 @@ export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="text-base sm:text-lg lg:text-xl text-slate-500 font-medium leading-relaxed mb-8 md:mb-12 max-w-[220px] sm:max-w-none"
           >
-            KamKam’lıların şu an nerede, hangi ayrıcalıkları yaşadığını gör. Senin için özenle seçilmiş mekanların güncel fırsatlarına göz at.
+            {t("hero.description")}
           </motion.p>
         </motion.div>
 
@@ -117,12 +118,13 @@ export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
             <div className="sticky left-0 z-20 flex items-center bg-white pl-4 sm:pl-0 pr-2 py-1">
               <button 
                 onClick={() => setIsFilterOpen(true)}
+                aria-label={t("hero.openFiltersAriaLabel")}
                 className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 bg-white border border-[#E3E7EC] rounded-full hover:border-[#D9381E]/30 hover:shadow-[0_4px_12px_rgb(217,56,30,0.08)] transition-all duration-300"
               >
                 <Filter className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#37474F] group-hover:text-brand transition-colors" />
                 
                 {/* Active Filter Indicator Dot */}
-                {(filters.activePrices.length > 0 || filters.openNow || filters.hasPromo || filters.activeDistance !== "Farketmez" || filters.activeSort !== "Önerilen") && (
+                {(filters.activePrices.length > 0 || filters.openNow || filters.hasPromo || filters.activeDistance !== "any" || filters.activeSort !== "recommended") && (
                   <span className="absolute top-0 right-0 w-3 h-3 bg-brand border-2 border-white rounded-full" />
                 )}
               </button>
@@ -142,7 +144,7 @@ export default function KesfetHero({ filters }: { filters: KesfetFilters }) {
                   : "bg-white border border-[#E3E7EC] text-[#37474F] hover:bg-gray-50 hover:border-gray-300"
                 }`}
               >
-                {category}
+                {t(`categories.${category}`)}
               </button>
             ))}
             

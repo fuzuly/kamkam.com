@@ -2,8 +2,18 @@
 
 import { m as motion } from "framer-motion";
 import { CheckCircle2, XCircle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+
+const ELIMINATED_KEYS = [
+  "emptyStatistics",
+  "checkoutDelays",
+  "hardware",
+  "discountHunters",
+];
 
 export default function NedirCompany() {
+  const t = useTranslation("nedir.company");
+
   return (
     <section className="w-full py-24 md:py-32 bg-white text-black relative">
       
@@ -18,10 +28,10 @@ export default function NedirCompany() {
           className="text-center md:text-left mb-24"
         >
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter leading-tight text-black mb-8">
-            KamKam Teknoloji ve Ticaret A.Ş. olarak, iyi hizmetin ve kaliteli yaşamın tesadüflere bırakılamayacağına inanıyoruz.
+            {t("manifestoTitle")}
           </h2>
           <p className="text-xl md:text-2xl font-medium text-gray-500 leading-relaxed max-w-4xl">
-            Eski kuralları geride bırakarak; şehrin ritmini belirleyenleri tek bir ağda topluyoruz. Geliştirdiğimiz teknolojiyle, sadece bir işlem platformu değil, herkesin kazandığı ayrıcalıklı bir yaşam tarzı sunuyoruz.
+            {t("manifestoDescription")}
           </p>
         </motion.div>
 
@@ -35,27 +45,22 @@ export default function NedirCompany() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center lg:items-start text-center lg:text-left"
           >
-            <h3 className="text-2xl font-bold tracking-tight mb-8">Neleri Değiştiriyoruz?</h3>
+            <h3 className="text-2xl font-bold tracking-tight mb-8">{t("changeTitle")}</h3>
             <div className="flex flex-col gap-6 lg:gap-5 w-full">
               
               <div className="flex flex-col lg:flex-row items-center lg:items-start gap-3 lg:gap-4">
                 <CheckCircle2 className="w-6 h-6 text-black shrink-0 lg:mt-0.5" />
                 <p className="text-lg font-semibold text-black">
-                  Kitlelerle işletmeleri buluşturan pürüzsüz bir rehberlik.
+                  {t("positiveChange")}
                 </p>
               </div>
 
               {/* The Negatives we are eliminating */}
-              {[
-                "Nakde dönüşmeyen, göz boyayan boş istatistikler.",
-                "Kasada bekleten SMS ve telefon numaraları.",
-                "Kasanızı yoran, bakım gerektiren hantal donanımlar.",
-                "Markanızı ucuzlatan geçici indirim avcıları."
-              ].map((item, i) => (
-                <div key={i} className="flex flex-col lg:flex-row items-center lg:items-start gap-3 lg:gap-4 opacity-50">
+              {ELIMINATED_KEYS.map((key) => (
+                <div key={key} className="flex flex-col lg:flex-row items-center lg:items-start gap-3 lg:gap-4 opacity-50">
                   <XCircle className="w-6 h-6 text-gray-400 shrink-0 lg:mt-0.5" />
                   <p className="text-lg font-medium text-gray-500 line-through decoration-gray-300">
-                    {item}
+                    {t(`eliminated.${key}`)}
                   </p>
                 </div>
               ))}
@@ -77,12 +82,12 @@ export default function NedirCompany() {
               <div className="flex items-center gap-4 mb-4 justify-center lg:justify-start">
                 <span className="w-8 h-px bg-brand" />
                 <h3 className="text-sm font-bold tracking-[0.2em] uppercase text-brand">
-                  Vizyon
+                  {t("vision.title")}
                 </h3>
                 <span className="w-8 h-px bg-brand lg:hidden" />
               </div>
               <p className="text-2xl md:text-3xl font-semibold tracking-tight text-black leading-snug">
-                Ticaretin ve sosyalleşmenin en ayrıcalıklı halini tasarlamak. Şehrin ritmini ve kusursuzluğun yeni standardını belirlemek.
+                {t("vision.description")}
               </p>
             </div>
 
@@ -91,12 +96,12 @@ export default function NedirCompany() {
               <div className="flex items-center gap-4 mb-4 justify-center lg:justify-start">
                 <span className="w-8 h-px bg-black/20" />
                 <h3 className="text-sm font-bold tracking-[0.2em] uppercase text-gray-500">
-                  Misyon
+                  {t("mission.title")}
                 </h3>
                 <span className="w-8 h-px bg-black/20 lg:hidden" />
               </div>
               <p className="text-lg md:text-xl font-medium text-gray-600 leading-relaxed">
-                Sıradanlığı reddedenleri tek bir ağda toplamak. Karmaşık sistemleri ve fiziksel sınırları ortadan kaldırarak; seçkin kitleyi, hak ettiği kaliteyle görünmez bir teknoloji üzerinden pürüzsüzce buluşturmak.
+                {t("mission.description")}
               </p>
             </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { m as motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PremiumCardIcon = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -21,6 +22,8 @@ const NfcWaveIcon = () => (
 );
 
 export default function NedirHero() {
+  const t = useTranslation("nedir.hero");
+
   return (
     <section className="relative w-full py-16 lg:py-20 flex flex-col items-center justify-center bg-[#fafafa] text-black overflow-hidden z-10 min-h-[95vh] lg:min-h-[92vh]">
       
@@ -41,9 +44,9 @@ export default function NedirHero() {
               className="flex flex-col items-center lg:items-start"
             >
               <h1 className="text-4xl sm:text-5xl lg:text-[4.8rem] xl:text-[5.2rem] font-extrabold tracking-tight text-black leading-[1.08] lg:leading-[1.05] mb-5 lg:mb-6">
-                Bir Uygulamadan <br />
+                {t("title")} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-[#e64d33] to-[#b82a14] drop-shadow-sm">
-                  Daha Fazlası.
+                  {t("highlight")}
                 </span>
               </h1>
             </motion.div>
@@ -54,8 +57,8 @@ export default function NedirHero() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="text-base sm:text-lg font-medium leading-relaxed tracking-tight text-gray-500 max-w-md lg:max-w-lg px-4 lg:px-0">
-                İyi yaşamanın ve kaliteli hizmetin ödüllendirildiği seçkin bir ekosistem. <br className="hidden md:block mb-3" />
-                <span className="text-gray-900">Şehrin ritmini belirleyen mekanlarda size özel ayrıcalıkları keşfedin, deneyimin merkezinde yer alın.</span>
+                {t("description")} <br className="hidden md:block mb-3" />
+                <span className="text-gray-900">{t("descriptionHighlight")}</span>
               </p>
             </motion.div>
           </div>
@@ -78,13 +81,13 @@ export default function NedirHero() {
                   <PremiumCardIcon />
                 </div>
                 <h2 className="text-[1.75rem] sm:text-3xl font-bold tracking-tight text-black leading-[1.15] lg:leading-[1.1]">
-                  Artık <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-[#ff6b4a]">Hak Ettiğin</span> <br />
-                  Ayrıcalıklar
+                  {t("privilegesCard.titleBefore")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-[#ff6b4a]">{t("privilegesCard.highlight")}</span> <br />
+                  {t("privilegesCard.titleAfter")}
                 </h2>
               </div>
 
               <p className="relative z-10 text-base lg:text-lg font-medium text-gray-500 tracking-tight mb-2 lg:mb-0">
-                Her dokunuşta cebinde.
+                {t("privilegesCard.description")}
               </p>
             </motion.div>
 
@@ -103,13 +106,13 @@ export default function NedirHero() {
                   <NfcWaveIcon />
                 </div>
                 <h2 className="text-[1.75rem] sm:text-3xl font-bold tracking-tight text-black leading-[1.15] lg:leading-[1.1]">
-                  Kasada <br />
-                  Sadece <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-400">Okut ve Çık.</span>
+                  {t("scanCard.titleBefore")} <br />
+                  {t("scanCard.titleMiddle")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-400">{t("scanCard.highlight")}</span>
                 </h2>
               </div>
 
               <p className="relative z-10 text-base lg:text-lg font-medium text-gray-500 tracking-tight leading-relaxed mb-2 lg:mb-0">
-                Anında hesabına yansıt.
+                {t("scanCard.description")}
               </p>
             </motion.div>
 

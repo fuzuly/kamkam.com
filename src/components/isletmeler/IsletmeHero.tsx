@@ -44,6 +44,7 @@ export default function IsletmeHero() {
               src="/isletmemockup.svg" 
               alt="KamKam Isletme App" 
               fill 
+              sizes="100vw"
               className="object-contain object-bottom"
               priority
             />
@@ -99,6 +100,7 @@ export default function IsletmeHero() {
                   src="/13.svg" 
                   alt="KamKam App Desktop Mockup" 
                   fill 
+                  sizes="(max-width: 1279px) 340px, 380px"
                   className="object-cover object-top"
                   priority
                 />

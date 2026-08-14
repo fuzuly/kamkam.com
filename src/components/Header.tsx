@@ -10,15 +10,10 @@ import Magnetic from "./Magnetic";
 import Image from "next/image";
 
 import { usePathname } from "next/navigation";
-
-const NAV_LINKS = [
-  { label: "Keşfet", href: "/kesfet" },
-  { label: "İşletmeler İçin", href: "/isletmeler" },
-  { label: "Kamkam Nedir?", href: "/nedir" },
-  { label: "Uygulamayı İndir", href: "/indir" },
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Header() {
+  const t = useTranslation("home.header");
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOverDarkSection, setIsOverDarkSection] = useState(pathname === "/"); 
@@ -26,6 +21,12 @@ export default function Header() {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [activeLang, setActiveLang] = useState("TR");
   const langRef = useRef<HTMLDivElement>(null);
+  const navLinks = [
+    { label: t("nav.discover"), href: "/kesfet" },
+    { label: t("nav.businesses"), href: "/isletmeler" },
+    { label: t("nav.about"), href: "/nedir" },
+    { label: t("nav.download"), href: "/indir" },
+  ];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -90,8 +91,8 @@ export default function Header() {
   const headerBg = !isScrolled 
     ? "bg-transparent py-6"
     : isOverDarkSection
-      ? "bg-black/70 backdrop-blur-2xl border-none shadow-[0_4px_30px_rgba(0,0,0,0.2)] py-4"
-      : "bg-white/75 backdrop-blur-2xl border-none shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-4";
+      ? "bg-black/90 backdrop-blur-md border-none shadow-[0_4px_30px_rgba(0,0,0,0.2)] py-4"
+      : "bg-white/90 backdrop-blur-md border-none shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-4";
 
   return (
     <>
@@ -105,11 +106,11 @@ export default function Header() {
           <div className="flex items-center justify-between">
             {/* LEFT: BRAND */}
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="flex items-center" aria-label="KamKam Anasayfa">
+              <Link href="/" className="flex items-center" aria-label={t("homeAriaLabel")}>
                 {pathname === "/isletmeler" ? (
                   <Image 
                     src={isDarkTheme ? "/isletmelogo-white.svg" : "/isletmelogo.svg"}
-                    alt="KamKam İşletmeler"
+                    alt={t("businessLogoAlt")}
                     width={150}
                     height={48}
                     priority
@@ -123,7 +124,7 @@ export default function Header() {
 
             {/* CENTER: DESKTOP NAVIGATION */}
             <nav className="hidden md:flex items-center gap-8">
-              {NAV_LINKS.map((link) => (
+              {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
@@ -150,7 +151,7 @@ export default function Header() {
                     textColor,
                     hoverColor
                   )}
-                  aria-label="Dil Seçimi"
+                  aria-label={t("languageAriaLabel")}
                 >
                   {activeLang === "TR" ? (
                     <img src="https://hatscripts.github.io/circle-flags/flags/tr.svg" alt="TR" className="w-[18px] h-[18px] rounded-full shadow-sm border border-black/5" />
@@ -171,8 +172,8 @@ export default function Header() {
                       className="absolute right-0 top-full mt-4 w-40 bg-white border border-[#E3E7EC] shadow-xl shadow-black/5 rounded-[16px] p-1.5 z-50 flex flex-col gap-0.5"
                     >
                       {[
-                        { code: "TR", label: "Türkçe", flag: "https://hatscripts.github.io/circle-flags/flags/tr.svg" },
-                        { code: "EN", label: "İngilizce", isGlobe: true }
+                        { code: "TR", label: t("languages.turkish"), flag: "https://hatscripts.github.io/circle-flags/flags/tr.svg" },
+                        { code: "EN", label: t("languages.english"), isGlobe: true }
                       ].map((lang) => (
                         <button
                           key={lang.code}
@@ -202,7 +203,7 @@ export default function Header() {
 
             <Magnetic strength={0.3}>
               <a href="https://kamkamapp.com/indir" data-magnetic="true" className="bg-brand text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/30">
-                İşletmeni Kaydet
+                {t("registerBusiness")}
               </a>
             </Magnetic>
             </div>
@@ -216,7 +217,7 @@ export default function Header() {
                   textColor,
                   isScrolled ? "hover:bg-slate-100" : "hover:bg-white/10"
                 )}
-                aria-label="Menüyü Aç"
+                aria-label={t("openMenuAriaLabel")}
               >
                 <IconMenu2 size={24} stroke={1.5} />
               </button>
@@ -243,7 +244,7 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {pathname === "/isletmeler" ? (
-                  <Image src="/isletmelogo.svg" alt="KamKam İşletmeler" width={150} height={40} className="h-10 w-auto" />
+                  <Image src="/isletmelogo.svg" alt={t("businessLogoAlt")} width={150} height={40} className="h-10 w-auto" />
                 ) : (
                   <Logo className="h-10 w-auto text-foreground" />
                 )}
@@ -251,7 +252,7 @@ export default function Header() {
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-foreground p-2 hover:bg-slate-100 rounded-full transition-colors"
-                aria-label="Menüyü Kapat"
+                aria-label={t("closeMenuAriaLabel")}
               >
                 <IconX size={24} stroke={1.5} />
               </button>
@@ -259,7 +260,7 @@ export default function Header() {
 
             {/* Mobile Menu Links */}
             <nav className="flex flex-col mt-12 gap-8 px-2">
-              {NAV_LINKS.map((link, i) => (
+              {navLinks.map((link, i) => (
                 <motion.div
                   key={link.label}
                   initial={{ opacity: 0, x: -20 }}
@@ -288,10 +289,10 @@ export default function Header() {
                 ) : (
                   <IconWorld size={24} stroke={1.5} />
                 )}
-                <span>{activeLang === "TR" ? "Türkçe / TR" : "English / EN"}</span>
+                <span>{activeLang === "TR" ? t("languages.turkishMobile") : t("languages.englishMobile")}</span>
               </button>
               <a href="https://kamkamapp.com/indir" className="bg-transparent border-[1.5px] border-brand text-brand py-4 rounded-full font-bold text-lg text-center transition-all duration-300 active:scale-95 active:bg-brand/5">
-                İşletmeni Kaydet
+                {t("registerBusiness")}
               </a>
             </div>
           </motion.div>

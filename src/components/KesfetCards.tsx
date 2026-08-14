@@ -2,14 +2,16 @@
 
 import { useState, useRef, useEffect } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
-import { Route, ChevronDown, Check, X, Search, Heart, Map as MapIcon } from "lucide-react";
+import { Route, ChevronDown, Check, X, Search, Heart } from "lucide-react";
 import { KesfetFilters } from "@/app/kesfet/page";
 import { PLACES } from "@/data/demo-isletmeler";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
-const SORT_OPTIONS = ["Önerilen", "En Yakın", "En Yüksek Puan"];
+const SORT_OPTIONS = ["recommended", "nearest", "highestRated"];
 
 export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
+  const t = useTranslation("kesfet");
   const [isSortOpen, setIsSortOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -31,16 +33,17 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
   // 1. FILTERING LOGIC
   const filteredPlaces = PLACES.filter(place => {
     // Category match
-    if (filters.activeCategory !== "Tümü" && place.category !== filters.activeCategory) return false;
+    if (filters.activeCategory !== "all" && place.category !== filters.activeCategory) return false;
     
     // Search match
     if (filters.searchQuery) {
       const q = filters.searchQuery.toLowerCase();
-      if (!place.name.toLowerCase().includes(q) && !place.category.toLowerCase().includes(q)) return false;
+      const category = t(`categories.${place.category}`).toLowerCase();
+      if (!place.name.toLowerCase().includes(q) && !category.includes(q)) return false;
     }
 
     // Open Now
-    if (filters.openNow && place.status !== "Açık") return false;
+    if (filters.openNow && place.status !== "open") return false;
 
     // Promo match (Mock logic: if true, only show places with extra campaigns)
     if (filters.hasPromo && !place.extraCampaigns) return false;
@@ -51,27 +54,27 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
   // 2. ACTIVE BADGES COMPUTATION
   const activeBadges: { label: string; onRemove: () => void }[] = [];
   
-  if (filters.activeCategory !== "Tümü") {
-    activeBadges.push({ label: filters.activeCategory, onRemove: () => filters.setActiveCategory("Tümü") });
+  if (filters.activeCategory !== "all") {
+    activeBadges.push({ label: t(`categories.${filters.activeCategory}`), onRemove: () => filters.setActiveCategory("all") });
   }
   if (filters.openNow) {
-    activeBadges.push({ label: "Şu An Açık", onRemove: () => filters.setOpenNow(false) });
+    activeBadges.push({ label: t("listings.openNowBadge"), onRemove: () => filters.setOpenNow(false) });
   }
   if (filters.hasPromo) {
-    activeBadges.push({ label: "Kampanyalılar", onRemove: () => filters.setHasPromo(false) });
+    activeBadges.push({ label: t("listings.promotionsBadge"), onRemove: () => filters.setHasPromo(false) });
   }
   filters.activePrices.forEach(price => {
     activeBadges.push({ label: price, onRemove: () => filters.setActivePrices(filters.activePrices.filter(p => p !== price)) });
   });
 
   const clearAllFilters = () => {
-    filters.setActiveCategory("Tümü");
+    filters.setActiveCategory("all");
     filters.setSearchQuery("");
     filters.setOpenNow(false);
     filters.setHasPromo(false);
     filters.setActivePrices([]);
-    filters.setActiveDistance("Farketmez");
-    filters.setActiveSort("Önerilen");
+    filters.setActiveDistance("any");
+    filters.setActiveSort("recommended");
   };
 
   return (
@@ -94,7 +97,7 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
               value={filters.searchQuery}
               onChange={(e) => filters.setSearchQuery(e.target.value)}
               className="block w-full pl-11 pr-4 py-3.5 sm:py-4 bg-white border border-gray-200/80 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand/40 transition-all shadow-sm hover:shadow-md text-[15px] sm:text-[16px] font-medium"
-              placeholder="Hadi sen de KamKam'la..."
+              placeholder={t("listings.searchPlaceholder")}
             />
           </div>
         </motion.div>
@@ -103,7 +106,7 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
         <div className="flex justify-between items-end px-4 sm:px-0 mb-4 sm:mb-6">
           <div className="flex flex-col gap-2">
             <h2 className="text-[17px] sm:text-[19px] font-extrabold text-[#37474F]">
-              Tüm İşletmeler
+              {t("listings.title")}
               <span className="text-sm text-gray-400 font-medium ml-2">({filteredPlaces.length})</span>
             </h2>
 
@@ -119,7 +122,11 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
                     className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-semibold text-gray-700 border border-gray-200"
                   >
                     {badge.label}
-                    <button onClick={badge.onRemove} className="w-4 h-4 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors">
+                    <button
+                      onClick={badge.onRemove}
+                      aria-label={t("listings.removeFilterAriaLabel", { filter: badge.label })}
+                      className="w-4 h-4 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
+                    >
                       <X className="w-3 h-3 text-gray-600" />
                     </button>
                   </motion.div>
@@ -133,8 +140,8 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
               onClick={() => setIsSortOpen(!isSortOpen)}
               className="flex items-center gap-1.5 px-3.5 py-2 bg-white border border-[#E3E7EC] rounded-full text-[12px] sm:text-[13px] font-bold text-[#37474F] hover:bg-gray-50 transition-colors shadow-sm whitespace-nowrap"
             >
-              <span className="text-[#78828A] font-medium hidden sm:inline">Sırala:</span> 
-              <span>{filters.activeSort}</span>
+              <span className="text-[#78828A] font-medium hidden sm:inline">{t("listings.sortLabel")}</span>
+              <span>{t(`sort.${filters.activeSort}`)}</span>
               <ChevronDown className="w-3.5 h-3.5 text-[#78828A] ml-0.5" />
             </button>
 
@@ -158,7 +165,7 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
                         filters.activeSort === option ? "bg-[#D9381E]/10 text-[#D9381E]" : "text-[#37474F] hover:bg-gray-50"
                       }`}
                     >
-                      {option}
+                      {t(`sort.${option}`)}
                       {filters.activeSort === option && <Check className="w-4 h-4" strokeWidth={3} />}
                     </button>
                   ))}
@@ -184,15 +191,15 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
                 <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6">
                   <Search className="w-10 h-10 text-gray-300" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Sonuç Bulunamadı</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">{t("listings.emptyTitle")}</h3>
                 <p className="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
-                  Görünüşe göre seçtiğin kriterlere uygun bir mekan yok. Filtreleri esneterek yeniden deneyebilirsin.
+                  {t("listings.emptyDescription")}
                 </p>
                 <button 
                   onClick={clearAllFilters}
                   className="px-8 py-3.5 bg-brand text-white rounded-full font-bold shadow-lg shadow-brand/20 hover:bg-brand/90 transition-all active:scale-95"
                 >
-                  Filtreleri Temizle
+                  {t("listings.clearFilters")}
                 </button>
               </motion.div>
             )}
@@ -222,6 +229,7 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
                       {/* FAVORITE HEART BUTTON */}
                       <button 
                         onClick={(e) => { e.stopPropagation(); toggleFavorite(place.id); }}
+                        aria-label={t(isFav ? "listings.unfavoriteAriaLabel" : "listings.favoriteAriaLabel", { name: place.name })}
                         className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 flex items-center justify-center bg-gray-50/80 backdrop-blur-sm sm:bg-white rounded-full border border-gray-100 hover:scale-110 active:scale-90 transition-all shadow-sm"
                       >
                         <Heart 
@@ -242,8 +250,8 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
                         </div>
                         
                         {/* STATUS DOT */}
-                        <div className={`absolute -top-1 -right-1 w-[14px] h-[14px] rounded-full border-[3px] border-white z-10 ${place.status === "Açık" ? "bg-[#10B981]" : "bg-gray-300"}`}>
-                          {place.status === "Açık" && (
+                        <div className={`absolute -top-1 -right-1 w-[14px] h-[14px] rounded-full border-[3px] border-white z-10 ${place.status === "open" ? "bg-[#10B981]" : "bg-gray-300"}`}>
+                          {place.status === "open" && (
                             <span className="absolute -inset-[1px] rounded-full border border-[#10B981] animate-ping opacity-50"></span>
                           )}
                         </div>
@@ -260,14 +268,14 @@ export default function KesfetCards({ filters }: { filters: KesfetFilters }) {
                         </div>
                         <div className="flex items-center gap-1.5 flex-shrink-0 mt-0.5">
                           <span className="text-[11px] font-semibold text-[#6B7280]">
-                            {place.category}
+                            {t(`categories.${place.category}`)}
                           </span>
                         </div>
 
                         {/* MIDDLE ROW: KamKam Badge & Extra Campaigns */}
                         <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
                           <div className="bg-brand/5 border border-brand/20 text-[#D9381E] px-2.5 py-1 rounded-[8px] text-[10px] sm:text-[11px] font-bold tracking-wide inline-block">
-                            {place.badge}
+                            {t(`promotions.${place.promotion}`)}
                           </div>
                           {place.extraCampaigns && place.extraCampaigns > 0 ? (
                             <div className="bg-brand/5 border border-brand/20 text-[#D9381E] px-2 py-1 rounded-[8px] text-[10px] sm:text-[11px] font-bold tracking-wide inline-block">

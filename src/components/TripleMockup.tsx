@@ -1,13 +1,14 @@
 "use client";
 
 import { m as motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { IconQrcode, IconBolt, IconGift, IconDeviceMobileMessage } from "@tabler/icons-react";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function TripleMockup() {
+  const t = useTranslation("home.features");
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -17,10 +18,6 @@ export default function TripleMockup() {
   const yCenter = useTransform(scrollYProgress, [0, 1], [100, -100]);
   // Side phones parallax (moves up slower)
   const ySide = useTransform(scrollYProgress, [0, 1], [150, -50]);
-
-  const handleCardClick = (index: number) => {
-    setActiveIndex(index);
-  };
 
   return (
     <section ref={containerRef} className="relative w-full py-32 bg-white overflow-hidden">
@@ -35,7 +32,7 @@ export default function TripleMockup() {
             className="flex items-center justify-center gap-3 sm:gap-4 mb-6 w-full"
           >
             <span className="w-8 sm:w-12 h-px bg-brand" />
-            <span className="text-brand font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs text-center">Kuralları Biz Koyarız</span>
+            <span className="text-brand font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs text-center">{t("eyebrow")}</span>
             <span className="w-8 sm:w-12 h-px bg-brand" />
           </motion.div>
           
@@ -46,9 +43,9 @@ export default function TripleMockup() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight leading-[1.1] mb-6"
           >
-            Yenilik Değil. <br />
+            {t("title")} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-500">
-              Devrim.
+              {t("highlight")}
             </span>
           </motion.h2>
           
@@ -59,7 +56,7 @@ export default function TripleMockup() {
             transition={{ delay: 0.2 }}
             className="text-xl md:text-2xl text-slate-500 font-medium"
           >
-            Kasa kuyruklarını ve şişirilmiş sadakat programlarını yok ettik. Sadece okut, al ve çık.
+            {t("description")}
           </motion.p>
         </div>
 
@@ -81,9 +78,9 @@ export default function TripleMockup() {
                 <IconQrcode size={28} stroke={1.2} className="text-slate-800 group-hover:text-brand transition-colors duration-500 relative z-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">Tek Hareketle Çözüm</h3>
+                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">{t("items.scan.title")}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  Numara veya formlarla uğraşmadan sadece kodunuzu okutun, ayrıcalıklar anında cüzdanınıza yansısın.
+                  {t("items.scan.description")}
                 </p>
               </div>
             </motion.div>
@@ -101,9 +98,9 @@ export default function TripleMockup() {
                 <IconBolt size={28} stroke={1.2} className="text-slate-800 group-hover:text-brand transition-colors duration-500 relative z-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">Kişisel Şehir Rehberiniz</h3>
+                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">{t("items.guide.title")}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  Karmaşık listelerde kaybolmadan, şehrin ritmini ve modunuza en uygun seçkin mekanları haritadan keşfedin.
+                  {t("items.guide.description")}
                 </p>
               </div>
             </motion.div>
@@ -115,24 +112,24 @@ export default function TripleMockup() {
             {/* LEFT PHONE (Behind) */}
             <motion.div 
               style={{ y: ySide }}
-              className="absolute left-1/2 top-16 w-[180px] sm:w-[220px] h-[390px] sm:h-[480px] rounded-[2rem] bg-black border-[4px] border-slate-800 shadow-xl overflow-hidden z-10 opacity-60 blur-[1.5px] origin-bottom-right"
+              className="absolute left-1/2 top-16 w-[180px] sm:w-[220px] h-[390px] sm:h-[480px] rounded-[2rem] bg-black border-[4px] border-slate-800 shadow-xl overflow-hidden z-10 opacity-60 origin-bottom-right"
               animate={{ x: "-110%", rotate: -8 }}
               transition={{ type: "spring", stiffness: 50 }}
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-slate-800 rounded-b-lg z-20" />
-              <Image src="/11.svg" alt="Left App Screen" fill priority className="object-cover object-top" />
+              <Image src="/11.svg" alt={t("mockups.leftAlt")} fill priority sizes="(max-width: 639px) 180px, 220px" className="object-cover object-top" />
               <div className="absolute inset-0 bg-black/20 pointer-events-none" />
             </motion.div>
 
             {/* RIGHT PHONE (Behind) */}
             <motion.div 
               style={{ y: ySide }}
-              className="absolute left-1/2 top-16 w-[180px] sm:w-[220px] h-[390px] sm:h-[480px] rounded-[2rem] bg-black border-[4px] border-slate-800 shadow-xl overflow-hidden z-10 opacity-60 blur-[1.5px] origin-bottom-left"
+              className="absolute left-1/2 top-16 w-[180px] sm:w-[220px] h-[390px] sm:h-[480px] rounded-[2rem] bg-black border-[4px] border-slate-800 shadow-xl overflow-hidden z-10 opacity-60 origin-bottom-left"
               animate={{ x: "10%", rotate: 8 }}
               transition={{ type: "spring", stiffness: 50 }}
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-slate-800 rounded-b-lg z-20" />
-              <Image src="/12.svg" alt="Right App Screen" fill priority className="object-cover object-top" />
+              <Image src="/12.svg" alt={t("mockups.rightAlt")} fill priority sizes="(max-width: 639px) 180px, 220px" className="object-cover object-top" />
               <div className="absolute inset-0 bg-black/20 pointer-events-none" />
             </motion.div>
 
@@ -142,7 +139,7 @@ export default function TripleMockup() {
               className="absolute z-30 left-1/2 -translate-x-1/2 w-[220px] sm:w-[260px] h-[480px] sm:h-[560px] rounded-[2.5rem] bg-black border-[6px] border-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden"
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl z-20" />
-              <Image src="/13.svg" alt="Center App Screen" fill priority className="object-cover object-top" />
+              <Image src="/13.svg" alt={t("mockups.centerAlt")} fill priority sizes="(max-width: 639px) 220px, 260px" className="object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
             </motion.div>
 
@@ -163,9 +160,9 @@ export default function TripleMockup() {
                 <IconGift size={28} stroke={1.2} className="text-slate-800 group-hover:text-brand transition-colors duration-500 relative z-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">Zincirsiz, Özgür Ödüller</h3>
+                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">{t("items.rewards.title")}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  Ödüllerinizi tek mekana hapsetmeyin; kazandığınız puanları KamKam ağındaki dilediğiniz işletmede özgürce harcayın.
+                  {t("items.rewards.description")}
                 </p>
               </div>
             </motion.div>
@@ -183,9 +180,9 @@ export default function TripleMockup() {
                 <IconDeviceMobileMessage size={28} stroke={1.2} className="text-slate-800 group-hover:text-brand transition-colors duration-500 relative z-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">Sıkıcı Değil, Dinamik ve Eğlenceli</h3>
+                <h3 className="text-xl font-bold text-foreground tracking-tight mb-2 group-hover:text-brand transition-colors duration-500">{t("items.lifestyle.title")}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  Sıradan rutinleri geride bırakın; şehrin ritmine katıldıkça sürekli yenilenen avantajlarla KamKam'ı eğlenceli bir yaşam tarzı haline getirin.
+                  {t("items.lifestyle.description")}
                 </p>
               </div>
             </motion.div>
